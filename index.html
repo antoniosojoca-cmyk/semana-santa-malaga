@@ -1,591 +1,434 @@
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Semana Santa de Málaga | Mi blog cofrade</title>
+<title>Semana Santa de Málaga</title>
 
-  <meta name="description"
-        content="Un recorrido personal y fotográfico por la Semana Santa de Málaga, sus hermandades, sus tronos y sus calles.">
+<style>
+* {
+  box-sizing: border-box;
+}
 
-  <style>
-    :root {
-      --negro: #090909;
-      --negro-suave: #12110f;
-      --dorado: #c6a76b;
-      --dorado-claro: #e3cf9d;
-      --marfil: #f2eadb;
-      --gris: #bdb5a8;
-    }
+html {
+  scroll-behavior: smooth;
+}
 
-    * {
-      box-sizing: border-box;
-    }
+body {
+  margin: 0;
+  background: #080808;
+  color: #f4eee2;
+  font-family: Georgia, "Times New Roman", serif;
+}
 
-    html {
-      scroll-behavior: smooth;
-    }
+:root {
+  --oro: #c9a86a;
+  --oro-suave: #e1c995;
+  --negro: #080808;
+}
 
-    body {
-      margin: 0;
-      background: var(--negro);
-      color: var(--marfil);
-      font-family: Georgia, "Times New Roman", serif;
-    }
+header {
+  text-align: center;
+  padding: 48px 20px 30px;
+  background: linear-gradient(#17130d, #080808);
+  border-bottom: 1px solid #594629;
+}
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+header h1 {
+  margin: 0;
+  color: var(--oro-suave);
+  font-size: clamp(2rem, 5vw, 4rem);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
 
-    /* CABECERA */
+header p {
+  color: #d0c2a5;
+  font-size: 1.12rem;
+  line-height: 1.7;
+  margin: 16px auto 0;
+  max-width: 750px;
+}
 
-    .cabecera {
-      padding: 30px 20px 25px;
-      text-align: center;
-      background: #0b0b0a;
-      border-bottom: 1px solid #55452b;
-    }
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 22px;
+  padding: 18px 12px;
+  background: #0d0c0a;
+  border-bottom: 1px solid #594629;
+}
 
-    .sobretitulo {
-      color: var(--dorado);
-      font-size: 11px;
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      margin-bottom: 15px;
-    }
+nav a {
+  color: var(--oro-suave);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
 
-    .cabecera h1 {
-      margin: 0;
-      font-size: clamp(27px, 5vw, 52px);
-      font-weight: normal;
-      letter-spacing: 3px;
-      line-height: 1.2;
-    }
+nav a:hover {
+  color: white;
+}
 
-    .cabecera p {
-      margin: 15px 0 0;
-      color: var(--gris);
-      font-size: 16px;
-      font-style: italic;
-    }
+.portada {
+  width: min(1200px, 96%);
+  margin: 30px auto 48px;
+  border: 1px solid #695332;
+  background: #000;
+  text-align: center;
+}
 
-    /* MENU PRINCIPAL */
+.portada img {
+  display: block;
+  width: 100%;
+  height: clamp(430px, 68vw, 760px);
+  object-fit: contain;
+  object-position: center;
+  background: #000;
+}
 
-    .menu {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0;
-      padding: 0 10px;
-      background: #11100e;
-      border-bottom: 1px solid #302719;
-    }
+.portada-texto {
+  padding: 22px 18px 28px;
+  background: linear-gradient(#15110b, #080808);
+}
 
-    .menu a {
-      display: block;
-      padding: 19px 13px;
-      color: #e7dfd0;
-      font-size: 13px;
-      transition: color 0.3s, background 0.3s;
-    }
+.portada-texto h2 {
+  margin: 0 0 10px;
+  color: var(--oro-suave);
+  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+}
 
-    .menu a:hover,
-    .menu a:focus-visible {
-      color: var(--dorado-claro);
-      background: #201b12;
-    }
+.portada-texto p {
+  color: #d8d0c2;
+  line-height: 1.8;
+  max-width: 760px;
+  margin: auto;
+}
 
-    /* FOTOGRAFIA PRINCIPAL */
+.musica {
+  text-align: center;
+  padding: 0 15px 45px;
+}
 
-    .portada {
-      position: relative;
-      min-height: 580px;
-      height: 76vh;
-      max-height: 850px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      overflow: hidden;
-      background: #15120d;
-    }
+.boton-musica {
+  display: inline-block;
+  padding: 14px 25px;
+  color: #080808;
+  background: var(--oro-suave);
+  border: 1px solid var(--oro);
+  font-family: Georgia, serif;
+  font-size: 1rem;
+  cursor: pointer;
+}
 
-    .portada img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 48%;
-      filter: brightness(0.68);
-    }
+.boton-musica:hover {
+  background: #f0ddb2;
+}
 
-    .portada::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.08) 15%,
-        rgba(0, 0, 0, 0.15) 40%,
-        rgba(0, 0, 0, 0.90) 100%
-      );
-      pointer-events: none;
-    }
+#reproductor {
+  margin: 22px auto 0;
+  width: min(560px, 100%);
+}
 
-    .texto-portada {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      padding: 50px 20px 65px;
-      text-align: center;
-    }
+#reproductor iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid #695332;
+}
 
-    .texto-portada .frase {
-      color: var(--dorado-claro);
-      text-transform: uppercase;
-      font-size: 12px;
-      letter-spacing: 5px;
-      margin-bottom: 18px;
-    }
+main {
+  width: min(1500px, 96%);
+  margin: auto;
+  padding: 0 0 60px;
+}
 
-    .texto-portada h2 {
-      margin: 0;
-      font-size: clamp(32px, 6vw, 67px);
-      line-height: 1.12;
-      font-weight: normal;
-      text-shadow: 0 3px 15px #000;
-    }
+.titulo-dias {
+  text-align: center;
+  color: var(--oro-suave);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  margin: 15px 0 12px;
+}
 
-    .texto-portada p {
-      max-width: 650px;
-      margin: 22px auto 28px;
-      color: #f0e8da;
-      font-size: 18px;
-      line-height: 1.7;
-    }
+.introduccion {
+  text-align: center;
+  color: #c7bdad;
+  line-height: 1.8;
+  margin: 0 auto 35px;
+  max-width: 760px;
+  padding: 0 12px;
+}
 
-    .enlace-portada {
-      display: inline-block;
-      padding: 13px 26px;
-      border: 1px solid var(--dorado);
-      color: var(--dorado-claro);
-      font-size: 13px;
-      letter-spacing: 2px;
-      transition: background 0.3s, color 0.3s;
-    }
-
-    .enlace-portada:hover {
-      background: var(--dorado);
-      color: #090909;
-    }
-
-    /* INTRODUCCION */
-
-    .introduccion {
-      max-width: 850px;
-      margin: auto;
-      padding: 65px 25px 45px;
-      text-align: center;
-    }
-
-    .introduccion .ornamento {
-      color: var(--dorado);
-      font-size: 25px;
-      margin-bottom: 16px;
-    }
-
-    .introduccion h2 {
-      margin: 0 0 20px;
-      color: var(--dorado-claro);
-      font-size: clamp(25px, 4vw, 36px);
-      font-weight: normal;
-    }
-
-    .introduccion p {
-      color: #c7bfb1;
-      font-size: 16px;
-      line-height: 1.9;
-    }
-
-    /* GALERIA DE DIAS */
-
-    .seccion-dias {
-      max-width: 1450px;
-      margin: auto;
-      padding: 20px 30px 75px;
-    }
-
-    .titulo-seccion {
-      text-align: center;
-      margin: 10px 0 35px;
-    }
-
-    .titulo-seccion h2 {
-      margin: 0 0 12px;
-      font-size: clamp(26px, 4vw, 39px);
-      font-weight: normal;
-      color: var(--marfil);
-    }
-
-    .titulo-seccion p {
-      margin: 0;
-      color: var(--gris);
-      font-size: 15px;
-    }
-
-
-    
-    .dias {
+.dias {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 30px;
+  gap: 32px;
 }
 
 .dia {
-  position: relative;
-  min-height: 450px;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  min-width: 0;
+  background: #0e0d0b;
+  border: 1px solid #65502e;
   overflow: hidden;
-  background: #171512;
-  border: 1px solid #5a482b;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.dia:hover {
+  border-color: var(--oro-suave);
+  transform: translateY(-3px);
 }
 
 .dia img {
   display: block;
   width: 100%;
-  height: 450px;
-  object-fit: cover;
-  transition: transform 0.6s, filter 0.6s;
-  filter: brightness(0.78);
+  height: clamp(360px, 39vw, 560px);
+  object-fit: contain;
+  object-position: center;
+  background: #000;
 }
-    
 
-    .dia:hover img {
-      transform: scale(1.06);
-      filter: brightness(0.85);
-    }
+.dia-texto {
+  text-align: center;
+  padding: 20px 14px 25px;
+  border-top: 1px solid #493a23;
+}
 
-    .dia .pie-dia {
-      position: absolute;
-      inset: auto 0 0;
-      padding: 45px 20px 22px;
-      background: linear-gradient(
-        transparent,
-        rgba(0, 0, 0, 0.95)
-      );
-    }
+.dia h3 {
+  color: var(--oro-suave);
+  font-size: clamp(1.25rem, 2.3vw, 1.8rem);
+  font-weight: normal;
+  margin: 0 0 10px;
+}
 
-    .dia .numero {
-      color: var(--dorado);
-      font-size: 11px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-    }
+.dia p {
+  margin: 0;
+  color: #c7bdad;
+  line-height: 1.6;
+  font-size: 0.98rem;
+}
 
-    .dia h3 {
-      margin: 8px 0 7px;
-      font-size: 25px;
-      font-weight: normal;
-    }
+footer {
+  text-align: center;
+  padding: 30px 18px;
+  border-top: 1px solid #594629;
+  color: #b9a783;
+  line-height: 1.8;
+  font-size: 0.9rem;
+}
 
-    .dia .descubre {
-      color: var(--dorado-claro);
-      font-size: 12px;
-      letter-spacing: 1px;
-    }
+@media (max-width: 650px) {
+  header {
+    padding-top: 35px;
+  }
 
-    .dia .descubre span {
-      display: inline-block;
-      transition: transform 0.3s;
-    }
+  header h1 {
+    letter-spacing: 1px;
+  }
 
-    .dia:hover .descubre span {
-      transform: translateX(5px);
-    }
+  .dias {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
 
-    /* PIE */
+  .dia img {
+    height: 430px;
+  }
 
-    footer {
-      padding: 32px 20px;
-      text-align: center;
-      background: #100f0d;
-      border-top: 1px solid #514127;
-    }
+  .portada {
+    width: 100%;
+    margin-top: 20px;
+  }
 
-    footer h2 {
-      color: var(--dorado);
-      font-weight: normal;
-      font-size: 20px;
-      letter-spacing: 2px;
-      margin: 0 0 12px;
-    }
-
-    footer p {
-      color: var(--gris);
-      font-size: 13px;
-      line-height: 1.8;
-    }
-
-    footer a {
-      color: var(--dorado-claro);
-      text-decoration: underline;
-    }
-
-    /* MOVILES Y TABLETAS */
-
-    @media (max-width: 900px) {
-      .dias {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .portada {
-        min-height: 500px;
-        height: 65vh;
-      }
-
-      .menu a {
-        padding: 15px 10px;
-      }
-    }
-
-    @media (max-width: 560px) {
-      .cabecera {
-        padding: 25px 12px;
-      }
-
-      .cabecera h1 {
-        letter-spacing: 1px;
-      }
-
-      .sobretitulo {
-        letter-spacing: 3px;
-      }
-
-      .menu a {
-        padding: 12px 9px;
-        font-size: 12px;
-      }
-
-      .portada {
-        min-height: 490px;
-        height: 70vh;
-      }
-
-      .texto-portada {
-        padding: 35px 18px 45px;
-      }
-
-      .texto-portada .frase {
-        letter-spacing: 3px;
-        line-height: 1.8;
-      }
-
-      .texto-portada p {
-        font-size: 16px;
-      }
-
-      .seccion-dias {
-        padding: 20px 15px 50px;
-      }
-
-      .dias {
-        grid-template-columns: 1fr;
-        gap: 18px;
-      }
-
-      .dia,
-      .dia img {
-        min-height: 290px;
-        height: 290px;
-      }
-    }
-  </style>
+  .portada img {
+    height: 500px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <header class="cabecera">
-    <div class="sobretitulo">Tradición · Fe · Arte · Devoción</div>
-    <h1>SEMANA SANTA DE MÁLAGA</h1>
-    <p>Una mirada personal a la pasión de una ciudad</p>
-  </header>
+<header>
+  <h1>Semana Santa de Málaga</h1>
+  <p>
+    Una ciudad, una devoción, una Semana Santa.
+    El arte de sus imágenes, la emoción de sus tronos
+    y el sentimiento de sus calles.
+  </p>
+</header>
 
-  <nav class="menu" aria-label="Menú principal">
-    <a href="domingo-ramos.html">Domingo de Ramos</a>
-    <a href="lunes-santo.html">Lunes Santo</a>
-    <a href="martes-santo.html">Martes Santo</a>
-    <a href="miercoles-santo.html">Miércoles Santo</a>
-    <a href="jueves-santo.html">Jueves Santo</a>
-    <a href="viernes-santo.html">Viernes Santo</a>
-    <a href="sabado-santo.html">Sábado Santo</a>
-    <a href="domingo-resurreccion.html">Resurrección</a>
-  </nav>
+<nav>
+  <a href="#portada">Portada</a>
+  <a href="#dias">Los días de Pasión</a>
+  <a href="#musica">La música</a>
+</nav>
 
-  <main>
+<section class="portada" id="portada">
+  <img
+    src="https://s1.abcstatics.com/abc/www/multimedia/sevilla/2025/05/22/esperanza-de-malaga-U20460765575QNp-1200x630%40diario_abc.jpg"
+    alt="María Santísima de la Esperanza de Málaga"
+    onerror="this.onerror=null;this.src='https://commons.wikimedia.org/wiki/Special:FilePath/Semana%20Santa%20en%20Malaga.JPG';"
+  >
 
-    <section class="portada">
+  <div class="portada-texto">
+    <h2>María Santísima de la Esperanza</h2>
+    <p>
+      La belleza de una devoción que camina entre cirios,
+      bordados y oraciones. Un homenaje a la Semana Santa
+      malagueña y a sus sagradas imágenes.
+    </p>
+  </div>
+</section>
+
+<section class="musica" id="musica">
+  <button class="boton-musica" id="botonMusica" type="button">
+    ♪ Escuchar la marcha
+  </button>
+
+  <div id="reproductor" hidden></div>
+</section>
+
+<main id="dias">
+  <h2 class="titulo-dias">Los días de Pasión</h2>
+
+  <p class="introduccion">
+    Recorre cada jornada de la Semana Santa de Málaga.
+    Pulsa sobre una fotografía para entrar en la página
+    correspondiente y descubrir sus hermandades.
+  </p>
+
+  <div class="dias">
+
+    <a class="dia" href="domingo-ramos.html">
       <img
-        src="https://s1.abcstatics.com/abc/www/multimedia/sevilla/2025/05/22/esperanza-de-malaga-U20460765575QNp-1200x630%40diario_abc.jpg"
-        alt="Panorámica de la Semana Santa de Málaga desde un balcón frente a la Catedral"
-        fetchpriority="high">
-
-      <div class="texto-portada">
-        <div class="frase">Una ciudad que se hace oración</div>
-
-        <h2>El alma cofrade<br>de Málaga</h2>
-
-        <p>
-          Luces que iluminan la noche, tronos que emocionan,
-          calles que guardan recuerdos y una tradición que
-          vive en el corazón de los malagueños.
-        </p>
-
-        <a class="enlace-portada" href="#dias">
-          RECORRER LA SEMANA SANTA
-        </a>
+        src="https://commons.wikimedia.org/wiki/Special:FilePath/Holy%20week%20in%20Malaga.JPG"
+        alt="Semana Santa de Málaga, Domingo de Ramos"
+        loading="lazy"
+      >
+      <div class="dia-texto">
+        <h3>Domingo de Ramos</h3>
+        <p>La alegría del comienzo de la Semana Santa.</p>
       </div>
-    </section>
+    </a>
 
-    <section class="introduccion">
-      <div class="ornamento">✦</div>
-
-      <h2>Una pasión contada en imágenes</h2>
-
-      <p>
-        Este espacio nace para recorrer, día a día, la Semana
-        Santa de Málaga. Un rincón personal donde descubrir
-        sus hermandades, contemplar sus imágenes y disfrutar
-        de la belleza de sus tronos, sus nazarenos y sus calles.
-      </p>
-
-      <p>
-        Cada jornada tendrá su lugar. Cada hermandad, su historia.
-        Y cada fotografía nos acercará a una de las tradiciones
-        más emocionantes de nuestra tierra.
-      </p>
-    </section>
-
-    <section class="seccion-dias" id="dias">
-
-      <div class="titulo-seccion">
-        <h2>Los días de nuestra Semana Santa</h2>
-        <p>Elige una jornada y comienza el recorrido.</p>
+    <a class="dia" href="lunes-santo.html">
+      <img
+        src="https://commons.wikimedia.org/wiki/Special:FilePath/Carrying%20the%20throne%20in%20the%20annual%20Easter%20religious%20procession.jpg"
+        alt="Trono procesional de Málaga, Lunes Santo"
+        loading="lazy"
+      >
+      <div class="dia-texto">
+        <h3>Lunes Santo</h3>
+        <p>Fe, solemnidad y devoción por las calles.</p>
       </div>
+    </a>
 
-      <div class="dias">
-
-        <a class="dia" href="domingo-ramos.html">
-          <img
-            src="https://commons.wikimedia.org/wiki/Special:FilePath/Semana%20Santa%20en%20Malaga.JPG"
-            alt="Procesión de Semana Santa en Málaga">
-          <div class="pie-dia">
-            <div class="numero">Primera jornada</div>
-            <h3>Domingo de Ramos</h3>
-            <div class="descubre">Descubrir el día <span>→</span></div>
-          </div>
-        </a>
-
-        <a class="dia" href="lunes-santo.html">
-          <img
-            src="https://commons.wikimedia.org/wiki/Special:FilePath/Carrying%20the%20throne%20in%20the%20annual%20Easter%20religious%20procession.jpg"
-            alt="Hombres de trono portando un trono procesional en Málaga">
-          <div class="pie-dia">
-            <div class="numero">Segunda jornada</div>
-            <h3>Lunes Santo</h3>
-            <div class="descubre">Descubrir el día <span>→</span></div>
-          </div>
-        </a>
-
-        <a class="dia" href="martes-santo.html">
-          <img
-            src="https://commons.wikimedia.org/wiki/Special:FilePath/Gitanos%20-%20Trono.jpg"
-            alt="Trono de María Santísima de la O, de la Hermandad de los Gitanos">
-          <div class="pie-dia">
-            <div class="numero">Tercera jornada</div>
-            <h3>Martes Santo</h3>
-            <div class="descubre">Descubrir el día <span>→</span></div>
-          </div>
-        </a>
-
-        <a class="dia" href="miercoles-santo.html">
-          <img
-            src="https://commons.wikimedia.org/wiki/Special:FilePath/Nazarenos%20in%20annual%20Easter%20religious%20procession.jpg"
-            alt="Nazarenos en una procesión de Semana Santa en Málaga">
-          <div class="pie-dia">
-            <div class="numero">Cuarta jornada</div>
-            <h3>Miércoles Santo</h3>
-            <div class="descubre">Descubrir el día <span>→</span></div>
-          </div>
-        </a>
-
-        <a class="dia" href="jueves-santo.html">
-          <img
-            src="https://commons.wikimedia.org/wiki/Special:FilePath/Procesi%C3%B3n%20M%C3%A1laga%20Semana%20Santa.jpg"
-            alt="Tronos y cortejo de una procesión malagueña">
-          <div class="pie-dia">
-            <div class="numero">Quinta jornada</div>
-            <h3>Jueves Santo</h3>
-            <div class="descubre">Descubrir el día <span>→</span></div>
-          </div>
-        </a>
-
-        <a class="dia" href="viernes-santo.html">
-          <img
-            src="https://commons.wikimedia.org/wiki/Special:FilePath/Dolores%20-%20Trono%20de%20la%20Virgen.jpg"
-            alt="Detalle de un trono mariano de Málaga">
-          <div class="pie-dia">
-            <div class="numero">Sexta jornada</div>
-            <h3>Viernes Santo</h3>
-            <div class="descubre">Descubrir el día <span>→</span></div>
-          </div>
-        </a>
-
-        <a class="dia" href="sabado-santo.html">
-          <img
-            src="https://commons.wikimedia.org/wiki/Special:FilePath/EsperanzaM%C3%A1laga.jpg"
-            alt="Nuestra Señora de la Esperanza de Málaga">
-          <div class="pie-dia">
-            <div class="numero">Séptima jornada</div>
-            <h3>Sábado Santo</h3>
-            <div class="descubre">Descubrir el día <span>→</span></div>
-          </div>
-        </a>
-
-        <a class="dia" href="domingo-resurreccion.html">
-          <img
-            src="https://commons.wikimedia.org/wiki/Special:FilePath/Resucitado%20Trono%209.jpg"
-            alt="Trono del Resucitado de Málaga">
-          <div class="pie-dia">
-            <div class="numero">La jornada final</div>
-            <h3>Domingo de Resurrección</h3>
-            <div class="descubre">Descubrir el día <span>→</span></div>
-          </div>
-        </a>
-
+    <a class="dia" href="martes-santo.html">
+      <img
+        src="https://commons.wikimedia.org/wiki/Special:FilePath/Nazarenos%20in%20annual%20Easter%20religious%20procession.jpg"
+        alt="Nazarenos en una procesión de Semana Santa"
+        loading="lazy"
+      >
+      <div class="dia-texto">
+        <h3>Martes Santo</h3>
+        <p>Tradición cofrade y emoción malagueña.</p>
       </div>
-    </section>
+    </a>
 
-  </main>
+    <a class="dia" href="miercoles-santo.html">
+      <img
+        src="https://commons.wikimedia.org/wiki/Special:FilePath/Nazarenos%20in%20Easter%20religious%20procession.jpg"
+        alt="Nazarenos durante la Semana Santa"
+        loading="lazy"
+      >
+      <div class="dia-texto">
+        <h3>Miércoles Santo</h3>
+        <p>El recogimiento y la belleza de las hermandades.</p>
+      </div>
+    </a>
 
-  <footer>
-    <h2>SEMANA SANTA DE MÁLAGA</h2>
-    <p>
-      Un proyecto personal dedicado a la belleza,
-      la historia y la devoción cofrade.
-    </p>
-    <p>
-      Algunas fotografías proceden de Wikimedia Commons.
-      Consulta sus autores y licencias en
-      <a href="https://commons.wikimedia.org/wiki/Category:Easter_in_M%C3%A1laga"
-         target="_blank" rel="noopener noreferrer">
-        Wikimedia Commons
-      </a>.
-    </p>
-    <p>Tradición que se contempla. Pasión que se siente.</p>
-  </footer>
+    <a class="dia" href="jueves-santo.html">
+      <img
+        src="https://commons.wikimedia.org/wiki/Special:FilePath/Semana%20Santa%20en%20Malaga.JPG"
+        alt="Procesión de Semana Santa en Málaga"
+        loading="lazy"
+      >
+      <div class="dia-texto">
+        <h3>Jueves Santo</h3>
+        <p>Una de las grandes noches de la ciudad.</p>
+      </div>
+    </a>
+
+    <a class="dia" href="viernes-santo.html">
+      <img
+        src="https://commons.wikimedia.org/wiki/Special:FilePath/Semana%20Santa%20in%20Malaga.JPG"
+        alt="Semana Santa de Málaga, Viernes Santo"
+        loading="lazy"
+      >
+      <div class="dia-texto">
+        <h3>Viernes Santo</h3>
+        <p>Silencio, oración y solemnidad.</p>
+      </div>
+    </a>
+
+    <a class="dia" href="sabado-santo.html">
+      <img
+        src="https://commons.wikimedia.org/wiki/Special:FilePath/Nazarenos%20in%20Easter%20religious%20procession.jpg"
+        alt="Nazarenos de Semana Santa"
+        loading="lazy"
+      >
+      <div class="dia-texto">
+        <h3>Sábado Santo</h3>
+        <p>Una jornada de espera y contemplación.</p>
+      </div>
+    </a>
+
+    <a class="dia" href="domingo-resurreccion.html">
+      <img
+        src="https://commons.wikimedia.org/wiki/Special:FilePath/Resucitado%20Trono%2010.jpg"
+        alt="Trono del Resucitado de Málaga"
+        loading="lazy"
+      >
+      <div class="dia-texto">
+        <h3>Domingo de Resurrección</h3>
+        <p>La luz y la esperanza cierran la Semana Santa.</p>
+      </div>
+    </a>
+
+  </div>
+</main>
+
+<footer>
+  <p>Semana Santa de Málaga</p>
+  <p>Tradición, arte, fe y sentimiento cofrade.</p>
+</footer>
+
+<script>
+const botonMusica = document.getElementById("botonMusica");
+const reproductor = document.getElementById("reproductor");
+let musicaActiva = false;
+
+botonMusica.addEventListener("click", function () {
+  if (!musicaActiva) {
+    reproductor.innerHTML =
+      '<iframe src="https://www.youtube-nocookie.com/embed/TwEcTH1hyGU?autoplay=1&rel=0" title="Marcha de Semana Santa" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+    reproductor.hidden = false;
+    botonMusica.textContent = "Ⅱ Detener la marcha";
+    musicaActiva = true;
+  } else {
+    reproductor.innerHTML = "";
+    reproductor.hidden = true;
+    botonMusica.textContent = "♪ Escuchar la marcha";
+    musicaActiva = false;
+  }
+});
+</script>
 
 </body>
 </html>
+
