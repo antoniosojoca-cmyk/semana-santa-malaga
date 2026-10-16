@@ -4,28 +4,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Domingo de Ramos | Semana Santa de Málaga</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  background: #080808;
-  color: #eee6d8;
-  font-family: Georgia, "Times New Roman", serif;
-}
+* { box-sizing: border-box; }
 
 :root {
   --oro: #d5b779;
   --oro-oscuro: #72582f;
+  --texto: #eee6d8;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: #080808;
+  color: var(--texto);
+  font-family: Georgia, "Times New Roman", serif;
 }
 
 header {
@@ -48,7 +44,6 @@ header p {
   margin: 18px auto 0;
   line-height: 1.8;
   color: #d0c4af;
-  font-size: 1.05rem;
 }
 
 .menu {
@@ -64,16 +59,103 @@ header p {
 .menu a {
   color: var(--oro);
   text-decoration: none;
-  font-size: 0.98rem;
 }
 
-.menu a:hover {
-  color: white;
+.menu a:hover { color: white; }
+
+.protagonista {
+  max-width: 1100px;
+  margin: 38px auto 0;
+  padding: 0 18px;
+  text-align: center;
+}
+
+.protagonista h2 {
+  color: var(--oro);
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
+  font-weight: normal;
+  margin: 0 0 22px;
+}
+
+.foto-principal {
+  background: #000;
+  border: 1px solid var(--oro-oscuro);
+  padding: 8px;
+}
+
+.foto-principal img {
+  display: block;
+  width: 100%;
+  max-height: 650px;
+  object-fit: contain;
+  object-position: center;
+  margin: auto;
+}
+
+.poesia {
+  max-width: 850px;
+  margin: 30px auto 48px;
+  padding: 28px 20px;
+  border-top: 1px solid var(--oro-oscuro);
+  border-bottom: 1px solid var(--oro-oscuro);
+}
+
+.poesia h2 {
+  color: var(--oro);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: normal;
+  margin: 0 0 22px;
+}
+
+.poesia p {
+  color: #e0cfaa;
+  font-size: clamp(1.05rem, 2.3vw, 1.3rem);
+  line-height: 2;
+  font-style: italic;
+  margin: 0;
+}
+
+.musica {
+  text-align: center;
+  padding: 0 18px 45px;
+}
+
+.musica p {
+  color: #c9beac;
+  line-height: 1.8;
+}
+
+.boton-musica, .boton {
+  display: inline-block;
+  padding: 13px 24px;
+  border: 1px solid var(--oro);
+  color: #080808;
+  background: var(--oro);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.boton-musica:hover, .boton:hover {
+  background: #f0dfb9;
+}
+
+.reproductor {
+  width: min(560px, 100%);
+  margin: 22px auto 0;
+}
+
+.reproductor iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--oro-oscuro);
 }
 
 .presentacion {
   max-width: 1000px;
-  margin: 38px auto 30px;
+  margin: 0 auto 30px;
   padding: 0 20px;
   text-align: center;
 }
@@ -82,7 +164,6 @@ header p {
   color: var(--oro);
   font-size: clamp(1.6rem, 4vw, 2.4rem);
   font-weight: normal;
-  margin-bottom: 15px;
 }
 
 .presentacion p {
@@ -155,20 +236,6 @@ header p {
   padding: 0 16px 55px;
 }
 
-.boton {
-  display: inline-block;
-  padding: 14px 26px;
-  border: 1px solid var(--oro);
-  color: #080808;
-  background: var(--oro);
-  text-decoration: none;
-  font-size: 1rem;
-}
-
-.boton:hover {
-  background: #f0dfb9;
-}
-
 footer {
   border-top: 1px solid #493a23;
   padding: 25px 15px;
@@ -185,13 +252,8 @@ footer {
     gap: 25px;
   }
 
-  .foto {
-    height: 450px;
-  }
-
-  header {
-    padding-top: 32px;
-  }
+  .foto { height: 450px; }
+  header { padding-top: 32px; }
 }
 </style>
 </head>
@@ -209,9 +271,57 @@ footer {
 
 <nav class="menu">
   <a href="index.html">Portada principal</a>
+  <a href="#poesia">La poesía</a>
+  <a href="#musica">Escuchar la marcha</a>
   <a href="#galeria">Las hermandades</a>
   <a href="#volver">Volver a la portada</a>
 </nav>
+
+<section class="protagonista">
+  <h2>Cuando Málaga despierta a la Semana Santa</h2>
+
+  <div class="foto-principal">
+    <img
+      src="https://d30gl8nkrjm6kp.cloudfront.net/articulos/articulos-2830412-1200x700.jpg"
+      alt="Imagen de la Pollinica en el Domingo de Ramos"
+      fetchpriority="high">
+  </div>
+
+  <section class="poesia" id="poesia">
+    <h2>Palmas de esperanza</h2>
+    <p>
+      Despierta Málaga, la palma se levanta,<br>
+      la calle se convierte en oración;<br>
+      tras cada cirio, una esperanza canta,<br>
+      y Cristo entra en el pueblo y el corazón.<br><br>
+
+      Suenan campanas, se abren los balcones,<br>
+      la luz acaricia cada rincón;<br>
+      comienza la semana de emociones,<br>
+      siete días de fe y de devoción.
+    </p>
+  </section>
+</section>
+
+<section class="musica" id="musica">
+  <h2 style="color:var(--oro);font-weight:normal;">
+    Una marcha para el Domingo de Ramos
+  </h2>
+  <p>
+    Deja que la música acompañe este comienzo
+    de la Semana Santa malagueña.
+  </p>
+
+  <button
+    class="boton-musica"
+    id="botonMusica"
+    type="button"
+    onclick="alternarMusica()">
+    ▶ Escuchar la marcha
+  </button>
+
+  <div class="reproductor" id="reproductor" hidden></div>
+</section>
 
 <section class="presentacion">
   <h2>La belleza del primer día</h2>
@@ -227,10 +337,8 @@ footer {
 
   <article class="cofradia">
     <div class="foto">
-      <img
-        src="https://d30gl8nkrjm6kp.cloudfront.net/articulos/articulos-2830412-1200x700.jpg"
-        alt="Nuestro Padre Jesús a su Entrada en Jerusalén, Pollinica"
-        loading="lazy">
+      <img src="https://d30gl8nkrjm6kp.cloudfront.net/articulos/articulos-2830412-1200x700.jpg"
+        alt="Nuestro Padre Jesús a su Entrada en Jerusalén, Pollinica" loading="lazy">
     </div>
     <div class="texto">
       <h3>1. Pollinica</h3>
@@ -240,10 +348,8 @@ footer {
 
   <article class="cofradia">
     <div class="foto">
-      <img
-        src="https://static.grupojoly.com/clip/471a8928-08a7-405e-903c-29b4f2512946_source-aspect-ratio_1600w_0.jpg"
-        alt="María Santísima de Lágrimas y Favores"
-        loading="lazy">
+      <img src="https://static.grupojoly.com/clip/471a8928-08a7-405e-903c-29b4f2512946_source-aspect-ratio_1600w_0.jpg"
+        alt="María Santísima de Lágrimas y Favores" loading="lazy">
     </div>
     <div class="texto">
       <h3>2. Lágrimas y Favores</h3>
@@ -253,10 +359,8 @@ footer {
 
   <article class="cofradia">
     <div class="foto">
-      <img
-        src="https://static.grupojoly.com/clip/7e2a3d81-6e6f-42d7-a6cd-b40b493d0a36_source-aspect-ratio_1600w_0.jpg"
-        alt="Nuestro Padre Jesús de la Soledad, Dulce Nombre"
-        loading="lazy">
+      <img src="https://static.grupojoly.com/clip/7e2a3d81-6e6f-42d7-a6cd-b40b493d0a36_source-aspect-ratio_1600w_0.jpg"
+        alt="Nuestro Padre Jesús de la Soledad, Dulce Nombre" loading="lazy">
     </div>
     <div class="texto">
       <h3>3. Dulce Nombre</h3>
@@ -266,10 +370,8 @@ footer {
 
   <article class="cofradia">
     <div class="foto">
-      <img
-        src="https://estaticos-cdn.prensaiberica.es/clip/8f6bab43-a9d8-4a32-9ada-13f5550d0901_alta-libre-aspect-ratio_default_0.jpg"
-        alt="María Santísima del Patrocinio, Salutación"
-        loading="lazy">
+      <img src="https://estaticos-cdn.prensaiberica.es/clip/8f6bab43-a9d8-4a32-9ada-13f5550d0901_alta-libre-aspect-ratio_default_0.jpg"
+        alt="María Santísima del Patrocinio, Salutación" loading="lazy">
     </div>
     <div class="texto">
       <h3>4. Salutación</h3>
@@ -279,10 +381,8 @@ footer {
 
   <article class="cofradia">
     <div class="foto">
-      <img
-        src="https://static.grupojoly.com/clip/f63877ac-8aef-4149-bb13-6d00e03093ea_16-9-aspect-ratio_default_0.jpg"
-        alt="María Santísima de Dolores y Esperanza, Humildad y Paciencia"
-        loading="lazy">
+      <img src="https://static.grupojoly.com/clip/f63877ac-8aef-4149-bb13-6d00e03093ea_16-9-aspect-ratio_default_0.jpg"
+        alt="María Santísima de Dolores y Esperanza, Humildad y Paciencia" loading="lazy">
     </div>
     <div class="texto">
       <h3>5. Humildad y Paciencia</h3>
@@ -292,10 +392,8 @@ footer {
 
   <article class="cofradia">
     <div class="foto">
-      <img
-        src="https://static.grupojoly.com/clip/9a28b433-8b0b-4d3c-a878-5b7fc74e5b52_source-aspect-ratio_1600w_0.jpg"
-        alt="Nuestro Padre Jesús de la Humildad, Ecce Homo"
-        loading="lazy">
+      <img src="https://static.grupojoly.com/clip/9a28b433-8b0b-4d3c-a878-5b7fc74e5b52_source-aspect-ratio_1600w_0.jpg"
+        alt="Nuestro Padre Jesús de la Humildad, Ecce Homo" loading="lazy">
     </div>
     <div class="texto">
       <h3>6. Humildad — Ecce Homo</h3>
@@ -305,10 +403,8 @@ footer {
 
   <article class="cofradia">
     <div class="foto">
-      <img
-        src="https://static.grupojoly.com/clip/4acb9659-13a7-4b90-8a0a-b9159f3ab7f3_facebook-aspect-ratio_default_0.jpg"
-        alt="Nuestro Padre Jesús Orando en el Huerto"
-        loading="lazy">
+      <img src="https://static.grupojoly.com/clip/4acb9659-13a7-4b90-8a0a-b9159f3ab7f3_facebook-aspect-ratio_default_0.jpg"
+        alt="Nuestro Padre Jesús Orando en el Huerto" loading="lazy">
     </div>
     <div class="texto">
       <h3>7. Huerto</h3>
@@ -318,23 +414,19 @@ footer {
 
   <article class="cofradia">
     <div class="foto">
-      <img
-        src="https://static.grupojoly.com/clip/c7675bd5-75b8-4f83-864a-c071ed1298ae_twitter-aspect-ratio_default_0.jpg"
-        alt="María Santísima de la Salud"
-        loading="lazy">
+      <img src="https://static.grupojoly.com/clip/c7675bd5-75b8-4f83-864a-c071ed1298ae_twitter-aspect-ratio_default_0.jpg"
+        alt="María Santísima de la Salud" loading="lazy">
     </div>
     <div class="texto">
       <h3>8. Salud</h3>
-      <p>La Esperanza en su Gran Amor y María Santísima de la Salud.</p>
+      <p>La devoción a María Santísima de la Salud.</p>
     </div>
   </article>
 
   <article class="cofradia">
     <div class="foto">
-      <img
-        src="https://image.ondacero.es/clipping/cmsimages01/2024/03/24/E672AD86-DC63-48D1-B08D-D6F1BF427279/hermandad-prendimiento-realiza-pequeno-recorrido-2024_default.jpg"
-        alt="Nuestro Padre Jesús del Prendimiento"
-        loading="lazy">
+      <img src="https://image.ondacero.es/clipping/cmsimages01/2024/03/24/E672AD86-DC63-48D1-B08D-D6F1BF427279_alta-libre-aspect-ratio_default_0.jpg"
+        alt="Nuestro Padre Jesús del Prendimiento" loading="lazy">
     </div>
     <div class="texto">
       <h3>9. Prendimiento</h3>
@@ -353,5 +445,26 @@ footer {
   <p>Tradición · Arte · Fe · Sentimiento cofrade</p>
 </footer>
 
+<script>
+function alternarMusica() {
+  const reproductor = document.getElementById("reproductor");
+  const boton = document.getElementById("botonMusica");
+
+  if (reproductor.hidden) {
+    reproductor.innerHTML =
+      '<iframe src="https://www.youtube-nocookie.com/embed/TwEcTH1hyGU?autoplay=1&rel=0" title="Marcha procesional para el Domingo de Ramos" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+
+    reproductor.hidden = false;
+    boton.textContent = "■ Detener la música";
+  } else {
+    reproductor.innerHTML = "";
+    reproductor.hidden = true;
+    boton.textContent = "▶ Escuchar la marcha";
+  }
+}
+</script>
+
 </body>
 </html>
+
+
