@@ -112,15 +112,18 @@ header p {
 
 .diapositiva.activa {
   display: block;
-  animation: aparecer 0.9s ease;
+  animation: aparecer 0.8s ease;
 }
 
 .diapositiva img {
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: cover;
+
+  /* Muestra la fotografía completa y evita cortar los rostros. */
+  object-fit: contain;
   object-position: center;
+  background: #000;
 }
 
 @keyframes aparecer {
@@ -136,6 +139,7 @@ header p {
   padding: 45px 65px 28px;
   text-align: center;
   background: linear-gradient(transparent, rgba(0,0,0,0.92));
+  pointer-events: none;
 }
 
 .pie-foto h2 {
@@ -161,7 +165,7 @@ header p {
   width: 48px;
   height: 60px;
   border: 1px solid rgba(213,183,121,0.8);
-  background: rgba(0,0,0,0.65);
+  background: rgba(0,0,0,0.75);
   color: var(--oro);
   font-size: 2rem;
   cursor: pointer;
@@ -221,7 +225,7 @@ header p {
   background: #19140c;
 }
 
-/* POESÍA Y PREGÓN */
+/* PREGÓN */
 
 .pregon {
   max-width: 900px;
@@ -264,28 +268,27 @@ header p {
   margin: 25px 0 15px;
 }
 
-.boton-oro {
+.boton-oro,
+.boton-oscuro {
   display: inline-block;
-  border: 1px solid var(--oro);
-  background: var(--oro);
-  color: #080808;
   padding: 14px 23px;
   font-family: Georgia, "Times New Roman", serif;
   font-size: 1rem;
   cursor: pointer;
 }
 
+.boton-oro {
+  border: 1px solid var(--oro);
+  background: var(--oro);
+  color: #080808;
+}
+
 .boton-oro:hover { background: #f0dfb9; }
 
 .boton-oscuro {
-  display: inline-block;
   border: 1px solid var(--oro);
   background: transparent;
   color: var(--oro);
-  padding: 14px 23px;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1rem;
-  cursor: pointer;
 }
 
 .boton-oscuro:hover { background: #19140c; }
@@ -337,89 +340,11 @@ header p {
   border: 1px solid var(--oro-oscuro);
 }
 
-/* HERMANDADES */
-
-.presentacion {
-  max-width: 1000px;
-  margin: 0 auto 30px;
-  padding: 0 20px;
-  text-align: center;
-}
-
-.presentacion h2 {
-  color: var(--oro);
-  font-size: clamp(1.7rem, 4vw, 2.5rem);
-  font-weight: normal;
-}
-
-.presentacion p {
-  color: #c9beac;
-  line-height: 1.9;
-}
-
-.galeria {
-  width: min(1500px, 96%);
-  margin: 0 auto;
-  padding: 10px 0 60px;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 32px;
-}
-
-.cofradia {
-  min-width: 0;
-  background: #0e0d0b;
-  border: 1px solid var(--oro-oscuro);
-  overflow: hidden;
-  transition: border-color 0.3s, transform 0.3s;
-}
-
-.cofradia:hover {
-  border-color: var(--oro);
-  transform: translateY(-3px);
-}
-
-.foto {
-  height: 520px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #000;
-  overflow: hidden;
-}
-
-.foto img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-  background: #000;
-}
-
-.texto {
-  padding: 20px 18px 24px;
-  text-align: center;
-  border-top: 1px solid #493a23;
-}
-
-.texto h3 {
-  color: var(--oro);
-  font-weight: normal;
-  font-size: clamp(1.25rem, 2.5vw, 1.8rem);
-  margin: 0 0 12px;
-}
-
-.texto p {
-  color: #c8bead;
-  line-height: 1.7;
-  margin: 0;
-}
+[hidden] { display: none !important; }
 
 .volver {
   text-align: center;
-  padding: 0 16px 55px;
+  padding: 0 16px 45px;
 }
 
 .boton-enlace {
@@ -452,14 +377,6 @@ footer {
   .flecha { width: 36px; height: 48px; font-size: 1.6rem; }
   .anterior { left: 8px; }
   .siguiente { right: 8px; }
-
-  .galeria {
-    grid-template-columns: 1fr;
-    width: 94%;
-    gap: 25px;
-  }
-
-  .foto { height: 450px; }
   header { padding-top: 32px; }
 }
 
@@ -485,7 +402,7 @@ footer {
   <a href="index.html">Portada principal</a>
   <a href="#pregon">El pregón</a>
   <a href="#musica">La marcha</a>
-  <a href="#galeria">Las hermandades</a>
+  <a href="#hermandades">Las hermandades</a>
   <a href="#volver">Volver a la portada</a>
 </nav>
 
@@ -497,9 +414,11 @@ footer {
   </p>
 </section>
 
-<!-- CARRUSEL AUTOMÁTICO -->
+<!-- CARRUSEL ÚNICO: LAS NUEVE COFRADÍAS -->
 
-<section class="carrusel" aria-label="Carrusel del Domingo de Ramos">
+<section class="carrusel" id="hermandades"
+  aria-label="Carrusel del Domingo de Ramos">
+
   <div class="marco" id="marcoCarrusel">
 
     <figure class="diapositiva activa">
@@ -584,9 +503,12 @@ footer {
     </figure>
 
     <button class="flecha anterior" type="button"
-      aria-label="Fotografía anterior" onclick="cambiarDiapositiva(-1)">‹</button>
+      aria-label="Fotografía anterior"
+      onclick="cambiarDiapositiva(-1)">‹</button>
+
     <button class="flecha siguiente" type="button"
-      aria-label="Fotografía siguiente" onclick="cambiarDiapositiva(1)">›</button>
+      aria-label="Fotografía siguiente"
+      onclick="cambiarDiapositiva(1)">›</button>
 
   </div>
 </section>
@@ -594,10 +516,11 @@ footer {
 <div class="controles-carrusel">
   <button class="boton-pequeno" type="button" id="botonPausa"
     onclick="alternarCarrusel()">Ⅱ Pausar carrusel</button>
-  <div class="puntos" id="puntosCarrusel" aria-label="Elegir fotografía"></div>
+  <div class="puntos" id="puntosCarrusel"
+    aria-label="Elegir fotografía"></div>
 </div>
 
-<!-- PREGÓN ORAL -->
+<!-- PREGÓN: SE CONSERVAN LOS TEXTOS Y CONTROLES -->
 
 <section class="pregon" id="pregon">
   <h2>Palmas de esperanza</h2>
@@ -643,7 +566,7 @@ footer {
   </p>
 </section>
 
-<!-- MÚSICA INDEPENDIENTE DE LA VOZ -->
+<!-- MÚSICA: NUEVO ENLACE DE YOUTUBE -->
 
 <section class="musica" id="musica">
   <h2>La marcha procesional</h2>
@@ -658,121 +581,10 @@ footer {
   <div class="reproductor" id="reproductor" hidden></div>
 </section>
 
-<!-- NUEVE TARJETAS DE HERMANDADES -->
-
-<section class="presentacion">
-  <h2>Las hermandades del Domingo de Ramos</h2>
-  <p>
-    Cada cofradía aporta su historia, su identidad y su manera
-    de expresar la fe por las calles malagueñas.
-  </p>
-</section>
-
-<main class="galeria" id="galeria">
-
-  <article class="cofradia">
-    <div class="foto">
-      <img src="https://d30gl8nkrjm6kp.cloudfront.net/articulos/articulos-2830412-1200x700.jpg"
-        alt="Pollinica" loading="lazy">
-    </div>
-    <div class="texto">
-      <h3>1. Pollinica</h3>
-      <p>Jesús entra en Jerusalén entre palmas y alegría.</p>
-    </div>
-  </article>
-
-  <article class="cofradia">
-    <div class="foto">
-      <img src="https://static.grupojoly.com/clip/471a8928-08a7-405e-903c-29b4f2512946_source-aspect-ratio_1600w_0.jpg"
-        alt="Lágrimas y Favores" loading="lazy">
-    </div>
-    <div class="texto">
-      <h3>2. Lágrimas y Favores</h3>
-      <p>La elegancia del palio y la devoción a la Virgen.</p>
-    </div>
-  </article>
-
-  <article class="cofradia">
-    <div class="foto">
-      <img src="https://static.grupojoly.com/clip/7e2a3d81-6e6f-42d7-a6cd-b40b493d0a36_source-aspect-ratio_1600w_0.jpg"
-        alt="Dulce Nombre" loading="lazy">
-    </div>
-    <div class="texto">
-      <h3>3. Dulce Nombre</h3>
-      <p>El misterio de Jesús de la Soledad por las calles malagueñas.</p>
-    </div>
-  </article>
-
-  <article class="cofradia">
-    <div class="foto">
-      <img src="https://estaticos-cdn.prensaiberica.es/clip/8f6bab43-a9d8-4a32-9ada-13f5550d0901_alta-libre-aspect-ratio_default_0.jpg"
-        alt="Salutación" loading="lazy">
-    </div>
-    <div class="texto">
-      <h3>4. Salutación</h3>
-      <p>El Nazareno de la Salutación y María Santísima del Patrocinio.</p>
-    </div>
-  </article>
-
-  <article class="cofradia">
-    <div class="foto">
-      <img src="https://static.grupojoly.com/clip/f63877ac-8aef-4149-bb13-6d00e03093ea_16-9-aspect-ratio_default_0.jpg"
-        alt="Humildad y Paciencia" loading="lazy">
-    </div>
-    <div class="texto">
-      <h3>5. Humildad y Paciencia</h3>
-      <p>Un cortejo de recogimiento y devoción de barrio.</p>
-    </div>
-  </article>
-
-  <article class="cofradia">
-    <div class="foto">
-      <img src="https://static.grupojoly.com/clip/9a28b433-8b0b-4d3c-a878-5b7fc74e5b52_source-aspect-ratio_1600w_0.jpg"
-        alt="Humildad, Ecce Homo" loading="lazy">
-    </div>
-    <div class="texto">
-      <h3>6. Humildad — Ecce Homo</h3>
-      <p>La imagen de Cristo presentado al pueblo.</p>
-    </div>
-  </article>
-
-  <article class="cofradia">
-    <div class="foto">
-      <img src="https://static.grupojoly.com/clip/4acb9659-13a7-4b90-8a0a-b9159f3ab7f3_facebook-aspect-ratio_default_0.jpg"
-        alt="Huerto" loading="lazy">
-    </div>
-    <div class="texto">
-      <h3>7. Huerto</h3>
-      <p>Jesús en oración bajo el olivo, acompañado por el ángel.</p>
-    </div>
-  </article>
-
-  <article class="cofradia">
-    <div class="foto">
-      <img src="https://static.grupojoly.com/clip/c7675bd5-75b8-4f83-864a-c071ed1298ae_twitter-aspect-ratio_default_0.jpg"
-        alt="Salud" loading="lazy">
-    </div>
-    <div class="texto">
-      <h3>8. Salud</h3>
-      <p>La devoción a María Santísima de la Salud.</p>
-    </div>
-  </article>
-
-  <article class="cofradia">
-    <div class="foto">
-      <img src="https://image.ondacero.es/clipping/cmsimages01/2024/03/24/E672AD86-DC63-48D1-B08D-D6F1BF427279_alta-libre-aspect-ratio_default_0.jpg"
-        alt="Prendimiento" loading="lazy">
-    </div>
-    <div class="texto">
-      <h3>9. Prendimiento</h3>
-      <p>El misterio del Prendimiento y María Santísima del Gran Perdón.</p>
-    </div>
-  </article>
-
-</main>
-
 <section class="volver" id="volver">
-  <a class="boton-enlace" href="index.html">← Volver a la portada principal</a>
+  <a class="boton-enlace" href="index.html">
+    ← Volver a la portada principal
+  </a>
 </section>
 
 <footer>
@@ -783,19 +595,31 @@ footer {
 <script>
 /* CARRUSEL AUTOMÁTICO */
 
-const diapositivas = Array.from(document.querySelectorAll(".diapositiva"));
+const diapositivas = Array.from(
+  document.querySelectorAll(".diapositiva")
+);
+
 const contenedorPuntos = document.getElementById("puntosCarrusel");
 const botonPausa = document.getElementById("botonPausa");
+
 let indiceActual = 0;
 let carruselPausado = false;
 let temporizadorCarrusel = null;
 
 diapositivas.forEach((diapositiva, indice) => {
   const punto = document.createElement("button");
+
   punto.type = "button";
   punto.className = "punto" + (indice === 0 ? " activo" : "");
-  punto.setAttribute("aria-label", "Mostrar fotografía " + (indice + 1));
-  punto.addEventListener("click", () => mostrarDiapositiva(indice, true));
+  punto.setAttribute(
+    "aria-label",
+    "Mostrar fotografía " + (indice + 1)
+  );
+
+  punto.addEventListener("click", () => {
+    mostrarDiapositiva(indice, true);
+  });
+
   contenedorPuntos.appendChild(punto);
 });
 
@@ -823,17 +647,24 @@ function avanzarCarrusel() {
 
 function reiniciarTemporizador() {
   clearInterval(temporizadorCarrusel);
-  temporizadorCarrusel = setInterval(avanzarCarrusel, 6000);
+
+  if (!carruselPausado) {
+    temporizadorCarrusel = setInterval(avanzarCarrusel, 6000);
+  }
 }
 
 function alternarCarrusel() {
   carruselPausado = !carruselPausado;
+
   botonPausa.textContent = carruselPausado
     ? "▶ Reanudar carrusel"
     : "Ⅱ Pausar carrusel";
 
-  if (!carruselPausado) reiniciarTemporizador();
-  else clearInterval(temporizadorCarrusel);
+  if (carruselPausado) {
+    clearInterval(temporizadorCarrusel);
+  } else {
+    reiniciarTemporizador();
+  }
 }
 
 reiniciarTemporizador();
@@ -861,7 +692,8 @@ function elegirVozEspanola() {
   );
 
   const masculina = espanolas.find(voz =>
-    /male|mascul|pablo|alvaro|álvaro|jorge|enrique|david|diego/i.test(voz.name)
+    /male|mascul|pablo|alvaro|álvaro|jorge|enrique|david|diego/i
+      .test(voz.name)
   );
 
   return masculina || espanolas[0] || vocesDisponibles[0] || null;
@@ -879,13 +711,16 @@ function detenerPregon() {
 function escucharPregon() {
   const estado = document.getElementById("estadoPregon");
 
-  if (!("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)) {
+  if (
+    !("speechSynthesis" in window) ||
+    !("SpeechSynthesisUtterance" in window)
+  ) {
     estado.textContent =
       "Este navegador no ofrece lectura de voz. Prueba con una versión actualizada de Chrome o Edge.";
     return;
   }
 
-  // La voz y la música no deben sonar a la vez.
+  /* Detener la marcha antes de iniciar la voz. */
   detenerMusica();
   window.speechSynthesis.cancel();
 
@@ -894,12 +729,10 @@ function escucharPregon() {
     "La calle se convierte en oración. " +
     "Tras cada cirio, una esperanza canta, " +
     "y Cristo entra en el pueblo y el corazón. " +
-    "Pausa. " +
     "Suenan campanas, se abren los balcones, " +
     "la luz acaricia cada rincón. " +
     "Comienza la semana de emociones, " +
     "siete días de fe y de devoción. " +
-    "Pausa. " +
     "Que cada paso nos acerque al cielo, " +
     "que cada vela encienda la bondad. " +
     "Málaga entrega su amor y su desvelo " +
@@ -909,6 +742,7 @@ function escucharPregon() {
   const voz = elegirVozEspanola();
 
   lectura.lang = voz ? voz.lang : "es-ES";
+
   if (voz) lectura.voice = voz;
 
   lectura.rate = 0.82;
@@ -932,12 +766,13 @@ function escucharPregon() {
   window.speechSynthesis.speak(lectura);
 }
 
-/* MÚSICA DE YOUTUBE, INDEPENDIENTE */
+/* MÚSICA DE DOMINGO DE RAMOS */
 
 function detenerMusica() {
   const reproductor = document.getElementById("reproductor");
   const boton = document.getElementById("botonMusica");
 
+  /* Vaciar el iframe detiene realmente la reproducción. */
   reproductor.innerHTML = "";
   reproductor.hidden = true;
   boton.textContent = "▶ Escuchar la marcha";
@@ -952,7 +787,7 @@ function alternarMusica() {
     return;
   }
 
-  // Al escuchar música, detenemos la lectura del pregón.
+  /* Detener el pregón antes de iniciar la música. */
   if ("speechSynthesis" in window) {
     window.speechSynthesis.cancel();
   }
@@ -960,11 +795,18 @@ function alternarMusica() {
   document.getElementById("estadoPregon").textContent =
     "La voz está detenida mientras escuchas la marcha.";
 
-  reproductor.innerHTML =
-    '<iframe src="https://www.youtube-nocookie.com/embed/TwEcTH1hyGU?autoplay=1&rel=0" ' +
-    'title="Marcha procesional" allow="autoplay; encrypted-media; picture-in-picture" ' +
-    'allowfullscreen></iframe>';
+  const iframe = document.createElement("iframe");
 
+  iframe.src =
+    "https://www.youtube-nocookie.com/embed/t_ygvjAaMeM?autoplay=1&rel=0";
+
+  iframe.title = "Marcha procesional del Domingo de Ramos";
+  iframe.allow =
+    "autoplay; encrypted-media; picture-in-picture; fullscreen";
+  iframe.allowFullscreen = true;
+  iframe.referrerPolicy = "strict-origin-when-cross-origin";
+
+  reproductor.replaceChildren(iframe);
   reproductor.hidden = false;
   boton.textContent = "■ Detener la marcha";
 }
@@ -972,6 +814,7 @@ function alternarMusica() {
 
 </body>
 </html>
+
 
 
 
