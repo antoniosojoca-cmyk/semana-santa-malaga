@@ -1,819 +1,308 @@
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Domingo de Ramos | Semana Santa de Málaga</title>
+  <title>Domingo de Ramos | Semana Santa de Málaga</title>
 
-<style>
-* { box-sizing: border-box; }
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-:root {
-  --oro: #d5b779;
-  --oro-oscuro: #72582f;
-  --fondo: #080808;
-  --texto: #eee6d8;
-}
+    html {
+      min-height: 100%;
+      background: #080808;
+    }
 
-html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse at center, #202020 0%, #0b0b0b 58%, #050505 100%);
+      color: #e8dfcd;
+      font-family: Georgia, "Times New Roman", serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 16px;
+    }
 
-body {
-  margin: 0;
-  background: var(--fondo);
-  color: var(--texto);
-  font-family: Georgia, "Times New Roman", serif;
-}
+    .pagina {
+      width: 100%;
+      max-width: 1050px;
+      min-height: 75vh;
+      border: 1px solid #a98a50;
+      outline: 1px solid rgba(169, 138, 80, 0.25);
+      outline-offset: 7px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 35px 24px 28px;
+      position: relative;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.28);
+    }
 
-header {
-  text-align: center;
-  padding: 42px 18px 30px;
-  background: linear-gradient(#19140c, #080808);
-  border-bottom: 1px solid var(--oro-oscuro);
-}
+    .sobretitulo {
+      color: #b99b62;
+      font-size: 12px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
 
-header h1 {
-  color: var(--oro);
-  font-size: clamp(2rem, 5vw, 3.6rem);
-  font-weight: normal;
-  letter-spacing: 2px;
-  margin: 0;
-}
+    h1 {
+      color: #d5b779;
+      font-size: clamp(27px, 5vw, 46px);
+      font-weight: normal;
+      letter-spacing: 4px;
+      margin: 0 0 12px;
+      text-transform: uppercase;
+    }
 
-header p {
-  max-width: 760px;
-  margin: 18px auto 0;
-  line-height: 1.8;
-  color: #d0c4af;
-}
+    .subtitulo {
+      color: #d1c5af;
+      font-size: clamp(14px, 2vw, 18px);
+      font-style: italic;
+      margin: 0 0 27px;
+    }
 
-.menu {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 14px 28px;
-  padding: 18px 12px;
-  background: #100e0a;
-  border-bottom: 1px solid #493a23;
-}
+    .marco-foto {
+      width: 100%;
+      max-width: 760px;
+      border: 1px solid #a98a50;
+      padding: 7px;
+      background: #050505;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+    }
 
-.menu a {
-  color: var(--oro);
-  text-decoration: none;
-}
+    .foto-pregonero {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 55vh;
+      min-height: 220px;
+      object-fit: contain;
+      background: #080808;
+    }
 
-.menu a:hover { color: white; }
+    .pie-foto {
+      color: #bca878;
+      font-size: 13px;
+      letter-spacing: 1px;
+      margin: 17px 0 24px;
+    }
 
-.introduccion {
-  text-align: center;
-  max-width: 950px;
-  margin: 34px auto 25px;
-  padding: 0 20px;
-}
+    .boton-sonido {
+      border: 1px solid #b99b62;
+      background: transparent;
+      color: #e1c78f;
+      padding: 13px 24px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 15px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: background 0.25s, color 0.25s;
+    }
 
-.introduccion h2 {
-  color: var(--oro);
-  font-size: clamp(1.5rem, 4vw, 2.3rem);
-  font-weight: normal;
-}
+    .boton-sonido:hover {
+      background: #b99b62;
+      color: #080808;
+    }
 
-.introduccion p {
-  color: #c9beac;
-  line-height: 1.9;
-}
+    .estado {
+      min-height: 20px;
+      color: #b9ad98;
+      font-size: 12px;
+      margin: 12px 0 0;
+    }
 
-/* CARRUSEL PRINCIPAL */
+    .enlace-pregon {
+      color: #bca878;
+      font-size: 12px;
+      margin-top: 10px;
+      text-decoration: none;
+    }
 
-.carrusel {
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-  background: #000;
-  border-top: 1px solid var(--oro-oscuro);
-  border-bottom: 1px solid var(--oro-oscuro);
-}
+    .enlace-pregon:hover {
+      color: #f0d8a1;
+      text-decoration: underline;
+    }
 
-.marco {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  min-height: 260px;
-  max-height: 760px;
-  position: relative;
-  background: #000;
-}
+    .volver {
+      position: absolute;
+      left: 20px;
+      bottom: 18px;
+      color: #c4a76c;
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
 
-.diapositiva {
-  display: none;
-  position: absolute;
-  inset: 0;
-  margin: 0;
-}
+    .volver:hover {
+      color: #f0d8a1;
+    }
 
-.diapositiva.activa {
-  display: block;
-  animation: aparecer 0.8s ease;
-}
+    .pie-pagina {
+      color: #77684d;
+      font-size: 11px;
+      letter-spacing: 2px;
+      margin-top: 30px;
+      text-align: center;
+      text-transform: uppercase;
+    }
 
-.diapositiva img {
-  width: 100%;
-  height: 100%;
-  display: block;
+    /* Reproductor de sonido de YouTube */
+    .reproductor-oculto {
+      position: fixed;
+      width: 2px;
+      height: 2px;
+      left: 0;
+      bottom: 0;
+      opacity: 0.01;
+      overflow: hidden;
+      pointer-events: none;
+    }
 
-  /* Muestra la fotografía completa y evita cortar los rostros. */
-  object-fit: contain;
-  object-position: center;
-  background: #000;
-}
+    @media (max-width: 600px) {
+      body {
+        padding: 18px 13px;
+      }
 
-@keyframes aparecer {
-  from { opacity: 0.35; }
-  to { opacity: 1; }
-}
+      .pagina {
+        min-height: 80vh;
+        padding: 28px 14px 65px;
+      }
 
-.pie-foto {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 45px 65px 28px;
-  text-align: center;
-  background: linear-gradient(transparent, rgba(0,0,0,0.92));
-  pointer-events: none;
-}
+      .sobretitulo {
+        letter-spacing: 3px;
+      }
 
-.pie-foto h2 {
-  color: var(--oro);
-  font-size: clamp(1.4rem, 3.5vw, 2.7rem);
-  font-weight: normal;
-  margin: 0 0 8px;
-  text-shadow: 0 2px 8px #000;
-}
+      h1 {
+        letter-spacing: 2px;
+      }
 
-.pie-foto p {
-  color: #fff3dc;
-  font-size: clamp(0.9rem, 2vw, 1.15rem);
-  margin: 0;
-  text-shadow: 0 2px 8px #000;
-}
+      .marco-foto {
+        padding: 4px;
+      }
 
-.flecha {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 5;
-  width: 48px;
-  height: 60px;
-  border: 1px solid rgba(213,183,121,0.8);
-  background: rgba(0,0,0,0.75);
-  color: var(--oro);
-  font-size: 2rem;
-  cursor: pointer;
-}
+      .foto-pregonero {
+        min-height: 180px;
+        max-height: 45vh;
+      }
 
-.flecha:hover {
-  background: var(--oro);
-  color: #080808;
-}
-
-.anterior { left: 18px; }
-.siguiente { right: 18px; }
-
-.controles-carrusel {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  padding: 17px 12px;
-  background: #0d0b08;
-}
-
-.puntos {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.punto {
-  width: 11px;
-  height: 11px;
-  border: 1px solid var(--oro);
-  border-radius: 50%;
-  padding: 0;
-  background: transparent;
-  cursor: pointer;
-}
-
-.punto.activo {
-  background: var(--oro);
-  transform: scale(1.2);
-}
-
-.boton-pequeno {
-  background: transparent;
-  border: 1px solid var(--oro-oscuro);
-  color: var(--oro);
-  padding: 8px 13px;
-  font-family: inherit;
-  cursor: pointer;
-}
-
-.boton-pequeno:hover {
-  border-color: var(--oro);
-  background: #19140c;
-}
-
-/* PREGÓN */
-
-.pregon {
-  max-width: 900px;
-  margin: 48px auto 30px;
-  padding: 0 22px;
-  text-align: center;
-}
-
-.pregon h2 {
-  color: var(--oro);
-  font-size: clamp(1.8rem, 4vw, 2.7rem);
-  font-weight: normal;
-  margin-bottom: 12px;
-}
-
-.subtitulo {
-  color: #bca579;
-  font-style: italic;
-  margin-bottom: 30px;
-}
-
-.texto-pregon {
-  padding: 30px 20px;
-  border-top: 1px solid var(--oro-oscuro);
-  border-bottom: 1px solid var(--oro-oscuro);
-  color: #e4d4b2;
-  font-size: clamp(1.05rem, 2.5vw, 1.35rem);
-  line-height: 2;
-  font-style: italic;
-}
-
-.texto-pregon p { margin: 0 0 20px; }
-.texto-pregon p:last-child { margin-bottom: 0; }
-
-.botones-audio {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 14px;
-  margin: 25px 0 15px;
-}
-
-.boton-oro,
-.boton-oscuro {
-  display: inline-block;
-  padding: 14px 23px;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.boton-oro {
-  border: 1px solid var(--oro);
-  background: var(--oro);
-  color: #080808;
-}
-
-.boton-oro:hover { background: #f0dfb9; }
-
-.boton-oscuro {
-  border: 1px solid var(--oro);
-  background: transparent;
-  color: var(--oro);
-}
-
-.boton-oscuro:hover { background: #19140c; }
-
-.estado-audio {
-  color: #b9a783;
-  font-size: 0.92rem;
-  line-height: 1.7;
-  min-height: 1.5em;
-}
-
-.nota-voz {
-  color: #a99c85;
-  font-size: 0.85rem;
-  line-height: 1.7;
-}
-
-/* MÚSICA INDEPENDIENTE */
-
-.musica {
-  max-width: 850px;
-  margin: 45px auto 60px;
-  padding: 30px 20px;
-  text-align: center;
-  border-top: 1px solid var(--oro-oscuro);
-  border-bottom: 1px solid var(--oro-oscuro);
-}
-
-.musica h2 {
-  color: var(--oro);
-  font-size: clamp(1.5rem, 3vw, 2.1rem);
-  font-weight: normal;
-}
-
-.musica p {
-  color: #c9beac;
-  line-height: 1.8;
-}
-
-.reproductor {
-  width: min(560px, 100%);
-  margin: 22px auto 0;
-}
-
-.reproductor iframe {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  border: 1px solid var(--oro-oscuro);
-}
-
-[hidden] { display: none !important; }
-
-.volver {
-  text-align: center;
-  padding: 0 16px 45px;
-}
-
-.boton-enlace {
-  display: inline-block;
-  padding: 14px 26px;
-  border: 1px solid var(--oro);
-  color: #080808;
-  background: var(--oro);
-  text-decoration: none;
-}
-
-.boton-enlace:hover { background: #f0dfb9; }
-
-footer {
-  border-top: 1px solid #493a23;
-  padding: 25px 15px;
-  text-align: center;
-  color: #b9a783;
-  line-height: 1.8;
-  font-size: 0.9rem;
-}
-
-@media (max-width: 700px) {
-  .marco {
-    aspect-ratio: 4 / 3;
-    min-height: 250px;
-  }
-
-  .pie-foto { padding: 35px 48px 20px; }
-  .flecha { width: 36px; height: 48px; font-size: 1.6rem; }
-  .anterior { left: 8px; }
-  .siguiente { right: 8px; }
-  header { padding-top: 32px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .diapositiva.activa { animation: none; }
-}
-</style>
+      .volver {
+        left: 14px;
+        bottom: 17px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-  <h1>Domingo de Ramos</h1>
-  <p>
-    La primera jornada de la Semana Santa de Málaga.
-    Nueve cofradías, nueve formas de vivir la fe y
-    una ciudad que abre sus calles a la Pasión.
-  </p>
-</header>
+  <main class="pagina">
 
-<nav class="menu">
-  <a href="index.html">Portada principal</a>
-  <a href="#pregon">El pregón</a>
-  <a href="#musica">La marcha</a>
-  <a href="#hermandades">Las hermandades</a>
-  <a href="#volver">Volver a la portada</a>
-</nav>
+    <div class="sobretitulo">Semana Santa de Málaga</div>
 
-<section class="introduccion">
-  <h2>Cuando Málaga despierta a la Semana Santa</h2>
-  <p>
-    Palmas que se alzan, campanas que anuncian la fiesta
-    y una ciudad que se prepara para vivir su semana más esperada.
-  </p>
-</section>
+    <h1>Domingo de Ramos</h1>
 
-<!-- CARRUSEL ÚNICO: LAS NUEVE COFRADÍAS -->
-
-<section class="carrusel" id="hermandades"
-  aria-label="Carrusel del Domingo de Ramos">
-
-  <div class="marco" id="marcoCarrusel">
-
-    <figure class="diapositiva activa">
-      <img src="https://i.pinimg.com/1200x/ff/60/f7/ff60f74a9ec1e44b746d81e2d188f052.jpg"
-        alt="La Pollinica en el Domingo de Ramos" fetchpriority="high">
-      <figcaption class="pie-foto">
-        <h2>La Pollinica</h2>
-        <p>La alegría de Jesús entrando en Jerusalén</p>
-      </figcaption>
-    </figure>
-
-    <figure class="diapositiva">
-      <img src="https://static.grupojoly.com/clip/471a8928-08a7-405e-903c-29b4f2512946_source-aspect-ratio_1600w_0.jpg"
-        alt="Lágrimas y Favores" loading="lazy">
-      <figcaption class="pie-foto">
-        <h2>Lágrimas y Favores</h2>
-        <p>La delicadeza de María por las calles de Málaga</p>
-      </figcaption>
-    </figure>
-
-    <figure class="diapositiva">
-      <img src="https://static.grupojoly.com/clip/7e2a3d81-6e6f-42d7-a6cd-b40b493d0a36_source-aspect-ratio_1600w_0.jpg"
-        alt="Dulce Nombre" loading="lazy">
-      <figcaption class="pie-foto">
-        <h2>Dulce Nombre</h2>
-        <p>Fe y recogimiento en el primer día de Pasión</p>
-      </figcaption>
-    </figure>
-
-    <figure class="diapositiva">
-      <img src="https://static.grupojoly.com/clip/33835518-58e6-4d56-ba18-44e2295ba443_source-aspect-ratio_1600w_0.webp"
-        alt="Salutación" loading="lazy">
-      <figcaption class="pie-foto">
-        <h2>Salutación</h2>
-        <p>Una devoción que camina entre cirios y oración</p>
-      </figcaption>
-    </figure>
-
-    <figure class="diapositiva">
-      <img src="https://static.grupojoly.com/clip/f63877ac-8aef-4149-bb13-6d00e03093ea_16-9-aspect-ratio_default_0.jpg"
-        alt="Humildad y Paciencia" loading="lazy">
-      <figcaption class="pie-foto">
-        <h2>Humildad y Paciencia</h2>
-        <p>El silencio que habla al corazón</p>
-      </figcaption>
-    </figure>
-
-    <figure class="diapositiva">
-      <img src="https://static.grupojoly.com/clip/9a28b433-8b0b-4d3c-a878-5b7fc74e5b52_source-aspect-ratio_1600w_0.jpg"
-        alt="Humildad, Ecce Homo" loading="lazy">
-      <figcaption class="pie-foto">
-        <h2>Humildad — Ecce Homo</h2>
-        <p>Cristo, presentado ante la mirada del pueblo</p>
-      </figcaption>
-    </figure>
-
-    <figure class="diapositiva">
-      <img src="https://static.grupojoly.com/clip/4acb9659-13a7-4b90-8a0a-b9159f3ab7f3_facebook-aspect-ratio_default_0.jpg"
-        alt="Oración en el Huerto" loading="lazy">
-      <figcaption class="pie-foto">
-        <h2>Huerto</h2>
-        <p>La oración de Jesús en la noche de Getsemaní</p>
-      </figcaption>
-    </figure>
-
-    <figure class="diapositiva">
-      <img src="https://static.grupojoly.com/clip/c7675bd5-75b8-4f83-864a-c071ed1298ae_twitter-aspect-ratio_default_0.jpg"
-        alt="Salud" loading="lazy">
-      <figcaption class="pie-foto">
-        <h2>Salud</h2>
-        <p>La devoción que se convierte en esperanza</p>
-      </figcaption>
-    </figure>
-
-    <figure class="diapositiva">
-      <img src="https://image.ondacero.es/clipping/cmsimages01/2024/03/24/E672AD86-DC63-48D1-B08D-D6F1BF427279_alta-libre-aspect-ratio_default_0.jpg"
-        alt="Prendimiento" loading="lazy">
-      <figcaption class="pie-foto">
-        <h2>Prendimiento</h2>
-        <p>El cierre de una jornada llena de sentimiento</p>
-      </figcaption>
-    </figure>
-
-    <button class="flecha anterior" type="button"
-      aria-label="Fotografía anterior"
-      onclick="cambiarDiapositiva(-1)">‹</button>
-
-    <button class="flecha siguiente" type="button"
-      aria-label="Fotografía siguiente"
-      onclick="cambiarDiapositiva(1)">›</button>
-
-  </div>
-</section>
-
-<div class="controles-carrusel">
-  <button class="boton-pequeno" type="button" id="botonPausa"
-    onclick="alternarCarrusel()">Ⅱ Pausar carrusel</button>
-  <div class="puntos" id="puntosCarrusel"
-    aria-label="Elegir fotografía"></div>
-</div>
-
-<!-- PREGÓN: SE CONSERVAN LOS TEXTOS Y CONTROLES -->
-
-<section class="pregon" id="pregon">
-  <h2>Palmas de esperanza</h2>
-  <p class="subtitulo">Palabras para abrir la Semana Santa de Málaga</p>
-
-  <div class="texto-pregon" id="textoPregon">
-    <p>
-      Despierta Málaga, la palma se levanta,<br>
-      la calle se convierte en oración;<br>
-      tras cada cirio, una esperanza canta,<br>
-      y Cristo entra en el pueblo y el corazón.
+    <p class="subtitulo">
+      La palabra de un cofrade malagueño
     </p>
-    <p>
-      Suenan campanas, se abren los balcones,<br>
-      la luz acaricia cada rincón;<br>
-      comienza la semana de emociones,<br>
-      siete días de fe y de devoción.
+
+    <div class="marco-foto">
+      <img
+        class="foto-pregonero"
+        src="https://img.youtube.com/vi/-71YPdoL3ZU/hqdefault.jpg"
+        alt="Imagen del pregón de Antonio Banderas"
+        onerror="this.style.display='none';"
+      >
+    </div>
+
+    <p class="pie-foto">
+      Antonio Banderas · Pregonero de Málaga · 2011
     </p>
-    <p>
-      Que cada paso nos acerque al cielo,<br>
-      que cada vela encienda la bondad;<br>
-      Málaga entrega su amor y su desvelo<br>
-      al misterio eterno de la Semana Santa.
+
+    <button
+      class="boton-sonido"
+      id="botonSonido"
+      type="button"
+      onclick="reproducirPregon()"
+    >
+      ▶ Escuchar el pregón
+    </button>
+
+    <p class="estado" id="estadoSonido">
+      Pulsa el botón para escuchar la voz original del pregonero.
     </p>
+
+    <a
+      class="enlace-pregon"
+      href="https://www.youtube.com/watch?v=-71YPdoL3ZU"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Abrir el pregón completo en YouTube
+    </a>
+
+    <a class="volver" href="index.html">
+      ← PORTADA
+    </a>
+
+  </main>
+
+  <div class="pie-pagina">
+    Fe, memoria y tradición
   </div>
 
-  <div class="botones-audio">
-    <button class="boton-oro" id="botonPregon" type="button"
-      onclick="escucharPregon()">▶ Escuchar el pregón</button>
-
-    <button class="boton-oscuro" type="button"
-      onclick="detenerPregon()">■ Detener la voz</button>
+  <div class="reproductor-oculto" aria-hidden="true">
+    <iframe
+      id="reproductorPregon"
+      title="Audio del pregón de Antonio Banderas"
+      width="2"
+      height="2"
+      src="about:blank"
+      allow="autoplay; encrypted-media; picture-in-picture"
+      referrerpolicy="strict-origin-when-cross-origin"
+    ></iframe>
   </div>
 
-  <p class="estado-audio" id="estadoPregon" aria-live="polite">
-    Pulsa «Escuchar el pregón» para oír la poesía.
-  </p>
+  <script>
+    let pregonActivo = false;
 
-  <p class="nota-voz">
-    La voz depende de las voces españolas instaladas en tu navegador
-    o sistema operativo. Si no hay una voz masculina disponible,
-    se utilizará una voz en español como alternativa.
-  </p>
-</section>
+    function reproducirPregon() {
+      const reproductor = document.getElementById("reproductorPregon");
+      const boton = document.getElementById("botonSonido");
+      const estado = document.getElementById("estadoSonido");
 
-<!-- MÚSICA: NUEVO ENLACE DE YOUTUBE -->
+      if (!pregonActivo) {
+        reproductor.src =
+          "https://www.youtube-nocookie.com/embed/-71YPdoL3ZU?autoplay=1&controls=1&rel=0";
 
-<section class="musica" id="musica">
-  <h2>La marcha procesional</h2>
-  <p>
-    Escucha la música por separado. Al activar la marcha,
-    se detendrá la lectura del pregón.
-  </p>
+        pregonActivo = true;
+        boton.textContent = "■ Detener el pregón";
+        estado.textContent =
+          "El pregón se está iniciando. Si no se oye, utiliza el enlace de YouTube.";
+      } else {
+        reproductor.src = "about:blank";
 
-  <button class="boton-oro" id="botonMusica" type="button"
-    onclick="alternarMusica()">▶ Escuchar la marcha</button>
-
-  <div class="reproductor" id="reproductor" hidden></div>
-</section>
-
-<section class="volver" id="volver">
-  <a class="boton-enlace" href="index.html">
-    ← Volver a la portada principal
-  </a>
-</section>
-
-<footer>
-  <p>Semana Santa de Málaga</p>
-  <p>Tradición · Arte · Fe · Sentimiento cofrade</p>
-</footer>
-
-<script>
-/* CARRUSEL AUTOMÁTICO */
-
-const diapositivas = Array.from(
-  document.querySelectorAll(".diapositiva")
-);
-
-const contenedorPuntos = document.getElementById("puntosCarrusel");
-const botonPausa = document.getElementById("botonPausa");
-
-let indiceActual = 0;
-let carruselPausado = false;
-let temporizadorCarrusel = null;
-
-diapositivas.forEach((diapositiva, indice) => {
-  const punto = document.createElement("button");
-
-  punto.type = "button";
-  punto.className = "punto" + (indice === 0 ? " activo" : "");
-  punto.setAttribute(
-    "aria-label",
-    "Mostrar fotografía " + (indice + 1)
-  );
-
-  punto.addEventListener("click", () => {
-    mostrarDiapositiva(indice, true);
-  });
-
-  contenedorPuntos.appendChild(punto);
-});
-
-function mostrarDiapositiva(indice, reiniciar) {
-  diapositivas[indiceActual].classList.remove("activa");
-  contenedorPuntos.children[indiceActual].classList.remove("activo");
-
-  indiceActual = (indice + diapositivas.length) % diapositivas.length;
-
-  diapositivas[indiceActual].classList.add("activa");
-  contenedorPuntos.children[indiceActual].classList.add("activo");
-
-  if (reiniciar) reiniciarTemporizador();
-}
-
-function cambiarDiapositiva(direccion) {
-  mostrarDiapositiva(indiceActual + direccion, true);
-}
-
-function avanzarCarrusel() {
-  if (!carruselPausado) {
-    mostrarDiapositiva(indiceActual + 1, false);
-  }
-}
-
-function reiniciarTemporizador() {
-  clearInterval(temporizadorCarrusel);
-
-  if (!carruselPausado) {
-    temporizadorCarrusel = setInterval(avanzarCarrusel, 6000);
-  }
-}
-
-function alternarCarrusel() {
-  carruselPausado = !carruselPausado;
-
-  botonPausa.textContent = carruselPausado
-    ? "▶ Reanudar carrusel"
-    : "Ⅱ Pausar carrusel";
-
-  if (carruselPausado) {
-    clearInterval(temporizadorCarrusel);
-  } else {
-    reiniciarTemporizador();
-  }
-}
-
-reiniciarTemporizador();
-
-/* VOZ DEL PREGÓN */
-
-let vocesDisponibles = [];
-
-function cargarVoces() {
-  if ("speechSynthesis" in window) {
-    vocesDisponibles = window.speechSynthesis.getVoices();
-  }
-}
-
-if ("speechSynthesis" in window) {
-  cargarVoces();
-  window.speechSynthesis.onvoiceschanged = cargarVoces;
-}
-
-function elegirVozEspanola() {
-  cargarVoces();
-
-  const espanolas = vocesDisponibles.filter(voz =>
-    voz.lang && voz.lang.toLowerCase().startsWith("es")
-  );
-
-  const masculina = espanolas.find(voz =>
-    /male|mascul|pablo|alvaro|álvaro|jorge|enrique|david|diego/i
-      .test(voz.name)
-  );
-
-  return masculina || espanolas[0] || vocesDisponibles[0] || null;
-}
-
-function detenerPregon() {
-  if ("speechSynthesis" in window) {
-    window.speechSynthesis.cancel();
-  }
-
-  document.getElementById("estadoPregon").textContent =
-    "La lectura del pregón se ha detenido.";
-}
-
-function escucharPregon() {
-  const estado = document.getElementById("estadoPregon");
-
-  if (
-    !("speechSynthesis" in window) ||
-    !("SpeechSynthesisUtterance" in window)
-  ) {
-    estado.textContent =
-      "Este navegador no ofrece lectura de voz. Prueba con una versión actualizada de Chrome o Edge.";
-    return;
-  }
-
-  /* Detener la marcha antes de iniciar la voz. */
-  detenerMusica();
-  window.speechSynthesis.cancel();
-
-  const texto =
-    "Despierta Málaga, la palma se levanta. " +
-    "La calle se convierte en oración. " +
-    "Tras cada cirio, una esperanza canta, " +
-    "y Cristo entra en el pueblo y el corazón. " +
-    "Suenan campanas, se abren los balcones, " +
-    "la luz acaricia cada rincón. " +
-    "Comienza la semana de emociones, " +
-    "siete días de fe y de devoción. " +
-    "Que cada paso nos acerque al cielo, " +
-    "que cada vela encienda la bondad. " +
-    "Málaga entrega su amor y su desvelo " +
-    "al misterio eterno de la Semana Santa.";
-
-  const lectura = new SpeechSynthesisUtterance(texto);
-  const voz = elegirVozEspanola();
-
-  lectura.lang = voz ? voz.lang : "es-ES";
-
-  if (voz) lectura.voice = voz;
-
-  lectura.rate = 0.82;
-  lectura.pitch = 0.82;
-  lectura.volume = 1;
-
-  lectura.onstart = () => {
-    estado.textContent = "El pregón está sonando…";
-  };
-
-  lectura.onend = () => {
-    estado.textContent = "Ha terminado el pregón.";
-  };
-
-  lectura.onerror = () => {
-    estado.textContent =
-      "No se ha podido iniciar la voz. Comprueba las voces de español de tu navegador.";
-  };
-
-  estado.textContent = "Preparando la voz…";
-  window.speechSynthesis.speak(lectura);
-}
-
-/* MÚSICA DE DOMINGO DE RAMOS */
-
-function detenerMusica() {
-  const reproductor = document.getElementById("reproductor");
-  const boton = document.getElementById("botonMusica");
-
-  /* Vaciar el iframe detiene realmente la reproducción. */
-  reproductor.innerHTML = "";
-  reproductor.hidden = true;
-  boton.textContent = "▶ Escuchar la marcha";
-}
-
-function alternarMusica() {
-  const reproductor = document.getElementById("reproductor");
-  const boton = document.getElementById("botonMusica");
-
-  if (!reproductor.hidden) {
-    detenerMusica();
-    return;
-  }
-
-  /* Detener el pregón antes de iniciar la música. */
-  if ("speechSynthesis" in window) {
-    window.speechSynthesis.cancel();
-  }
-
-  document.getElementById("estadoPregon").textContent =
-    "La voz está detenida mientras escuchas la marcha.";
-
-  const iframe = document.createElement("iframe");
-
-  iframe.src =
-    "https://www.youtube-nocookie.com/embed/t_ygvjAaMeM?autoplay=1&rel=0";
-
-  iframe.title = "Marcha procesional del Domingo de Ramos";
-  iframe.allow =
-    "autoplay; encrypted-media; picture-in-picture; fullscreen";
-  iframe.allowFullscreen = true;
-  iframe.referrerPolicy = "strict-origin-when-cross-origin";
-
-  reproductor.replaceChildren(iframe);
-  reproductor.hidden = false;
-  boton.textContent = "■ Detener la marcha";
-}
-</script>
+        pregonActivo = false;
+        boton.textContent = "▶ Escuchar el pregón";
+        estado.textContent = "El sonido está detenido.";
+      }
+    }
+  </script>
 
 </body>
 </html>
+
 
 
 
