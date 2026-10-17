@@ -1,408 +1,435 @@
 
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#000000">
 
-  <title>Domingo de Ramos | Semana Santa de Málaga</title>
+<title>Domingo de Ramos | Semana Santa de Málaga</title>
 
-  <meta name="theme-color" content="#000000">
+<style>
+*{box-sizing:border-box}
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+html,body{
+  margin:0;
+  min-height:100%;
+  background:#000;
+  color:#e9dfcc;
+  font-family:Georgia,"Times New Roman",serif;
+}
 
-    html {
-      min-height: 100%;
-      background: #000;
-    }
+body{min-height:100vh}
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: #000;
-      color: #e9dfcc;
-      font-family: Georgia, "Times New Roman", serif;
-    }
+.pagina{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:38px 18px 65px;
+  background:#000;
+}
 
-    .pagina {
-      position: relative;
-      min-height: 100vh;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 45px 20px 65px;
-      overflow: hidden;
-      isolation: isolate;
-      background: #000;
-    }
+.imagen-fondo{
+  position:absolute;
+  z-index:-2;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+}
 
-    /* La fotografía se integra con el fondo negro */
-    .imagen-fondo {
-      position: absolute;
-      z-index: -2;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
-    }
+.imagen-fondo img{
+  width:min(100%,1150px);
+  height:min(78vh,790px);
+  object-fit:contain;
+  opacity:0;
+  transition:opacity 1.8s ease;
+  -webkit-mask-image:radial-gradient(
+    ellipse 68% 55% at center,
+    #000 35%,rgba(0,0,0,.85) 60%,transparent 100%
+  );
+  mask-image:radial-gradient(
+    ellipse 68% 55% at center,
+    #000 35%,rgba(0,0,0,.85) 60%,transparent 100%
+  );
+}
 
-    .imagen-fondo img {
-      display: block;
-      width: min(100%, 1150px);
-      height: min(78vh, 790px);
-      object-fit: contain;
-      object-position: center;
-      opacity: 0.88;
+.imagen-fondo img.visible{opacity:.9}
 
-      -webkit-mask-image:
-        radial-gradient(
-          ellipse 65% 53% at center,
-          #000 43%,
-          rgba(0,0,0,.85) 62%,
-          transparent 100%
-        );
+.sombra{
+  position:absolute;
+  z-index:-1;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(
+    to bottom,
+    #000 0%,
+    rgba(0,0,0,.48) 20%,
+    rgba(0,0,0,.08) 45%,
+    rgba(0,0,0,.35) 70%,
+    #000 100%
+  );
+}
 
-      mask-image:
-        radial-gradient(
-          ellipse 65% 53% at center,
-          #000 43%,
-          rgba(0,0,0,.85) 62%,
-          transparent 100%
-        );
-    }
+.encabezado{
+  width:100%;
+  max-width:850px;
+  text-align:center;
+  margin-top:2vh;
+}
 
-    /* Oscuridad que permite leer los títulos */
-    .sombra {
-      position: absolute;
-      z-index: -1;
-      inset: 0;
-      pointer-events: none;
-      background:
-        linear-gradient(
-          to bottom,
-          #000 0%,
-          rgba(0,0,0,.55) 18%,
-          rgba(0,0,0,.12) 43%,
-          rgba(0,0,0,.35) 68%,
-          #000 100%
-        );
-    }
+.sobretitulo{
+  color:#bba16b;
+  font-size:11px;
+  letter-spacing:5px;
+  text-transform:uppercase;
+  margin:0 0 18px;
+}
 
-    .encabezado {
-      text-align: center;
-      width: 100%;
-      max-width: 850px;
-      margin-top: 1vh;
-    }
+h1{
+  color:#d4b779;
+  font-size:clamp(27px,5vw,49px);
+  font-weight:normal;
+  letter-spacing:clamp(2px,.7vw,6px);
+  line-height:1.25;
+  text-transform:uppercase;
+  margin:0;
+  text-shadow:0 2px 18px #000;
+}
 
-    .sobretitulo {
-      color: #bba16b;
-      font-size: 11px;
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      margin: 0 0 19px;
-    }
+.subtitulo{
+  margin:17px 0 0;
+  color:#e4d8c2;
+  font-size:clamp(14px,2vw,18px);
+  font-style:italic;
+  text-shadow:0 2px 12px #000;
+}
 
-    h1 {
-      color: #d4b779;
-      font-weight: normal;
-      font-size: clamp(27px, 5vw, 49px);
-      letter-spacing: clamp(2px, .7vw, 6px);
-      line-height: 1.25;
-      text-transform: uppercase;
-      margin: 0;
-      text-shadow: 0 2px 18px #000;
-    }
+.espacio-imagen{
+  flex:1;
+  min-height:200px;
+  width:100%;
+}
 
-    .subtitulo {
-      margin: 18px 0 0;
-      color: #e4d8c2;
-      font-size: clamp(14px, 2vw, 18px);
-      font-style: italic;
-      text-shadow: 0 2px 12px #000;
-    }
+.pie-imagen{
+  color:#c4ac7a;
+  font-size:12px;
+  letter-spacing:2px;
+  text-align:center;
+  min-height:18px;
+  margin:0 0 24px;
+  text-shadow:0 2px 10px #000;
+}
 
-    .espacio-imagen {
-      flex: 1;
-      min-height: 210px;
-      width: 100%;
-    }
+.audio{
+  width:100%;
+  max-width:540px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
 
-    .audio {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      width: 100%;
-      max-width: 560px;
-      margin-top: 10px;
-    }
+.boton-sonido{
+  width:43px;
+  height:43px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid rgba(207,177,113,.7);
+  border-radius:50%;
+  color:#d7bd83;
+  background:rgba(0,0,0,.75);
+  font-family:Georgia,serif;
+  font-size:19px;
+  cursor:pointer;
+  transition:background .25s,color .25s;
+}
 
-    .boton-sonido {
-      width: 43px;
-      height: 43px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid rgba(207, 177, 113, .7);
-      border-radius: 50%;
-      color: #d7bd83;
-      background: rgba(0,0,0,.7);
-      font-family: Georgia, serif;
-      font-size: 19px;
-      cursor: pointer;
-      transition: background .25s, color .25s, transform .25s;
-    }
+.boton-sonido:hover{
+  color:#000;
+  background:#cbb078;
+}
 
-    .boton-sonido:hover {
-      color: #000;
-      background: #cbb078;
-      transform: scale(1.05);
-    }
+.leyenda-audio{
+  color:#c5b99f;
+  font-size:12px;
+  letter-spacing:1px;
+  margin:12px 0 0;
+}
 
-    .boton-sonido:focus-visible {
-      outline: 2px solid #d7bd83;
-      outline-offset: 4px;
-    }
+.estado{
+  color:#bba16b;
+  font-size:12px;
+  line-height:1.6;
+  min-height:20px;
+  margin:8px 0 0;
+  max-width:430px;
+}
 
-    .leyenda-audio {
-      color: #c5b99f;
-      font-size: 12px;
-      letter-spacing: 1px;
-      margin: 12px 0 0;
-    }
+.volver{
+  position:absolute;
+  bottom:23px;
+  left:24px;
+  color:#bba16b;
+  font-size:11px;
+  letter-spacing:2px;
+  text-decoration:none;
+}
 
-    .estado {
-      color: #96866a;
-      font-size: 11px;
-      min-height: 16px;
-      margin: 8px 0 0;
-    }
+.volver:hover{color:#f0d9a4}
 
-    .volver {
-      position: absolute;
-      bottom: 25px;
-      left: 25px;
-      color: #bba16b;
-      font-size: 11px;
-      letter-spacing: 2px;
-      text-decoration: none;
-    }
+.firma{
+  position:absolute;
+  bottom:23px;
+  right:24px;
+  color:#66583f;
+  font-size:10px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
 
-    .volver:hover {
-      color: #f0d9a4;
-    }
+@media(max-width:600px){
+  .pagina{padding:32px 15px 65px}
+  .sobretitulo{letter-spacing:3px;font-size:10px}
+  .imagen-fondo img{height:66vh;width:100%}
+  .espacio-imagen{min-height:175px}
+  .volver{left:15px;bottom:19px;font-size:10px}
+  .firma{right:15px;bottom:19px;font-size:9px}
+}
 
-    .firma {
-      position: absolute;
-      bottom: 25px;
-      right: 25px;
-      color: #66583f;
-      font-size: 10px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .reproductor-oculto {
-      position: fixed;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-      left: -10px;
-      bottom: 0;
-      opacity: 0.001;
-      pointer-events: none;
-    }
-
-    @media (max-width: 600px) {
-      .pagina {
-        padding: 35px 16px 70px;
-      }
-
-      .sobretitulo {
-        letter-spacing: 3px;
-        font-size: 10px;
-      }
-
-      .imagen-fondo img {
-        width: 100%;
-        height: 65vh;
-      }
-
-      .espacio-imagen {
-        min-height: 190px;
-      }
-
-      .volver {
-        left: 16px;
-        bottom: 20px;
-        font-size: 10px;
-      }
-
-      .firma {
-        right: 16px;
-        bottom: 20px;
-        font-size: 9px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        transition: none !important;
-      }
-    }
-  </style>
+@media(prefers-reduced-motion:reduce){
+  .imagen-fondo img{transition:none}
+}
+</style>
 </head>
 
 <body>
+<main class="pagina">
 
-  <main class="pagina">
-
-    <div class="imagen-fondo" aria-hidden="true">
-      <img
-        src="https://commons.wikimedia.org/wiki/Special:FilePath/Pollinica_-_Trono_Padre_Jesus_2.jpg?width=1800"
-        alt=""
-        onerror="this.style.display='none';"
-      >
-    </div>
-
-    <div class="sombra" aria-hidden="true"></div>
-
-    <header class="encabezado">
-      <p class="sobretitulo">Semana Santa de Málaga</p>
-
-      <h1>Domingo de Ramos</h1>
-
-      <p class="subtitulo">
-        El comienzo de un camino de fe
-      </p>
-    </header>
-
-    <div class="espacio-imagen" aria-hidden="true"></div>
-
-    <section class="audio" aria-label="Audio de la jornada">
-
-      <button
-        class="boton-sonido"
-        id="botonSonido"
-        type="button"
-        aria-label="Escuchar fragmento"
-        aria-pressed="false"
-        title="Escuchar o detener el audio"
-      >♪</button>
-
-      <p class="leyenda-audio">
-        Voz y oración
-      </p>
-
-      <p class="estado" id="estadoSonido" aria-live="polite">
-        Pulsa ♪ para escuchar
-      </p>
-
-    </section>
-
-    <a class="volver" href="index.html">
-      ← PORTADA
-    </a>
-
-    <div class="firma">
-      Málaga · Semana Santa
-    </div>
-
-  </main>
-
-  <div class="reproductor-oculto" aria-hidden="true">
-    <iframe
-      id="reproductorPregon"
-      title="Audio de la Semana Santa"
-      width="1"
-      height="1"
-      src="about:blank"
-      allow="autoplay; encrypted-media"
-      referrerpolicy="strict-origin-when-cross-origin"
-    ></iframe>
+  <div class="imagen-fondo" aria-hidden="true">
+    <img id="fotoA" class="visible" src="" alt="">
+    <img id="fotoB" src="" alt="">
   </div>
 
-  <script>
-    const VIDEO_ID = "-71YPdoL3ZU";
+  <div class="sombra" aria-hidden="true"></div>
 
-    /*
-      Fragmento provisional de prueba: primeros 45 segundos.
-      Lo sustituiremos por el pasaje adecuado cuando
-      identifiquemos los minutos exactos del pregón.
-    */
-    const INICIO_FRAGMENTO = 0;
-    const FIN_FRAGMENTO = 45;
+  <header class="encabezado">
+    <p class="sobretitulo">Semana Santa de Málaga</p>
+    <h1>Domingo de Ramos</h1>
+    <p class="subtitulo">El comienzo de un camino de fe</p>
+  </header>
 
-    let reproduciendo = false;
-    let temporizador = null;
+  <div class="espacio-imagen" aria-hidden="true"></div>
 
-    const reproductor = document.getElementById("reproductorPregon");
-    const boton = document.getElementById("botonSonido");
-    const estado = document.getElementById("estadoSonido");
+  <p class="pie-imagen" id="nombreCofradia">
+    Domingo de Ramos · Málaga
+  </p>
 
-    function detenerAudio() {
-      reproductor.src = "about:blank";
-      reproduciendo = false;
+  <section class="audio" aria-label="Oración del Domingo de Ramos">
+    <button
+      class="boton-sonido"
+      id="botonSonido"
+      type="button"
+      aria-label="Escuchar oración"
+      aria-pressed="false"
+      title="Escuchar o detener la oración"
+    >♪</button>
 
-      if (temporizador !== null) {
-        clearTimeout(temporizador);
-        temporizador = null;
-      }
+    <p class="leyenda-audio">Oración del Domingo de Ramos</p>
 
-      boton.textContent = "♪";
-      boton.setAttribute("aria-label", "Escuchar fragmento");
-      boton.setAttribute("aria-pressed", "false");
-      estado.textContent = "Pulsa ♪ para escuchar";
-    }
+    <p class="estado" id="estadoSonido" aria-live="polite">
+      Pulsa ♪ para escuchar la oración
+    </p>
+  </section>
 
-    function reproducirPregon() {
-      if (reproduciendo) {
-        detenerAudio();
-        return;
-      }
+  <a class="volver" href="index.html">← PORTADA</a>
+  <div class="firma">Málaga · Semana Santa</div>
 
-      reproduciendo = true;
+</main>
 
-      boton.textContent = "■";
-      boton.setAttribute("aria-label", "Detener audio");
-      boton.setAttribute("aria-pressed", "true");
+<script>
+/*
+  Fotografías de referencia.
+  Si alguna dirección no carga, se puede sustituir por la URL
+  de una fotografía pública y comprobada de la hermandad.
+*/
+const cofradias = [
+  {
+    nombre:"Pollinica",
+    imagen:"https://commons.wikimedia.org/wiki/Special:FilePath/Pollinica_-_Trono_Padre_Jesus_2.jpg?width=1800"
+  },
+  {
+    nombre:"Lágrimas y Favores",
+    imagen:"https://commons.wikimedia.org/wiki/Special:FilePath/Virgen_de_Lagrimas_y_Favores_Malaga.jpg?width=1800"
+  },
+  {
+    nombre:"Dulce Nombre",
+    imagen:"https://commons.wikimedia.org/wiki/Special:FilePath/Dulce_Nombre_Malaga.jpg?width=1800"
+  },
+  {
+    nombre:"Salutación",
+    imagen:"https://commons.wikimedia.org/wiki/Special:FilePath/Salutacion_Malaga.jpg?width=1800"
+  },
+  {
+    nombre:"Humildad",
+    imagen:"https://commons.wikimedia.org/wiki/Special:FilePath/Humildad_Malaga.jpg?width=1800"
+  },
+  {
+    nombre:"Salud",
+    imagen:"https://commons.wikimedia.org/wiki/Special:FilePath/Salud_Malaga.jpg?width=1800"
+  },
+  {
+    nombre:"Huerto",
+    imagen:"https://commons.wikimedia.org/wiki/Special:FilePath/Oracion_en_el_Huerto_Malaga.jpg?width=1800"
+  },
+  {
+    nombre:"Prendimiento",
+    imagen:"https://commons.wikimedia.org/wiki/Special:FilePath/Prendimiento_Malaga.jpg?width=1800"
+  },
+  {
+    nombre:"Humildad y Paciencia",
+    imagen:"https://commons.wikimedia.org/wiki/Special:FilePath/Humildad_y_Paciencia_Malaga.jpg?width=1800"
+  }
+];
 
-      estado.textContent =
-        "Intentando reproducir el fragmento seleccionado…";
+const fotoA=document.getElementById("fotoA");
+const fotoB=document.getElementById("fotoB");
+const nombre=document.getElementById("nombreCofradia");
 
-      const parametros = new URLSearchParams({
-        autoplay: "1",
-        controls: "0",
-        start: String(INICIO_FRAGMENTO),
-        end: String(FIN_FRAGMENTO),
-        rel: "0",
-        playsinline: "1"
-      });
+let indice=0;
+let imagenActiva=0;
+let temporizadorImagen=null;
 
-      reproductor.src =
-        "https://www.youtube-nocookie.com/embed/" +
-        VIDEO_ID + "?" + parametros.toString();
+function cambiarImagen(){
+  const siguiente=(indice+1)%cofradias.length;
+  const datos=cofradias[siguiente];
+  const entrante=imagenActiva===0?fotoB:fotoA;
+  const saliente=imagenActiva===0?fotoA:fotoB;
 
-      temporizador = setTimeout(() => {
-        detenerAudio();
-      }, (FIN_FRAGMENTO - INICIO_FRAGMENTO) * 1000 + 1500);
-    }
+  const nuevaImagen=new Image();
 
-    boton.addEventListener("click", reproducirPregon);
-  </script>
+  nuevaImagen.onload=()=>{
+    entrante.src=datos.imagen;
+    entrante.classList.add("visible");
+    saliente.classList.remove("visible");
 
+    nombre.textContent=datos.nombre;
+    indice=siguiente;
+    imagenActiva=imagenActiva===0?1:0;
+  };
+
+  nuevaImagen.onerror=()=>{
+    indice=siguiente;
+    // Si falla una foto, probar la siguiente sin romper el diseño.
+  };
+
+  nuevaImagen.src=datos.imagen;
+}
+
+function iniciarCarrusel(){
+  const primera=new Image();
+
+  primera.onload=()=>{
+    fotoA.src=cofradias[0].imagen;
+    fotoA.classList.add("visible");
+    nombre.textContent=cofradias[0].nombre;
+
+    temporizadorImagen=setInterval(cambiarImagen,6500);
+  };
+
+  primera.onerror=()=>{
+    nombre.textContent="Semana Santa de Málaga";
+    temporizadorImagen=setInterval(cambiarImagen,6500);
+  };
+
+  primera.src=cofradias[0].imagen;
+}
+
+iniciarCarrusel();
+
+/* Oración original, recitada con la voz disponible en el navegador */
+const oracion =
+"Señor Jesús, hoy comienza tu camino por las calles de Málaga. " +
+"Entre palmas, flores y miradas de esperanza, acompaña a quienes te siguen " +
+"y consuela a quienes sufren. Que cada imagen nos acerque a tu amor " +
+"y que esta Semana Santa nos enseñe a vivir con más fe, más humildad " +
+"y más bondad. Amén.";
+
+const boton=document.getElementById("botonSonido");
+const estado=document.getElementById("estadoSonido");
+
+let hablando=false;
+
+function detenerOracion(){
+  if("speechSynthesis" in window){
+    window.speechSynthesis.cancel();
+  }
+
+  hablando=false;
+  boton.textContent="♪";
+  boton.setAttribute("aria-label","Escuchar oración");
+  boton.setAttribute("aria-pressed","false");
+  estado.textContent="Pulsa ♪ para escuchar la oración";
+}
+
+boton.addEventListener("click",()=>{
+  if(!("speechSynthesis" in window)){
+    estado.textContent=
+      "Tu navegador no permite recitar la oración. Prueba con Chrome.";
+    return;
+  }
+
+  if(hablando){
+    detenerOracion();
+    return;
+  }
+
+  window.speechSynthesis.cancel();
+
+  const voz=new SpeechSynthesisUtterance(oracion);
+  voz.lang="es-ES";
+  voz.rate=0.84;
+  voz.pitch=0.92;
+  voz.volume=1;
+
+  voz.onstart=()=>{
+    hablando=true;
+    boton.textContent="■";
+    boton.setAttribute("aria-label","Detener oración");
+    boton.setAttribute("aria-pressed","true");
+    estado.textContent="Escuchando la oración…";
+  };
+
+  voz.onend=()=>{
+    hablando=false;
+    boton.textContent="♪";
+    boton.setAttribute("aria-label","Escuchar oración");
+    boton.setAttribute("aria-pressed","false");
+    estado.textContent="Oración finalizada";
+  };
+
+  voz.onerror=()=>{
+    hablando=false;
+    boton.textContent="♪";
+    boton.setAttribute("aria-pressed","false");
+    estado.textContent="No se ha podido iniciar la voz. Inténtalo de nuevo.";
+  };
+
+  estado.textContent="Preparando la oración…";
+  window.speechSynthesis.speak(voz);
+});
+</script>
 </body>
 </html>
+
+
 
 
 
