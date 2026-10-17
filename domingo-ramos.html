@@ -8,6 +8,8 @@
 
   <title>Domingo de Ramos | Semana Santa de Málaga</title>
 
+  <meta name="theme-color" content="#000000">
+
   <style>
     * {
       box-sizing: border-box;
@@ -15,191 +17,247 @@
 
     html {
       min-height: 100%;
-      background: #080808;
+      background: #000;
     }
 
     body {
       margin: 0;
       min-height: 100vh;
-      background:
-        radial-gradient(ellipse at center, #202020 0%, #0b0b0b 58%, #050505 100%);
-      color: #e8dfcd;
+      background: #000;
+      color: #e9dfcc;
       font-family: Georgia, "Times New Roman", serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 28px 16px;
     }
 
     .pagina {
+      position: relative;
+      min-height: 100vh;
       width: 100%;
-      max-width: 1050px;
-      min-height: 75vh;
-      border: 1px solid #a98a50;
-      outline: 1px solid rgba(169, 138, 80, 0.25);
-      outline-offset: 7px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 35px 24px 28px;
-      position: relative;
+      padding: 45px 20px 65px;
+      overflow: hidden;
+      isolation: isolate;
+      background: #000;
+    }
+
+    /* La fotografía se integra con el fondo negro */
+    .imagen-fondo {
+      position: absolute;
+      z-index: -2;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .imagen-fondo img {
+      display: block;
+      width: min(100%, 1150px);
+      height: min(78vh, 790px);
+      object-fit: contain;
+      object-position: center;
+      opacity: 0.88;
+
+      -webkit-mask-image:
+        radial-gradient(
+          ellipse 65% 53% at center,
+          #000 43%,
+          rgba(0,0,0,.85) 62%,
+          transparent 100%
+        );
+
+      mask-image:
+        radial-gradient(
+          ellipse 65% 53% at center,
+          #000 43%,
+          rgba(0,0,0,.85) 62%,
+          transparent 100%
+        );
+    }
+
+    /* Oscuridad que permite leer los títulos */
+    .sombra {
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(
+          to bottom,
+          #000 0%,
+          rgba(0,0,0,.55) 18%,
+          rgba(0,0,0,.12) 43%,
+          rgba(0,0,0,.35) 68%,
+          #000 100%
+        );
+    }
+
+    .encabezado {
       text-align: center;
-      background: rgba(0, 0, 0, 0.28);
+      width: 100%;
+      max-width: 850px;
+      margin-top: 1vh;
     }
 
     .sobretitulo {
-      color: #b99b62;
-      font-size: 12px;
+      color: #bba16b;
+      font-size: 11px;
       letter-spacing: 5px;
       text-transform: uppercase;
-      margin-bottom: 12px;
+      margin: 0 0 19px;
     }
 
     h1 {
-      color: #d5b779;
-      font-size: clamp(27px, 5vw, 46px);
+      color: #d4b779;
       font-weight: normal;
-      letter-spacing: 4px;
-      margin: 0 0 12px;
+      font-size: clamp(27px, 5vw, 49px);
+      letter-spacing: clamp(2px, .7vw, 6px);
+      line-height: 1.25;
       text-transform: uppercase;
+      margin: 0;
+      text-shadow: 0 2px 18px #000;
     }
 
     .subtitulo {
-      color: #d1c5af;
+      margin: 18px 0 0;
+      color: #e4d8c2;
       font-size: clamp(14px, 2vw, 18px);
       font-style: italic;
-      margin: 0 0 27px;
+      text-shadow: 0 2px 12px #000;
     }
 
-    .marco-foto {
+    .espacio-imagen {
+      flex: 1;
+      min-height: 210px;
       width: 100%;
-      max-width: 760px;
-      border: 1px solid #a98a50;
-      padding: 7px;
-      background: #050505;
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
     }
 
-    .foto-pregonero {
-      display: block;
+    .audio {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
       width: 100%;
-      height: auto;
-      max-height: 55vh;
-      min-height: 220px;
-      object-fit: contain;
-      background: #080808;
-    }
-
-    .pie-foto {
-      color: #bca878;
-      font-size: 13px;
-      letter-spacing: 1px;
-      margin: 17px 0 24px;
+      max-width: 560px;
+      margin-top: 10px;
     }
 
     .boton-sonido {
-      border: 1px solid #b99b62;
-      background: transparent;
-      color: #e1c78f;
-      padding: 13px 24px;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 15px;
-      letter-spacing: 1px;
+      width: 43px;
+      height: 43px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(207, 177, 113, .7);
+      border-radius: 50%;
+      color: #d7bd83;
+      background: rgba(0,0,0,.7);
+      font-family: Georgia, serif;
+      font-size: 19px;
       cursor: pointer;
-      transition: background 0.25s, color 0.25s;
+      transition: background .25s, color .25s, transform .25s;
     }
 
     .boton-sonido:hover {
-      background: #b99b62;
-      color: #080808;
+      color: #000;
+      background: #cbb078;
+      transform: scale(1.05);
     }
 
-    .estado {
-      min-height: 20px;
-      color: #b9ad98;
+    .boton-sonido:focus-visible {
+      outline: 2px solid #d7bd83;
+      outline-offset: 4px;
+    }
+
+    .leyenda-audio {
+      color: #c5b99f;
       font-size: 12px;
+      letter-spacing: 1px;
       margin: 12px 0 0;
     }
 
-    .enlace-pregon {
-      color: #bca878;
-      font-size: 12px;
-      margin-top: 10px;
-      text-decoration: none;
-    }
-
-    .enlace-pregon:hover {
-      color: #f0d8a1;
-      text-decoration: underline;
+    .estado {
+      color: #96866a;
+      font-size: 11px;
+      min-height: 16px;
+      margin: 8px 0 0;
     }
 
     .volver {
       position: absolute;
-      left: 20px;
-      bottom: 18px;
-      color: #c4a76c;
+      bottom: 25px;
+      left: 25px;
+      color: #bba16b;
+      font-size: 11px;
+      letter-spacing: 2px;
       text-decoration: none;
-      font-size: 13px;
-      letter-spacing: 1px;
     }
 
     .volver:hover {
-      color: #f0d8a1;
+      color: #f0d9a4;
     }
 
-    .pie-pagina {
-      color: #77684d;
-      font-size: 11px;
+    .firma {
+      position: absolute;
+      bottom: 25px;
+      right: 25px;
+      color: #66583f;
+      font-size: 10px;
       letter-spacing: 2px;
-      margin-top: 30px;
-      text-align: center;
       text-transform: uppercase;
     }
 
-    /* Reproductor de sonido de YouTube */
     .reproductor-oculto {
       position: fixed;
-      width: 2px;
-      height: 2px;
-      left: 0;
-      bottom: 0;
-      opacity: 0.01;
+      width: 1px;
+      height: 1px;
       overflow: hidden;
+      left: -10px;
+      bottom: 0;
+      opacity: 0.001;
       pointer-events: none;
     }
 
     @media (max-width: 600px) {
-      body {
-        padding: 18px 13px;
-      }
-
       .pagina {
-        min-height: 80vh;
-        padding: 28px 14px 65px;
+        padding: 35px 16px 70px;
       }
 
       .sobretitulo {
         letter-spacing: 3px;
+        font-size: 10px;
       }
 
-      h1 {
-        letter-spacing: 2px;
+      .imagen-fondo img {
+        width: 100%;
+        height: 65vh;
       }
 
-      .marco-foto {
-        padding: 4px;
-      }
-
-      .foto-pregonero {
-        min-height: 180px;
-        max-height: 45vh;
+      .espacio-imagen {
+        min-height: 190px;
       }
 
       .volver {
-        left: 14px;
-        bottom: 17px;
+        left: 16px;
+        bottom: 20px;
+        font-size: 10px;
+      }
+
+      .firma {
+        right: 16px;
+        bottom: 20px;
+        font-size: 9px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
       }
     }
   </style>
@@ -209,99 +267,143 @@
 
   <main class="pagina">
 
-    <div class="sobretitulo">Semana Santa de Málaga</div>
-
-    <h1>Domingo de Ramos</h1>
-
-    <p class="subtitulo">
-      La palabra de un cofrade malagueño
-    </p>
-
-    <div class="marco-foto">
+    <div class="imagen-fondo" aria-hidden="true">
       <img
-        class="foto-pregonero"
-        src="https://img.youtube.com/vi/-71YPdoL3ZU/hqdefault.jpg"
-        alt="Imagen del pregón de Antonio Banderas"
+        src="https://commons.wikimedia.org/wiki/Special:FilePath/Pollinica_-_Trono_Padre_Jesus_2.jpg?width=1800"
+        alt=""
         onerror="this.style.display='none';"
       >
     </div>
 
-    <p class="pie-foto">
-      Antonio Banderas · Pregonero de Málaga · 2011
-    </p>
+    <div class="sombra" aria-hidden="true"></div>
 
-    <button
-      class="boton-sonido"
-      id="botonSonido"
-      type="button"
-      onclick="reproducirPregon()"
-    >
-      ▶ Escuchar el pregón
-    </button>
+    <header class="encabezado">
+      <p class="sobretitulo">Semana Santa de Málaga</p>
 
-    <p class="estado" id="estadoSonido">
-      Pulsa el botón para escuchar la voz original del pregonero.
-    </p>
+      <h1>Domingo de Ramos</h1>
 
-    <a
-      class="enlace-pregon"
-      href="https://www.youtube.com/watch?v=-71YPdoL3ZU"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Abrir el pregón completo en YouTube
-    </a>
+      <p class="subtitulo">
+        El comienzo de un camino de fe
+      </p>
+    </header>
+
+    <div class="espacio-imagen" aria-hidden="true"></div>
+
+    <section class="audio" aria-label="Audio de la jornada">
+
+      <button
+        class="boton-sonido"
+        id="botonSonido"
+        type="button"
+        aria-label="Escuchar fragmento"
+        aria-pressed="false"
+        title="Escuchar o detener el audio"
+      >♪</button>
+
+      <p class="leyenda-audio">
+        Voz y oración
+      </p>
+
+      <p class="estado" id="estadoSonido" aria-live="polite">
+        Pulsa ♪ para escuchar
+      </p>
+
+    </section>
 
     <a class="volver" href="index.html">
       ← PORTADA
     </a>
 
-  </main>
+    <div class="firma">
+      Málaga · Semana Santa
+    </div>
 
-  <div class="pie-pagina">
-    Fe, memoria y tradición
-  </div>
+  </main>
 
   <div class="reproductor-oculto" aria-hidden="true">
     <iframe
       id="reproductorPregon"
-      title="Audio del pregón de Antonio Banderas"
-      width="2"
-      height="2"
+      title="Audio de la Semana Santa"
+      width="1"
+      height="1"
       src="about:blank"
-      allow="autoplay; encrypted-media; picture-in-picture"
+      allow="autoplay; encrypted-media"
       referrerpolicy="strict-origin-when-cross-origin"
     ></iframe>
   </div>
 
   <script>
-    let pregonActivo = false;
+    const VIDEO_ID = "-71YPdoL3ZU";
+
+    /*
+      Fragmento provisional de prueba: primeros 45 segundos.
+      Lo sustituiremos por el pasaje adecuado cuando
+      identifiquemos los minutos exactos del pregón.
+    */
+    const INICIO_FRAGMENTO = 0;
+    const FIN_FRAGMENTO = 45;
+
+    let reproduciendo = false;
+    let temporizador = null;
+
+    const reproductor = document.getElementById("reproductorPregon");
+    const boton = document.getElementById("botonSonido");
+    const estado = document.getElementById("estadoSonido");
+
+    function detenerAudio() {
+      reproductor.src = "about:blank";
+      reproduciendo = false;
+
+      if (temporizador !== null) {
+        clearTimeout(temporizador);
+        temporizador = null;
+      }
+
+      boton.textContent = "♪";
+      boton.setAttribute("aria-label", "Escuchar fragmento");
+      boton.setAttribute("aria-pressed", "false");
+      estado.textContent = "Pulsa ♪ para escuchar";
+    }
 
     function reproducirPregon() {
-      const reproductor = document.getElementById("reproductorPregon");
-      const boton = document.getElementById("botonSonido");
-      const estado = document.getElementById("estadoSonido");
-
-      if (!pregonActivo) {
-        reproductor.src =
-          "https://www.youtube-nocookie.com/embed/-71YPdoL3ZU?autoplay=1&controls=1&rel=0";
-
-        pregonActivo = true;
-        boton.textContent = "■ Detener el pregón";
-        estado.textContent =
-          "El pregón se está iniciando. Si no se oye, utiliza el enlace de YouTube.";
-      } else {
-        reproductor.src = "about:blank";
-
-        pregonActivo = false;
-        boton.textContent = "▶ Escuchar el pregón";
-        estado.textContent = "El sonido está detenido.";
+      if (reproduciendo) {
+        detenerAudio();
+        return;
       }
+
+      reproduciendo = true;
+
+      boton.textContent = "■";
+      boton.setAttribute("aria-label", "Detener audio");
+      boton.setAttribute("aria-pressed", "true");
+
+      estado.textContent =
+        "Intentando reproducir el fragmento seleccionado…";
+
+      const parametros = new URLSearchParams({
+        autoplay: "1",
+        controls: "0",
+        start: String(INICIO_FRAGMENTO),
+        end: String(FIN_FRAGMENTO),
+        rel: "0",
+        playsinline: "1"
+      });
+
+      reproductor.src =
+        "https://www.youtube-nocookie.com/embed/" +
+        VIDEO_ID + "?" + parametros.toString();
+
+      temporizador = setTimeout(() => {
+        detenerAudio();
+      }, (FIN_FRAGMENTO - INICIO_FRAGMENTO) * 1000 + 1500);
     }
+
+    boton.addEventListener("click", reproducirPregon);
   </script>
 
 </body>
 </html>
+
 
 
 
