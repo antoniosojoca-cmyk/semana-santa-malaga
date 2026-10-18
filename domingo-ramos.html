@@ -41,30 +41,36 @@ body{min-height:100vh}
   pointer-events:none;
 }
 
-.imagen-fondo img{
 
+.imagen-fondo img{
   position:absolute;
-  width:min(100%, 1150px);
-  height:min(78vh, 790px);
   left:50%;
   top:50%;
+
+  width:auto;
+  height:min(78vh,790px);
+  max-width:100%;
+
   object-fit:contain;
   object-position:center center;
-  transform:translate(-50%, -50%);
+  transform:translate(-50%,-50%);
+
   opacity:0;
   transition:opacity 1.8s ease;
 
   -webkit-mask-image:radial-gradient(
-    ellipse 65% 53% at center,
+    ellipse 76% 75% at center,
     #000 35%,
-    rgba(0,0,0,.85) 60%,
+    rgba(0,0,0,.92) 52%,
+    rgba(0,0,0,.55) 70%,
     transparent 100%
   );
 
   mask-image:radial-gradient(
-    ellipse 65% 53% at center,
+    ellipse 76% 75% at center,
     #000 35%,
-    rgba(0,0,0,.85) 60%,
+    rgba(0,0,0,.92) 52%,
+    rgba(0,0,0,.55) 70%,
     transparent 100%
   );
 }
@@ -72,20 +78,13 @@ body{min-height:100vh}
 .imagen-fondo img.visible{
   opacity:.9;
 }
-  
+
+
+
   
 
-  mask-image:radial-gradient(
-    ellipse 65% 53% at center,
-    #000 35%,
-    rgba(0,0,0,.85) 60%,
-    transparent 100%
-  );
-}
+  
 
-.imagen-fondo img.visible{
-  opacity:.9;
-}
 
   
 
