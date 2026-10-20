@@ -1,21 +1,20 @@
 
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#000000">
 <title>Domingo de Ramos | Semana Santa de Málaga</title>
 
 <style>
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%;background:#000;color:#e9dfcc;font-family:Georgia,"Times New Roman",serif}
-.pagina{position:relative;isolation:isolate;overflow:hidden;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:38px 18px 70px;background:#000}
-.imagen-fondo{position:absolute;z-index:-2;inset:0;overflow:hidden;pointer-events:none}
-.imagen-fondo img{position:absolute;left:50%;top:50%;width:auto;height:min(78vh,790px);max-width:100%;object-fit:contain;object-position:center center;transform:translate(-50%,-50%);opacity:0;transition:opacity 1.8s ease;-webkit-mask-image:radial-gradient(ellipse 76% 75% at center,#000 35%,rgba(0,0,0,.92) 52%,rgba(0,0,0,.55) 70%,transparent 100%);mask-image:radial-gradient(ellipse 76% 75% at center,#000 35%,rgba(0,0,0,.92) 52%,rgba(0,0,0,.55) 70%,transparent 100%)}
+.pagina{position:relative;isolation:isolate;overflow:hidden;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:35px 18px 70px;background:#000}
+.imagen-fondo{position:absolute;z-index:-2;inset:0;overflow:hidden;pointer-events:none;background:#000}
+.imagen-fondo img{position:absolute;left:50%;top:50%;width:auto;height:min(78vh,790px);max-width:94vw;object-fit:contain;object-position:center;transform:translate(-50%,-50%);opacity:0;transition:opacity 1.4s ease;-webkit-mask-image:radial-gradient(ellipse 76% 75% at center,#000 35%,rgba(0,0,0,.92) 52%,rgba(0,0,0,.55) 70%,transparent 100%);mask-image:radial-gradient(ellipse 76% 75% at center,#000 35%,rgba(0,0,0,.92) 52%,rgba(0,0,0,.55) 70%,transparent 100%)}
 .imagen-fondo img.visible{opacity:.9}
-.sombra{position:absolute;z-index:-1;inset:0;pointer-events:none;background:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.48) 20%,rgba(0,0,0,.08) 45%,rgba(0,0,0,.35) 70%,#000 100%)}
+.sombra{position:absolute;z-index:-1;inset:0;pointer-events:none;background:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.42) 20%,rgba(0,0,0,.05) 48%,rgba(0,0,0,.4) 75%,#000 100%)}
 .encabezado{width:100%;max-width:850px;text-align:center;margin-top:2vh}
 .sobretitulo{color:#bba16b;font-size:11px;letter-spacing:5px;text-transform:uppercase;margin:0 0 18px}
 h1{color:#d4b779;font-size:clamp(27px,5vw,49px);font-weight:normal;letter-spacing:clamp(2px,.7vw,6px);line-height:1.25;text-transform:uppercase;margin:0;text-shadow:0 2px 18px #000}
@@ -23,20 +22,26 @@ h1{color:#d4b779;font-size:clamp(27px,5vw,49px);font-weight:normal;letter-spacin
 .espacio-imagen{flex:1;min-height:150px;width:100%}
 .pie-imagen{color:#c4ac7a;font-size:12px;letter-spacing:2px;text-align:center;min-height:18px;margin:0 0 16px;text-shadow:0 2px 10px #000}
 .puntos{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:11px;margin:0 0 22px;max-width:330px}
-.punto{width:9px;height:9px;padding:0;border:1px solid #cbb078;border-radius:50%;background:transparent;cursor:pointer;transition:background .25s,transform .25s}
-.punto.activo{background:#d4b779;transform:scale(1.35);box-shadow:0 0 8px rgba(212,183,121,.5)}
-.punto:focus-visible,.boton-sonido:focus-visible,.boton-marcha:focus-visible{outline:2px solid #d7bd83;outline-offset:4px}
+.punto{width:9px;height:9px;padding:0;border:1px solid #cbb078;border-radius:50%;background:transparent;cursor:pointer}
+.punto.activo{background:#d4b779;transform:scale(1.35);box-shadow:0 0 8px #d4b77980}
 .audio{width:100%;max-width:540px;display:flex;flex-direction:column;align-items:center;text-align:center}
 .controles{display:flex;align-items:center;justify-content:center;gap:15px}
-.boton-sonido,.boton-marcha{width:43px;height:43px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(207,177,113,.7);border-radius:50%;color:#d7bd83;background:rgba(0,0,0,.75);font-family:Georgia,serif;font-size:19px;cursor:pointer;transition:background .25s,color .25s}
+.boton-sonido,.boton-marcha{width:43px;height:43px;display:flex;align-items:center;justify-content:center;border:1px solid #cfb171b3;border-radius:50%;color:#d7bd83;background:#000c;font-family:Georgia,serif;font-size:19px;cursor:pointer}
 .boton-sonido:hover,.boton-marcha:hover{color:#000;background:#cbb078}
 .leyenda-audio{color:#c5b99f;font-size:12px;letter-spacing:1px;margin:12px 0 0}
-.estado{color:#bba16b;font-size:12px;line-height:1.6;min-height:20px;margin:8px 0 0;max-width:430px}
+.estado{color:#bba16b;font-size:12px;line-height:1.6;min-height:18px;margin:7px 0 0;max-width:430px}
 .volver{position:absolute;bottom:23px;left:24px;color:#bba16b;font-size:11px;letter-spacing:2px;text-decoration:none}
-.volver:hover{color:#f0d9a4}
-.firma{position:absolute;bottom:23px;right:24px;color:#66583f;font-size:10px;letter-spacing:2px;text-transform:uppercase}
+.creditos{position:absolute;bottom:23px;right:24px;color:#897650;font-size:10px;letter-spacing:1px;text-decoration:none}
 .reproductor-musica{position:fixed;width:1px;height:1px;left:-20px;bottom:0;overflow:hidden;opacity:.001;pointer-events:none}
-@media(max-width:600px){.pagina{padding:32px 15px 65px}.sobretitulo{letter-spacing:3px;font-size:10px}.imagen-fondo img{height:66vh;max-width:100%}.espacio-imagen{min-height:140px}.volver{left:15px;bottom:19px;font-size:10px}.firma{right:15px;bottom:19px;font-size:9px}.puntos{gap:13px}}
+@media(max-width:600px){
+ .pagina{padding:32px 15px 65px}
+ .sobretitulo{letter-spacing:3px;font-size:10px}
+ .imagen-fondo img{height:66vh;max-width:94vw}
+ .espacio-imagen{min-height:140px}
+ .volver{left:15px;bottom:19px;font-size:10px}
+ .creditos{right:15px;bottom:19px;font-size:9px}
+ .puntos{gap:13px}
+}
 @media(prefers-reduced-motion:reduce){.imagen-fondo img{transition:none}}
 </style>
 </head>
@@ -44,8 +49,8 @@ h1{color:#d4b779;font-size:clamp(27px,5vw,49px);font-weight:normal;letter-spacin
 <body>
 <main class="pagina">
   <div class="imagen-fondo" aria-hidden="true">
-    <img id="fotoA" class="visible" src="" alt="">
-    <img id="fotoB" src="" alt="">
+    <img id="fotoA" alt="">
+    <img id="fotoB" alt="">
   </div>
   <div class="sombra" aria-hidden="true"></div>
 
@@ -56,16 +61,13 @@ h1{color:#d4b779;font-size:clamp(27px,5vw,49px);font-weight:normal;letter-spacin
   </header>
 
   <div class="espacio-imagen" aria-hidden="true"></div>
-  <p class="pie-imagen" id="nombreCofradia">Pollinica</p>
-
+  <p class="pie-imagen" id="nombreCofradia">Preparando las imágenes…</p>
   <nav class="puntos" id="puntos" aria-label="Elegir cofradía"></nav>
 
   <section class="audio" aria-label="Oración y música">
     <div class="controles">
-      <button class="boton-sonido" id="botonSonido" type="button"
-        aria-label="Escuchar oración" aria-pressed="false" title="Escuchar oración">♪</button>
-      <button class="boton-marcha" id="botonMarcha" type="button"
-        aria-label="Reproducir marcha" aria-pressed="false" title="Reproducir o detener la marcha">♫</button>
+      <button class="boton-sonido" id="botonSonido" type="button" aria-label="Escuchar oración" aria-pressed="false">♪</button>
+      <button class="boton-marcha" id="botonMarcha" type="button" aria-label="Reproducir marcha" aria-pressed="false">♫</button>
     </div>
     <p class="leyenda-audio">Oración del Domingo de Ramos</p>
     <p class="estado" id="estadoSonido" aria-live="polite">Pulsa ♪ para escuchar la oración</p>
@@ -73,179 +75,161 @@ h1{color:#d4b779;font-size:clamp(27px,5vw,49px);font-weight:normal;letter-spacin
   </section>
 
   <a class="volver" href="index.html">← PORTADA</a>
-  <div class="firma">Málaga · Semana Santa</div>
+  <a class="creditos" href="https://informalaga.es/semana-santa/fotos" target="_blank" rel="noopener">CRÉDITOS FOTOGRÁFICOS</a>
 </main>
 
 <div class="reproductor-musica" aria-hidden="true">
-  <iframe id="reproductorMarcha" title="Marcha procesional"
-    width="1" height="1" src="about:blank"
-    allow="autoplay; encrypted-media; picture-in-picture"
-    referrerpolicy="strict-origin-when-cross-origin"></iframe>
+  <iframe id="reproductorMarcha" title="Marcha procesional" width="1" height="1"
+    src="about:blank" allow="autoplay; encrypted-media; picture-in-picture"></iframe>
 </div>
 
 <script>
-/* Fotografías actuales. Las direcciones se pueden sustituir por enlaces
-   directos a fotografías comprobadas de cada hermandad. */
 const cofradias = [
-  {nombre:"Pollinica", imagen:"https://commons.wikimedia.org/wiki/Special:FilePath/Pollinica_-_Trono_Padre_Jesus_2.jpg?width=1800"},
-  {nombre:"Lágrimas y Favores", imagen:"https://commons.wikimedia.org/wiki/Special:FilePath/Virgen_de_Lagrimas_y_Favores_Malaga.jpg?width=1800"},
-  {nombre:"Dulce Nombre", imagen:"https://commons.wikimedia.org/wiki/Special:FilePath/Dulce_Nombre_Malaga.jpg?width=1800"},
-  {nombre:"Salutación", imagen:"https://commons.wikimedia.org/wiki/Special:FilePath/Salutacion_Malaga.jpg?width=1800"},
-  {nombre:"Humildad", imagen:"https://commons.wikimedia.org/wiki/Special:FilePath/Humildad_Malaga.jpg?width=1800"},
-  {nombre:"Salud", imagen:"https://commons.wikimedia.org/wiki/Special:FilePath/Salud_Malaga.jpg?width=1800"},
-  {nombre:"Huerto", imagen:"https://commons.wikimedia.org/wiki/Special:FilePath/Oracion_en_el_Huerto_Malaga.jpg?width=1800"},
-  {nombre:"Prendimiento", imagen:"https://commons.wikimedia.org/wiki/Special:FilePath/Prendimiento_Malaga.jpg?width=1800"},
-  {nombre:"Humildad y Paciencia", imagen:"https://commons.wikimedia.org/wiki/Special:FilePath/Humildad_y_Paciencia_Malaga.jpg?width=1800"}
+ {nombre:"Pollinica", imagen:"https://commons.wikimedia.org/wiki/Special:FilePath/Pollinica_-_Trono_Padre_Jesus_1.jpg"},
+ {nombre:"Lágrimas y Favores", imagen:"https://commons.wikimedia.org/wiki/Special:FilePath/L%C3%A1grimas_y_Favores_%28Fusionadas%29_por_calle_Strachan_%284470894973%29.jpg"},
+ {nombre:"Dulce Nombre", imagen:"https://commons.wikimedia.org/wiki/Special:FilePath/Nuestro_Padre_Jes%C3%BAs_de_la_Soledad.jpg"},
+ {nombre:"Salutación", imagen:"https://commons.wikimedia.org/wiki/Special:FilePath/Salutacion_-_Trono_Jesus_Nazareno.jpg"},
+ {nombre:"Humildad", imagen:"https://commons.wikimedia.org/wiki/Special:FilePath/Ecce_Homo_%28Humildad%29_saliendo_de_la_Catedral_de_M%C3%A1laga_%284470973673%29.jpg"},
+ {nombre:"Salud", imagen:"https://commons.wikimedia.org/wiki/Special:FilePath/Salud_-_Maria_Santisima_de_la_Salud.jpg"},
+ {nombre:"Huerto", imagen:"https://commons.wikimedia.org/wiki/Special:FilePath/Huerto_-_Trono_Oracion_Huerto.jpg"},
+ {nombre:"Prendimiento", imagen:"https://commons.wikimedia.org/wiki/Special:FilePath/Prendimiento_-_Trono_del_Prendimiento.jpg"},
+ {nombre:"Humildad y Paciencia", imagen:"https://commons.wikimedia.org/wiki/Special:FilePath/Cristo_de_la_Humildad_y_Paciencia_de_M%C3%A1laga.jpg"}
 ];
 
 const fotoA=document.getElementById("fotoA");
 const fotoB=document.getElementById("fotoB");
 const nombre=document.getElementById("nombreCofradia");
 const zonaPuntos=document.getElementById("puntos");
-let indice=0;
+let indice=-1;
 let imagenActiva=0;
-let temporizadorImagen=null;
-let versionCarga=0;
+let temporizador=null;
+let cargando=false;
 
-cofradias.forEach((cofradia,i)=>{
-  const punto=document.createElement("button");
-  punto.type="button";
-  punto.className="punto"+(i===0?" activo":"");
-  punto.setAttribute("aria-label","Ver "+cofradia.nombre);
-  punto.title=cofradia.nombre;
-  punto.addEventListener("click",()=>mostrarImagen(i,true));
-  zonaPuntos.appendChild(punto);
+cofradias.forEach((c,i)=>{
+ const p=document.createElement("button");
+ p.type="button";
+ p.className="punto";
+ p.title=c.nombre;
+ p.setAttribute("aria-label","Ver "+c.nombre);
+ p.addEventListener("click",()=>mostrarImagen(i));
+ zonaPuntos.appendChild(p);
 });
 
 function actualizarPuntos(){
-  [...zonaPuntos.children].forEach((p,i)=>{
-    p.classList.toggle("activo",i===indice);
-    p.setAttribute("aria-current",i===indice?"true":"false");
-  });
+ [...zonaPuntos.children].forEach((p,i)=>{
+   p.classList.toggle("activo",i===indice);
+   p.setAttribute("aria-current",i===indice?"true":"false");
+ });
 }
 
-function mostrarImagen(i,manual=false){
-  const version=++versionCarga;
-  const entrante=imagenActiva===0?fotoB:fotoA;
-  const saliente=imagenActiva===0?fotoA:fotoB;
-  const datos=cofradias[i];
-  const prueba=new Image();
+function mostrarImagen(i){
+ if(cargando)return;
+ cargando=true;
+ let intentos=0;
 
-  if(manual && temporizadorImagen){
-    clearInterval(temporizadorImagen);
-    temporizadorImagen=null;
-  }
-
-  prueba.onload=()=>{
-    if(version!==versionCarga)return;
-    entrante.src=datos.imagen;
-    entrante.classList.add("visible");
-    saliente.classList.remove("visible");
-    indice=i;
-    imagenActiva=imagenActiva===0?1:0;
-    nombre.textContent=datos.nombre;
-    actualizarPuntos();
-
-    if(manual){
-      if(temporizadorImagen)clearInterval(temporizadorImagen);
-      temporizadorImagen=setInterval(()=>{
-        mostrarImagen((indice+1)%cofradias.length);
-      },10000);
-    }
-  };
-
-  prueba.onerror=()=>{
-    if(version!==versionCarga)return;
-    nombre.textContent=datos.nombre+" · imagen no disponible";
-  };
-
-  prueba.src=datos.imagen;
+ function probar(pos){
+   if(intentos>=cofradias.length){
+     nombre.textContent="No se han podido cargar las fotografías";
+     cargando=false;
+     return;
+   }
+   const elegido=(pos+cofradias.length)%cofradias.length;
+   const datos=cofradias[elegido];
+   const prueba=new Image();
+   prueba.onload=()=>{
+     const entrante=imagenActiva===0?fotoB:fotoA;
+     const saliente=imagenActiva===0?fotoA:fotoB;
+     entrante.src=datos.imagen;
+     entrante.classList.add("visible");
+     saliente.classList.remove("visible");
+     imagenActiva=imagenActiva===0?1:0;
+     indice=elegido;
+     nombre.textContent=datos.nombre;
+     actualizarPuntos();
+     cargando=false;
+   };
+   prueba.onerror=()=>{
+     intentos++;
+     probar(elegido+1);
+   };
+   prueba.src=datos.imagen;
+ }
+ probar(i);
 }
 
+function siguiente(){
+ if(indice<0)mostrarImagen(0);
+ else mostrarImagen((indice+1)%cofradias.length);
+}
 mostrarImagen(0);
-temporizadorImagen=setInterval(()=>{
-  mostrarImagen((indice+1)%cofradias.length);
-},10000);
+temporizador=setInterval(siguiente,10000);
 
-/* Oración recitada por la voz española disponible en el navegador */
+/* Oración recitada por la voz del navegador */
 const oracion="Señor Jesús, hoy comienza tu camino por las calles de Málaga. Entre palmas, flores y miradas de esperanza, acompaña a quienes te siguen y consuela a quienes sufren. Que cada imagen nos acerque a tu amor y que esta Semana Santa nos enseñe a vivir con más fe, más humildad y más bondad. Amén.";
-
 const botonSonido=document.getElementById("botonSonido");
 const estadoSonido=document.getElementById("estadoSonido");
 let hablando=false;
 
-function detenerOracion(){
-  window.speechSynthesis.cancel();
-  hablando=false;
-  botonSonido.textContent="♪";
-  botonSonido.setAttribute("aria-pressed","false");
-  estadoSonido.textContent="Pulsa ♪ para escuchar la oración";
-}
-
 botonSonido.addEventListener("click",()=>{
-  if(!("speechSynthesis" in window)){
-    estadoSonido.textContent="Este navegador no dispone de voz recitada.";
-    return;
-  }
-  if(hablando){detenerOracion();return;}
-
-  window.speechSynthesis.cancel();
-  const voz=new SpeechSynthesisUtterance(oracion);
-  voz.lang="es-ES";
-  voz.rate=.84;
-  voz.pitch=.92;
-  voz.volume=1;
-
-  voz.onstart=()=>{
-    hablando=true;
-    botonSonido.textContent="■";
-    botonSonido.setAttribute("aria-pressed","true");
-    estadoSonido.textContent="Escuchando la oración…";
-  };
-  voz.onend=()=>{
-    hablando=false;
-    botonSonido.textContent="♪";
-    botonSonido.setAttribute("aria-pressed","false");
-    estadoSonido.textContent="Oración finalizada";
-  };
-  voz.onerror=()=>{
-    hablando=false;
-    botonSonido.textContent="♪";
-    botonSonido.setAttribute("aria-pressed","false");
-    estadoSonido.textContent="No se ha podido iniciar la voz.";
-  };
-
-  estadoSonido.textContent="Preparando la oración…";
-  window.speechSynthesis.speak(voz);
+ if(!("speechSynthesis" in window)){
+   estadoSonido.textContent="Este navegador no dispone de voz recitada.";
+   return;
+ }
+ if(hablando){
+   speechSynthesis.cancel();
+   hablando=false;
+   botonSonido.textContent="♪";
+   botonSonido.setAttribute("aria-pressed","false");
+   estadoSonido.textContent="Oración detenida";
+   return;
+ }
+ speechSynthesis.cancel();
+ const voz=new SpeechSynthesisUtterance(oracion);
+ voz.lang="es-ES"; voz.rate=.84; voz.pitch=.92; voz.volume=1;
+ voz.onstart=()=>{
+   hablando=true; botonSonido.textContent="■";
+   botonSonido.setAttribute("aria-pressed","true");
+   estadoSonido.textContent="Escuchando la oración…";
+ };
+ voz.onend=()=>{
+   hablando=false; botonSonido.textContent="♪";
+   botonSonido.setAttribute("aria-pressed","false");
+   estadoSonido.textContent="Oración finalizada";
+ };
+ voz.onerror=()=>{
+   hablando=false; botonSonido.textContent="♪";
+   botonSonido.setAttribute("aria-pressed","false");
+   estadoSonido.textContent="No se ha podido iniciar la voz.";
+ };
+ speechSynthesis.speak(voz);
 });
 
-/* Marcha de YouTube Short: se intenta reproducir como audio de fondo */
+/* Marcha de YouTube: el reproductor oculto puede ser bloqueado por YouTube */
 const botonMarcha=document.getElementById("botonMarcha");
 const estadoMarcha=document.getElementById("estadoMarcha");
 const reproductorMarcha=document.getElementById("reproductorMarcha");
 let marchaActiva=false;
 
 botonMarcha.addEventListener("click",()=>{
-  if(marchaActiva){
-    reproductorMarcha.src="about:blank";
-    marchaActiva=false;
-    botonMarcha.textContent="♫";
-    botonMarcha.setAttribute("aria-pressed","false");
-    estadoMarcha.textContent="Marcha detenida";
-    return;
-  }
-
-  reproductorMarcha.src=
-    "https://www.youtube-nocookie.com/embed/arkDVt8YlmM?autoplay=1&controls=0&playsinline=1&rel=0";
-
-  marchaActiva=true;
-  botonMarcha.textContent="■";
-  botonMarcha.setAttribute("aria-pressed","true");
-  estadoMarcha.textContent="Intentando iniciar la marcha… Si no suena, YouTube puede bloquear el reproductor oculto.";
+ if(marchaActiva){
+   reproductorMarcha.src="about:blank";
+   marchaActiva=false;
+   botonMarcha.textContent="♫";
+   botonMarcha.setAttribute("aria-pressed","false");
+   estadoMarcha.textContent="Marcha detenida";
+ }else{
+   reproductorMarcha.src="https://www.youtube-nocookie.com/embed/arkDVt8YlmM?autoplay=1&controls=0&playsinline=1&rel=0";
+   marchaActiva=true;
+   botonMarcha.textContent="■";
+   botonMarcha.setAttribute("aria-pressed","true");
+   estadoMarcha.textContent="Intentando iniciar la marcha… Si no suena, YouTube puede bloquear el reproductor oculto.";
+ }
 });
 </script>
 </body>
 </html>
+
+
 
 
 
