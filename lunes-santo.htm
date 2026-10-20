@@ -1,0 +1,221 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#000000">
+<title>Lunes Santo | Semana Santa de Málaga</title>
+
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#000;color:#eee2c8;font-family:Georgia,"Times New Roman",serif}
+.pagina{min-height:100vh;position:relative;isolation:isolate;overflow:hidden;background:#000;display:flex;flex-direction:column;align-items:center;padding:32px 16px 65px}
+.fondo{position:absolute;inset:0;z-index:-2;pointer-events:none;overflow:hidden}
+.fondo img{position:absolute;left:50%;top:51%;height:min(70vh,760px);max-width:94vw;width:auto;transform:translate(-50%,-50%);object-fit:contain;opacity:0;transition:opacity 1.5s ease;-webkit-mask-image:radial-gradient(ellipse 76% 75% at center,#000 30%,rgba(0,0,0,.9) 50%,rgba(0,0,0,.5) 72%,transparent 100%);mask-image:radial-gradient(ellipse 76% 75% at center,#000 30%,rgba(0,0,0,.9) 50%,rgba(0,0,0,.5) 72%,transparent 100%)}
+.fondo img.visible{opacity:.9}
+.sombra{position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(#000 0%,rgba(0,0,0,.3) 24%,transparent 48%,rgba(0,0,0,.3) 73%,#000 100%)}
+.cabecera{text-align:center;width:100%;max-width:850px;margin-top:3vh}
+.mini{color:#bda36e;font-size:11px;letter-spacing:5px;text-transform:uppercase}
+h1{font-weight:normal;color:#d6bd83;font-size:clamp(29px,5vw,48px);letter-spacing:4px;margin:18px 0;text-shadow:0 2px 15px #000}
+.subtitulo{font-size:17px;font-style:italic;text-shadow:0 2px 10px #000}
+.aire{flex:1;min-height:200px}
+.nombre{min-height:18px;color:#d0b477;letter-spacing:2px;font-size:12px;text-align:center;margin:0 0 20px}
+.puntos{display:flex;justify-content:center;gap:15px;flex-wrap:wrap;margin:0 0 24px;max-width:360px}
+.punto{width:10px;height:10px;padding:0;border:1px solid #c9ad72;border-radius:50%;background:transparent;cursor:pointer}
+.punto.activo{background:#d6bd83;box-shadow:0 0 8px #d6bd83}
+.controles{display:flex;justify-content:center;gap:18px}
+button.audio{width:44px;height:44px;border-radius:50%;border:1px solid #cbb078;color:#d6bd83;background:#000c;font-size:19px;cursor:pointer}
+button.audio:hover{background:#cbb078;color:#000}
+.texto-audio{font-size:12px;color:#c6b99d;text-align:center;line-height:1.7;max-width:520px;margin:12px 0 0}
+.volver{position:absolute;bottom:22px;left:20px;color:#cbb078;text-decoration:none;font-size:11px;letter-spacing:2px}
+.credito{position:absolute;bottom:22px;right:20px;color:#a58d5d;text-decoration:none;font-size:10px;letter-spacing:1px}
+@media(max-width:600px){.cabecera{margin-top:2vh}.mini{letter-spacing:3px}.fondo img{height:62vh}.aire{min-height:160px}.volver{left:12px}.credito{right:12px}}
+</style>
+</head>
+
+<body>
+<main class="pagina">
+ <div class="fondo" aria-hidden="true">
+  <img id="foto1" alt="">
+  <img id="foto2" alt="">
+ </div>
+ <div class="sombra"></div>
+
+ <header class="cabecera">
+  <div class="mini">Semana Santa de Málaga</div>
+  <h1>Lunes Santo</h1>
+  <p class="subtitulo">Fe, silencio y devoción por las calles de Málaga</p>
+ </header>
+
+ <div class="aire"></div>
+ <p class="nombre" id="nombre">Crucifixión</p>
+ <nav class="puntos" id="puntos" aria-label="Elegir cofradía"></nav>
+
+ <section>
+  <div class="controles">
+   <button class="audio" id="voz" type="button" aria-label="Escuchar oración">♪</button>
+   <button class="audio" id="musica" type="button" aria-label="Iniciar o detener la marcha">♫</button>
+  </div>
+  <p class="texto-audio" id="estado">Pulsa ♪ para escuchar la oración</p>
+  <p class="texto-audio" id="estadoMusica">Pulsa ♫ para escuchar la marcha procesional</p>
+ </section>
+
+ <a class="volver" href="index.html">← PORTADA</a>
+ <a class="credito" href="https://www.malagahoy.es/semanasanta/mejores-fotos-lunes-santo-semana-santa-malaga-2026_0_2006341864.html" target="_blank" rel="noopener">FOTOGRAFÍAS Y REFERENCIAS</a>
+</main>
+
+<iframe id="youtube" title="Marcha procesional" allow="autoplay; encrypted-media; picture-in-picture" style="position:absolute;width:1px;height:1px;left:-10px;bottom:0;border:0" src="about:blank"></iframe>
+
+<script>
+/*
+ Las fotografías se buscan en galerías de referencia.
+ Si una URL directa falla, se muestra un enlace a la galería
+ para localizar la fotografía correcta, sin romper la página.
+*/
+const hermandades=[
+ {nombre:"Crucifixión",busqueda:"Crucifixión Málaga Semana Santa"},
+ {nombre:"Pasión",busqueda:"Pasión Málaga Semana Santa"},
+ {nombre:"Gitanos",busqueda:"Gitanos Jesús de la Columna Málaga"},
+ {nombre:"Dolores del Puente",busqueda:"Dolores del Puente Málaga Semana Santa"},
+ {nombre:"Cautivo",busqueda:"Jesús Cautivo Málaga Semana Santa"},
+ {nombre:"Estudiantes",busqueda:"Estudiantes Málaga Semana Santa"}
+];
+
+/* Abrimos una galería identificada como referencia para cada hermandad.
+   Se mantiene una imagen central y los puntos seleccionables. */
+const galeria="https://www.malagahoy.es/semanasanta/mejores-fotos-lunes-santo-semana-santa-malaga-2026_0_2006341864.html";
+const fotos=[
+ "https://commons.wikimedia.org/wiki/Special:FilePath/Cristo_de_la_Crucifixion_Malaga.jpg",
+ "https://commons.wikimedia.org/wiki/Special:FilePath/Nuestro_Padre_Jesus_de_la_Pasion_Malaga.jpg",
+ "https://commons.wikimedia.org/wiki/Special:FilePath/Jesus_de_la_Columna_Malaga.jpg",
+ "https://commons.wikimedia.org/wiki/Special:FilePath/Virgen_de_los_Dolores_del_Puente_Malaga.jpg",
+ "https://commons.wikimedia.org/wiki/Special:FilePath/Nuestro_Padre_Jesus_Cautivo_Malaga.jpg",
+ "https://commons.wikimedia.org/wiki/Special:FilePath/Cristo_Coronado_de_Espinas_Estudiantes_Malaga.jpg"
+];
+
+const foto1=document.getElementById("foto1");
+const foto2=document.getElementById("foto2");
+const nombre=document.getElementById("nombre");
+const puntos=document.getElementById("puntos");
+let actual=0, capa=0, ocupado=false, temporizador;
+
+hermandades.forEach((h,i)=>{
+ const b=document.createElement("button");
+ b.className="punto";
+ b.type="button";
+ b.title=h.nombre;
+ b.setAttribute("aria-label","Ver "+h.nombre);
+ b.addEventListener("click",()=>mostrar(i));
+ puntos.appendChild(b);
+});
+
+function pintarPuntos(){
+ [...puntos.children].forEach((p,i)=>p.classList.toggle("activo",i===actual));
+}
+
+function mostrar(i){
+ if(ocupado)return;
+ ocupado=true;
+ const prueba=new Image();
+ prueba.onload=()=>{
+  const entrante=capa===0?foto2:foto1;
+  const saliente=capa===0?foto1:foto2;
+  entrante.src=prueba.src;
+  entrante.classList.add("visible");
+  saliente.classList.remove("visible");
+  capa=capa===0?1:0;
+  actual=i;
+  nombre.textContent=hermandades[i].nombre;
+  pintarPuntos();
+  ocupado=false;
+ };
+ prueba.onerror=()=>{
+  actual=i;
+  nombre.textContent=hermandades[i].nombre+" · ver fotografías";
+  pintarPuntos();
+  ocupado=false;
+  window.open(galeria,"_blank","noopener");
+ };
+ prueba.src=fotos[i];
+}
+
+mostrar(0);
+temporizador=setInterval(()=>{
+ if(!ocupado)mostrar((actual+1)%hermandades.length);
+},10000);
+
+/* Oración pausada */
+const oracion=[
+"Señor de Málaga…",
+"Hoy es Lunes Santo.",
+"La ciudad guarda silencio… las calles se llenan de fe… y miles de corazones esperan tu llegada.",
+"Caminas entre tu pueblo, Señor… entre promesas, lágrimas y plegarias.",
+"Mira a quienes sufren… da esperanza a quienes la han perdido… y acompaña a quienes caminan solos.",
+"Que nunca nos falte tu luz… ni la fe para seguir adelante.",
+"Y que, al verte pasar por las calles de Málaga, aprendamos a vivir con más amor, más humildad… y más bondad.",
+"Amén."
+].join(" … ");
+
+const botonVoz=document.getElementById("voz");
+const estado=document.getElementById("estado");
+let hablando=false;
+
+botonVoz.addEventListener("click",()=>{
+ if(!("speechSynthesis" in window)){
+  estado.textContent="Este navegador no permite la recitación por voz.";
+  return;
+ }
+ if(hablando){
+  speechSynthesis.cancel();
+  hablando=false;
+  botonVoz.textContent="♪";
+  estado.textContent="Oración detenida";
+  return;
+ }
+ speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(oracion);
+ u.lang="es-ES";
+ u.rate=.72;
+ u.pitch=.82;
+ u.volume=1;
+ u.onstart=()=>{
+  hablando=true;
+  botonVoz.textContent="■";
+  estado.textContent="Escuchando la oración…";
+ };
+ u.onend=()=>{
+  hablando=false;
+  botonVoz.textContent="♪";
+  estado.textContent="Oración finalizada";
+ };
+ u.onerror=()=>{
+  hablando=false;
+  botonVoz.textContent="♪";
+  estado.textContent="No se ha podido iniciar la voz.";
+ };
+ speechSynthesis.speak(u);
+});
+
+/* Marcha solicitada por el usuario */
+const botonMusica=document.getElementById("musica");
+const estadoMusica=document.getElementById("estadoMusica");
+const youtube=document.getElementById("youtube");
+let sonando=false;
+
+botonMusica.addEventListener("click",()=>{
+ if(!sonando){
+  youtube.src="https://www.youtube-nocookie.com/embed/8oImqljPz_I?autoplay=1&controls=0&playsinline=1&rel=0";
+  sonando=true;
+  botonMusica.textContent="■";
+  estadoMusica.textContent="Iniciando la marcha…";
+ }else{
+  youtube.src="about:blank";
+  sonando=false;
+  botonMusica.textContent="♫";
+  estadoMusica.textContent="Marcha detenida";
+ }
+});
+</script>
+</body>
+</html>
