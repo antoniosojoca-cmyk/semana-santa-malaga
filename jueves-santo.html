@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#000000">
+<title>Jueves Santo | Semana Santa de Málaga</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#000;color:#eee2c8;font-family:Georgia,"Times New Roman",serif}
+.pagina{min-height:100vh;position:relative;isolation:isolate;overflow:hidden;background:#000;display:flex;flex-direction:column;align-items:center;padding:30px 16px 70px}
+.fondo{position:absolute;inset:0;z-index:-2;pointer-events:none;overflow:hidden;background:#000}
+.fondo img{position:absolute;left:50%;top:50%;height:min(72vh,760px);max-width:94vw;width:auto;max-height:80vh;object-fit:contain;transform:translate(-50%,-50%);opacity:0;transition:opacity 1.5s ease;-webkit-mask-image:radial-gradient(ellipse 76% 75% at center,#000 30%,rgba(0,0,0,.9) 50%,rgba(0,0,0,.5) 72%,transparent 100%);mask-image:radial-gradient(ellipse 76% 75% at center,#000 30%,rgba(0,0,0,.9) 50%,rgba(0,0,0,.5) 72%,transparent 100%)}
+.fondo img.visible{opacity:.9}
+.sombra{position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(#000 0%,rgba(0,0,0,.45) 20%,transparent 47%,rgba(0,0,0,.45) 75%,#000 100%)}
+.cabecera{text-align:center;width:100%;max-width:850px;margin-top:3vh}
+.mini{color:#bda36e;font-size:11px;letter-spacing:5px;text-transform:uppercase}
+h1{font-weight:normal;color:#d6bd83;font-size:clamp(28px,5vw,48px);letter-spacing:4px;margin:18px 0;text-shadow:0 2px 15px #000}
+.subtitulo{font-size:17px;font-style:italic;text-shadow:0 2px 10px #000}
+.aire{flex:1;min-height:185px}
+.nombre{min-height:18px;color:#d0b477;letter-spacing:2px;font-size:12px;text-align:center;margin:0 0 20px;text-shadow:0 2px 12px #000}
+.puntos{display:flex;justify-content:center;gap:15px;flex-wrap:wrap;margin:0 0 24px;max-width:360px}
+.punto{width:10px;height:10px;padding:0;border:1px solid #c9ad72;border-radius:50%;background:transparent;cursor:pointer}
+.punto.activo{background:#d6bd83;box-shadow:0 0 8px #d6bd83}
+.controles{display:flex;justify-content:center;gap:18px}
+button.audio{width:44px;height:44px;border-radius:50%;border:1px solid #cbb078;color:#d6bd83;background:#000c;font-size:19px;cursor:pointer}
+button.audio:hover{background:#cbb078;color:#000}
+.texto-audio{font-size:12px;color:#c6b99d;text-align:center;line-height:1.7;max-width:520px;margin:12px 0 0}
+.volver{position:absolute;bottom:22px;left:20px;color:#cbb078;text-decoration:none;font-size:11px;letter-spacing:2px}
+.credito{position:absolute;bottom:22px;right:20px;color:#a58d5d;text-decoration:none;font-size:10px;letter-spacing:1px}
+@media(max-width:600px){.cabecera{margin-top:2vh}.mini{letter-spacing:3px}.fondo img{height:62vh;max-width:96vw}.aire{min-height:155px}.volver{left:12px}.credito{right:12px}}
+</style>
+</head>
+<body>
+<main class="pagina">
+ <div class="fondo" aria-hidden="true">
+  <img id="foto1" alt="">
+  <img id="foto2" alt="">
+ </div>
+ <div class="sombra"></div>
+
+ <header class="cabecera">
+  <div class="mini">Semana Santa de Málaga</div>
+  <h1>Jueves Santo</h1>
+  <p class="subtitulo">Una noche de fe, solemnidad y Esperanza</p>
+ </header>
+
+ <div class="aire"></div>
+ <p class="nombre" id="nombre">Preparando fotografías…</p>
+ <nav class="puntos" id="puntos" aria-label="Elegir hermandad"></nav>
+
+ <section>
+  <div class="controles">
+   <button class="audio" id="voz" type="button" aria-label="Escuchar oración">♪</button>
+   <button class="audio" id="musica" type="button" aria-label="Iniciar o detener marcha">♫</button>
+  </div>
+  <p class="texto-audio" id="estado">Pulsa ♪ para escuchar la oración</p>
+  <p class="texto-audio" id="estadoMusica">Pulsa ♫ para escuchar la marcha procesional</p>
+ </section>
+
+ <a class="volver" href="index.html">← PORTADA</a>
+ <a class="credito" href="https://informalaga.es/semana-santa/fotos" target="_blank" rel="noopener">GALERÍA DE REFERENCIA</a>
+</main>
+
+<iframe id="youtube" title="Marcha procesional" allow="autoplay; encrypted-media; picture-in-picture" style="position:absolute;width:1px;height:1px;left:-10px;bottom:0;border:0" src="about:blank"></iframe>
+
+<script>
+/*
+ Fotografías alojadas en Wikimedia Commons.
+ Si un archivo cambia de nombre o no está disponible,
+ el carrusel muestra un aviso en lugar de ocultar el error.
+*/
+const hermandades=[
+ {nombre:"Sagrada Cena",url:"https://commons.wikimedia.org/wiki/Special:FilePath/Cena_Trono.jpg"},
+ {nombre:"Viñeros",url:"https://commons.wikimedia.org/wiki/Special:FilePath/Vi%C3%B1eros_Trono.jpg"},
+ {nombre:"Santa Cruz",url:"https://commons.wikimedia.org/wiki/Special:FilePath/Santa_Cruz_Trono.jpg"},
+ {nombre:"Vera+Cruz",url:"https://commons.wikimedia.org/wiki/Special:FilePath/Vera_Cruz_Trono.jpg"},
+ {nombre:"Mena",url:"https://commons.wikimedia.org/wiki/Special:FilePath/Mena_Trono.jpg"},
+ {nombre:"Zamarrilla",url:"https://commons.wikimedia.org/wiki/Special:FilePath/Zamarrilla_Trono.jpg"},
+ {nombre:"Misericordia",url:"https://commons.wikimedia.org/wiki/Special:FilePath/Misericordia_Trono.jpg"},
+ {nombre:"Esperanza",url:"https://commons.wikimedia.org/wiki/Special:FilePath/Esperanza_Trono.jpg"}
+];
+
+const foto1=document.getElementById("foto1");
+const foto2=document.getElementById("foto2");
+const nombre=document.getElementById("nombre");
+const zonaPuntos=document.getElementById("puntos");
+let actual=0,capa=0,temporizador=null,cambiando=false;
+const cargadas=new Array(hermandades.length).fill(false);
+
+hermandades.forEach((h,i)=>{
+ const b=document.createElement("button");
+ b.type="button";
+ b.className="punto";
+ b.title=h.nombre;
+ b.setAttribute("aria-label","Ver "+h.nombre);
+ b.addEventListener("click",()=>mostrar(i,true));
+ zonaPuntos.appendChild(b);
+});
+
+function actualizarPuntos(){
+ [...zonaPuntos.children].forEach((p,i)=>{
+  p.classList.toggle("activo",i===actual);
+  p.setAttribute("aria-current",i===actual?"true":"false");
+ });
+}
+
+function mostrar(i,manual=false){
+ if(cambiando)return;
+ cambiando=true;
+ const h=hermandades[i];
+ const entrante=capa===0?foto2:foto1;
+ const saliente=capa===0?foto1:foto2;
+ nombre.textContent=h.nombre+"…";
+ entrante.onload=()=>{
+  entrante.classList.add("visible");
+  saliente.classList.remove("visible");
+  actual=i;
+  capa=capa===0?1:0;
+  cargadas[i]=true;
+  nombre.textContent=h.nombre;
+  actualizarPuntos();
+  cambiando=false;
+  entrante.onload=null;
+  entrante.onerror=null;
+ };
+ entrante.onerror=()=>{
+  entrante.onload=null;
+  entrante.onerror=null;
+  nombre.textContent="Fotografía no disponible: "+h.nombre;
+  cambiando=false;
+  if(manual)actual=i;
+ };
+ entrante.classList.remove("visible");
+ entrante.src=h.url;
+ if(manual&&temporizador){
+  clearInterval(temporizador);
+  temporizador=setInterval(siguiente,10000);
+ }
+}
+
+function siguiente(){
+ if(cambiando)return;
+ let proximo=(actual+1)%hermandades.length;
+ mostrar(proximo);
+}
+mostrar(0);
+temporizador=setInterval(siguiente,10000);
+
+/* Oración original del Jueves Santo */
+const oracion=[
+"Señor de Málaga…",
+"en esta noche santa, nuestras calles se convierten en camino de fe…",
+"la Sagrada Cena nos recuerda el amor que se entrega…",
+"Viñeros camina con humildad… y Santa Cruz nos invita al recogimiento.",
+"Ante la Vera+Cruz, que aprendamos a guardar silencio…",
+"junto al Cristo de Mena, que nunca falten la entrega y la esperanza…",
+"Zamarrilla, Misericordia y Esperanza… nombres que viven en el corazón de Málaga.",
+"Cuida de nuestros mayores… consuela a quienes sufren…",
+"acompaña a las familias que atraviesan dificultades…",
+"y enséñanos a caminar unidos, con fe, respeto y amor al prójimo.",
+"Que esta noche deje luz en nuestras vidas…",
+"Amén."
+].join(" … ");
+
+const botonVoz=document.getElementById("voz");
+const estado=document.getElementById("estado");
+let hablando=false;
+
+botonVoz.addEventListener("click",()=>{
+ if(!("speechSynthesis" in window)){
+  estado.textContent="Este navegador no dispone de voz recitada.";
+  return;
+ }
+ if(hablando){
+  speechSynthesis.cancel();
+  hablando=false;
+  botonVoz.textContent="♪";
+  estado.textContent="Oración detenida";
+  return;
+ }
+ speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(oracion);
+ u.lang="es-ES";
+ u.rate=.68;
+ u.pitch=.80;
+ u.volume=1;
+ u.onstart=()=>{
+  hablando=true;
+  botonVoz.textContent="■";
+  estado.textContent="Escuchando la oración…";
+ };
+ u.onend=()=>{
+  hablando=false;
+  botonVoz.textContent="♪";
+  estado.textContent="Oración finalizada";
+ };
+ u.onerror=()=>{
+  hablando=false;
+  botonVoz.textContent="♪";
+  estado.textContent="No se ha podido iniciar la voz.";
+ };
+ speechSynthesis.speak(u);
+});
+
+/* Marcha elegida por ti: YouTube Shorts */
+const botonMusica=document.getElementById("musica");
+const estadoMusica=document.getElementById("estadoMusica");
+const youtube=document.getElementById("youtube");
+let sonando=false;
+
+botonMusica.addEventListener("click",()=>{
+ if(!sonando){
+  youtube.src="https://www.youtube-nocookie.com/embed/MfiXu-6TOWA?autoplay=1&controls=0&playsinline=1&rel=0";
+  sonando=true;
+  botonMusica.textContent="■";
+  estadoMusica.textContent="Intentando iniciar la marcha…";
+ }else{
+  youtube.src="about:blank";
+  sonando=false;
+  botonMusica.textContent="♫";
+  estadoMusica.textContent="Marcha detenida";
+ }
+});
+</script>
+</body>
+</html>
