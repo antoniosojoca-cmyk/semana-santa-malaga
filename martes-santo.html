@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#000000">
+<title>Martes Santo | Semana Santa de Málaga</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#000;color:#eee2c8;font-family:Georgia,"Times New Roman",serif}
+.pagina{min-height:100vh;position:relative;isolation:isolate;overflow:hidden;background:#000;display:flex;flex-direction:column;align-items:center;padding:30px 16px 68px}
+.fondo{position:absolute;inset:0;z-index:-2;pointer-events:none;overflow:hidden;background:#000}
+.fondo img{position:absolute;left:50%;top:50%;height:min(72vh,760px);max-width:94vw;width:auto;transform:translate(-50%,-50%);object-fit:contain;opacity:0;transition:opacity 1.5s ease;-webkit-mask-image:radial-gradient(ellipse 76% 75% at center,#000 30%,rgba(0,0,0,.9) 50%,rgba(0,0,0,.5) 72%,transparent 100%);mask-image:radial-gradient(ellipse 76% 75% at center,#000 30%,rgba(0,0,0,.9) 50%,rgba(0,0,0,.5) 72%,transparent 100%)}
+.fondo img.visible{opacity:.88}
+.sombra{position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(#000 0%,rgba(0,0,0,.4) 22%,transparent 48%,rgba(0,0,0,.4) 74%,#000 100%)}
+.cabecera{text-align:center;width:100%;max-width:850px;margin-top:3vh}
+.mini{color:#bda36e;font-size:11px;letter-spacing:5px;text-transform:uppercase}
+h1{font-weight:normal;color:#d6bd83;font-size:clamp(28px,5vw,48px);letter-spacing:4px;margin:18px 0;text-shadow:0 2px 15px #000}
+.subtitulo{font-size:17px;font-style:italic;text-shadow:0 2px 10px #000}
+.aire{flex:1;min-height:185px}
+.nombre{min-height:18px;color:#d0b477;letter-spacing:2px;font-size:12px;text-align:center;margin:0 0 20px;text-shadow:0 2px 12px #000}
+.puntos{display:flex;justify-content:center;gap:15px;flex-wrap:wrap;margin:0 0 24px;max-width:360px}
+.punto{width:10px;height:10px;padding:0;border:1px solid #c9ad72;border-radius:50%;background:transparent;cursor:pointer}
+.punto.activo{background:#d6bd83;box-shadow:0 0 8px #d6bd83}
+.controles{display:flex;justify-content:center;gap:18px}
+button.audio{width:44px;height:44px;border-radius:50%;border:1px solid #cbb078;color:#d6bd83;background:#000c;font-size:19px;cursor:pointer}
+button.audio:hover{background:#cbb078;color:#000}
+.texto-audio{font-size:12px;color:#c6b99d;text-align:center;line-height:1.7;max-width:520px;margin:12px 0 0}
+.volver{position:absolute;bottom:22px;left:20px;color:#cbb078;text-decoration:none;font-size:11px;letter-spacing:2px}
+.credito{position:absolute;bottom:22px;right:20px;color:#a58d5d;text-decoration:none;font-size:10px;letter-spacing:1px}
+@media(max-width:600px){.cabecera{margin-top:2vh}.mini{letter-spacing:3px}.fondo img{height:62vh}.aire{min-height:155px}.volver{left:12px}.credito{right:12px}}
+</style>
+</head>
+<body>
+<main class="pagina">
+ <div class="fondo" aria-hidden="true">
+  <img id="foto1" alt="">
+  <img id="foto2" alt="">
+ </div>
+ <div class="sombra"></div>
+
+ <header class="cabecera">
+  <div class="mini">Semana Santa de Málaga</div>
+  <h1>Martes Santo</h1>
+  <p class="subtitulo">La fe de un pueblo que camina junto a sus imágenes</p>
+ </header>
+
+ <div class="aire"></div>
+ <p class="nombre" id="nombre">Rocío</p>
+ <nav class="puntos" id="puntos" aria-label="Elegir cofradía"></nav>
+
+ <section>
+  <div class="controles">
+   <button class="audio" id="voz" type="button" aria-label="Escuchar oración">♪</button>
+   <button class="audio" id="musica" type="button" aria-label="Iniciar o detener marcha">♫</button>
+  </div>
+  <p class="texto-audio" id="estado">Pulsa ♪ para escuchar la oración</p>
+  <p class="texto-audio" id="estadoMusica">Pulsa ♫ para escuchar la marcha procesional</p>
+ </section>
+
+ <a class="volver" href="index.html">← PORTADA</a>
+ <a class="credito" href="https://www.malagahoy.es/semanasanta/mejores-imagenes-martes-santo-malaga_0_2006357463.amp.html" target="_blank" rel="noopener">GALERÍA DE REFERENCIA</a>
+</main>
+
+<iframe id="youtube" title="Marcha procesional" allow="autoplay; encrypted-media; picture-in-picture" style="position:absolute;width:1px;height:1px;left:-10px;bottom:0;border:0" src="about:blank"></iframe>
+
+<script>
+/* Fotografías procedentes de galerías del Martes Santo.
+   Los bordes se difuminan para integrarse en el fondo negro. */
+const hermandades=[
+ {nombre:"Rocío",foto:"https://static.grupojoly.com/clip/d360575b-749a-40de-a229-0522acc84376_source-aspect-ratio_1600w_0.jpg"},
+ {nombre:"Las Penas",foto:"https://static.grupojoly.com/clip/05ed5538-042b-42bb-af9c-cfd6e89a35d8_source-aspect-ratio_1600w_0.jpg"},
+ {nombre:"Nueva Esperanza",foto:"https://static.grupojoly.com/clip/421f4b25-93c6-4a97-b082-9faa55413ee1_source-aspect-ratio_1600w_0.jpg"},
+ {nombre:"Humillación y Estrella",foto:"https://static.grupojoly.com/clip/59160ae8-86d3-4966-924e-70538a6e538a_source-aspect-ratio_1600w_0.jpg"},
+ {nombre:"Rescate",foto:"https://static.grupojoly.com/clip/b4ebbd57-5b19-40f0-8635-7a83b19f9e3a_source-aspect-ratio_1600w_0.jpg"},
+ {nombre:"Sentencia",foto:"https://static.grupojoly.com/clip/05ed5538-042b-42bb-af9c-cfd6e89a35d8_source-aspect-ratio_1600w_0.jpg"}
+];
+
+const foto1=document.getElementById("foto1");
+const foto2=document.getElementById("foto2");
+const nombre=document.getElementById("nombre");
+const zonaPuntos=document.getElementById("puntos");
+let actual=-1,capa=0,temporizador=null;
+
+hermandades.forEach((h,i)=>{
+ const b=document.createElement("button");
+ b.type="button";
+ b.className="punto";
+ b.title=h.nombre;
+ b.setAttribute("aria-label","Ver "+h.nombre);
+ b.addEventListener("click",()=>mostrar(i));
+ zonaPuntos.appendChild(b);
+});
+
+function actualizarPuntos(){
+ [...zonaPuntos.children].forEach((p,i)=>{
+  p.classList.toggle("activo",i===actual);
+  p.setAttribute("aria-current",i===actual?"true":"false");
+ });
+}
+
+function mostrar(i){
+ const datos=hermandades[i];
+ const prueba=new Image();
+ prueba.onload=()=>{
+  const entrante=capa===0?foto2:foto1;
+  const saliente=capa===0?foto1:foto2;
+  entrante.src=datos.foto;
+  entrante.classList.add("visible");
+  saliente.classList.remove("visible");
+  capa=capa===0?1:0;
+  actual=i;
+  nombre.textContent=datos.nombre;
+  actualizarPuntos();
+ };
+ prueba.onerror=()=>{
+  nombre.textContent="No se ha podido cargar: "+datos.nombre;
+ };
+ prueba.src=datos.foto;
+}
+
+mostrar(0);
+temporizador=setInterval(()=>{
+ mostrar((actual+1)%hermandades.length);
+},10000);
+
+/* Oración pausada */
+const oracion=[
+"Señor de Málaga…",
+"hoy es Martes Santo…",
+"la tarde se inclina despacio… y las calles aguardan tu llegada.",
+"Rocío, Penas, Nueva Esperanza… Humillación y Estrella, Rescate y Sentencia…",
+"seis caminos… una misma fe… y miles de corazones que te acompañan.",
+"Escucha, Señor, las plegarias de quienes sufren…",
+"da consuelo a quien llora… esperanza a quien la necesita… y fuerza a quien ya no puede más.",
+"Que nunca perdamos la fe… ni la bondad para mirar al prójimo.",
+"Y que al verte pasar por Málaga… aprendamos a vivir con más amor… más humildad… y más paz.",
+"Amén."
+].join(" … ");
+
+const botonVoz=document.getElementById("voz");
+const estado=document.getElementById("estado");
+let hablando=false;
+
+botonVoz.addEventListener("click",()=>{
+ if(!("speechSynthesis" in window)){
+  estado.textContent="Este navegador no dispone de voz recitada.";
+  return;
+ }
+ if(hablando){
+  speechSynthesis.cancel();
+  hablando=false;
+  botonVoz.textContent="♪";
+  estado.textContent="Oración detenida";
+  return;
+ }
+ speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(oracion);
+ u.lang="es-ES";
+ u.rate=.70;
+ u.pitch=.82;
+ u.volume=1;
+ u.onstart=()=>{
+  hablando=true;
+  botonVoz.textContent="■";
+  estado.textContent="Escuchando la oración…";
+ };
+ u.onend=()=>{
+  hablando=false;
+  botonVoz.textContent="♪";
+  estado.textContent="Oración finalizada";
+ };
+ u.onerror=()=>{
+  hablando=false;
+  botonVoz.textContent="♪";
+  estado.textContent="No se ha podido iniciar la voz.";
+ };
+ speechSynthesis.speak(u);
+});
+
+/* Marcha que has elegido */
+const botonMusica=document.getElementById("musica");
+const estadoMusica=document.getElementById("estadoMusica");
+const youtube=document.getElementById("youtube");
+let sonando=false;
+
+botonMusica.addEventListener("click",()=>{
+ if(!sonando){
+  youtube.src="https://www.youtube-nocookie.com/embed/t_ygvjAaMeM?autoplay=1&controls=0&playsinline=1&rel=0";
+  sonando=true;
+  botonMusica.textContent="■";
+  estadoMusica.textContent="Intentando iniciar la marcha…";
+ }else{
+  youtube.src="about:blank";
+  sonando=false;
+  botonMusica.textContent="♫";
+  estadoMusica.textContent="Marcha detenida";
+ }
+});
+</script>
+</body>
+</html>
