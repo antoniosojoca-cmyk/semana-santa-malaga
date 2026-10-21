@@ -6,32 +6,89 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#000000">
 <title>Miércoles Santo | Semana Santa de Málaga</title>
+
 <style>
 *{box-sizing:border-box}
-html,body{margin:0;min-height:100%;background:#000;color:#eee2c8;font-family:Georgia,"Times New Roman",serif}
-.pagina{min-height:100vh;position:relative;isolation:isolate;overflow:hidden;background:#000;display:flex;flex-direction:column;align-items:center;padding:30px 16px 65px}
-.fondo{position:absolute;inset:0;z-index:-2;pointer-events:none;overflow:hidden;background:#000}
-.fondo img{position:absolute;left:50%;top:50%;height:min(72vh,760px);max-width:94vw;width:auto;transform:translate(-50%,-50%);object-fit:contain;opacity:0;transition:opacity 1.5s ease;-webkit-mask-image:radial-gradient(ellipse 76% 75% at center,#000 30%,rgba(0,0,0,.9) 50%,rgba(0,0,0,.5) 72%,transparent 100%);mask-image:radial-gradient(ellipse 76% 75% at center,#000 30%,rgba(0,0,0,.9) 50%,rgba(0,0,0,.5) 72%,transparent 100%)}
+html,body{
+ margin:0;min-height:100%;background:#000;color:#eee2c8;
+ font-family:Georgia,"Times New Roman",serif
+}
+.pagina{
+ min-height:100vh;position:relative;isolation:isolate;overflow:hidden;
+ background:#000;display:flex;flex-direction:column;align-items:center;
+ padding:30px 16px 70px
+}
+.fondo{
+ position:absolute;inset:0;z-index:-2;pointer-events:none;
+ overflow:hidden;background:#000
+}
+.fondo img{
+ position:absolute;left:50%;top:50%;
+ height:min(72vh,760px);max-width:94vw;width:auto;
+ max-height:80vh;object-fit:contain;
+ transform:translate(-50%,-50%);
+ opacity:0;transition:opacity 1.5s ease;
+ -webkit-mask-image:radial-gradient(ellipse 76% 75% at center,
+ #000 30%,rgba(0,0,0,.9) 50%,rgba(0,0,0,.5) 72%,transparent 100%);
+ mask-image:radial-gradient(ellipse 76% 75% at center,
+ #000 30%,rgba(0,0,0,.9) 50%,rgba(0,0,0,.5) 72%,transparent 100%)
+}
 .fondo img.visible{opacity:.9}
-.sombra{position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(#000 0%,rgba(0,0,0,.4) 22%,transparent 48%,rgba(0,0,0,.4) 74%,#000 100%)}
+.sombra{
+ position:absolute;inset:0;z-index:-1;pointer-events:none;
+ background:linear-gradient(#000 0%,rgba(0,0,0,.45) 20%,
+ transparent 47%,rgba(0,0,0,.45) 75%,#000 100%)
+}
 .cabecera{text-align:center;width:100%;max-width:850px;margin-top:3vh}
 .mini{color:#bda36e;font-size:11px;letter-spacing:5px;text-transform:uppercase}
-h1{font-weight:normal;color:#d6bd83;font-size:clamp(28px,5vw,48px);letter-spacing:4px;margin:18px 0;text-shadow:0 2px 15px #000}
+h1{
+ font-weight:normal;color:#d6bd83;font-size:clamp(28px,5vw,48px);
+ letter-spacing:4px;margin:18px 0;text-shadow:0 2px 15px #000
+}
 .subtitulo{font-size:17px;font-style:italic;text-shadow:0 2px 10px #000}
 .aire{flex:1;min-height:185px}
-.nombre{min-height:18px;color:#d0b477;letter-spacing:2px;font-size:12px;text-align:center;margin:0 0 20px;text-shadow:0 2px 12px #000}
-.puntos{display:flex;justify-content:center;gap:15px;flex-wrap:wrap;margin:0 0 24px;max-width:360px}
-.punto{width:10px;height:10px;padding:0;border:1px solid #c9ad72;border-radius:50%;background:transparent;cursor:pointer}
+.nombre{
+ min-height:18px;color:#d0b477;letter-spacing:2px;font-size:12px;
+ text-align:center;margin:0 0 20px;text-shadow:0 2px 12px #000
+}
+.puntos{
+ display:flex;justify-content:center;gap:15px;flex-wrap:wrap;
+ margin:0 0 24px;max-width:360px
+}
+.punto{
+ width:10px;height:10px;padding:0;border:1px solid #c9ad72;
+ border-radius:50%;background:transparent;cursor:pointer
+}
 .punto.activo{background:#d6bd83;box-shadow:0 0 8px #d6bd83}
 .controles{display:flex;justify-content:center;gap:18px}
-button.audio{width:44px;height:44px;border-radius:50%;border:1px solid #cbb078;color:#d6bd83;background:#000c;font-size:19px;cursor:pointer}
+button.audio{
+ width:44px;height:44px;border-radius:50%;border:1px solid #cbb078;
+ color:#d6bd83;background:#000c;font-size:19px;cursor:pointer
+}
 button.audio:hover{background:#cbb078;color:#000}
-.texto-audio{font-size:12px;color:#c6b99d;text-align:center;line-height:1.7;max-width:520px;margin:12px 0 0}
-.volver{position:absolute;bottom:22px;left:20px;color:#cbb078;text-decoration:none;font-size:11px;letter-spacing:2px}
-.credito{position:absolute;bottom:22px;right:20px;color:#a58d5d;text-decoration:none;font-size:10px;letter-spacing:1px}
-@media(max-width:600px){.cabecera{margin-top:2vh}.mini{letter-spacing:3px}.fondo img{height:62vh}.aire{min-height:155px}.volver{left:12px}.credito{right:12px}}
+.texto-audio{
+ font-size:12px;color:#c6b99d;text-align:center;line-height:1.7;
+ max-width:520px;margin:12px 0 0
+}
+.volver{
+ position:absolute;bottom:22px;left:20px;color:#cbb078;
+ text-decoration:none;font-size:11px;letter-spacing:2px
+}
+.credito{
+ position:absolute;bottom:22px;right:20px;color:#a58d5d;
+ text-decoration:none;font-size:10px;letter-spacing:1px
+}
+@media(max-width:600px){
+ .cabecera{margin-top:2vh}
+ .mini{letter-spacing:3px}
+ .fondo img{height:62vh;max-width:96vw}
+ .aire{min-height:155px}
+ .volver{left:12px}
+ .credito{right:12px}
+}
 </style>
 </head>
+
 <body>
 <main class="pagina">
  <div class="fondo" aria-hidden="true">
@@ -47,7 +104,7 @@ button.audio:hover{background:#cbb078;color:#000}
  </header>
 
  <div class="aire"></div>
- <p class="nombre" id="nombre">Buscando fotografías…</p>
+ <p class="nombre" id="nombre">Preparando fotografías…</p>
  <nav class="puntos" id="puntos" aria-label="Elegir cofradía"></nav>
 
  <section>
@@ -60,37 +117,65 @@ button.audio:hover{background:#cbb078;color:#000}
  </section>
 
  <a class="volver" href="index.html">← PORTADA</a>
- <a class="credito" href="https://malagahoy.es/semanasanta/mejores-imagenes-miercoles-santo-malaga_0_2006374438.amp.html" target="_blank" rel="noopener">GALERÍA DE REFERENCIA</a>
+ <a class="credito" href="https://informalaga.es/semana-santa/fotos" target="_blank" rel="noopener">GALERÍA Y CRÉDITOS</a>
 </main>
 
-<iframe id="youtube" title="Marcha procesional" allow="autoplay; encrypted-media; picture-in-picture" style="position:absolute;width:1px;height:1px;left:-10px;bottom:0;border:0" src="about:blank"></iframe>
+<iframe id="youtube" title="Marcha procesional"
+ allow="autoplay; encrypted-media; picture-in-picture"
+ style="position:absolute;width:1px;height:1px;left:-10px;bottom:0;border:0"
+ src="about:blank"></iframe>
 
 <script>
-const hermandades=[
- {nombre:"Mediadora",busqueda:"https://i.pinimg.com/474x/7c/8e/6f/7c8e6fde6eb4dd09dc4fc074396390bc.jpg"},
- {nombre:"Fusionadas",busqueda:"Cofradías Fusionadas Málaga Semana Santa"},
- {nombre:"Salesianos",busqueda:"Cristo de las Penas Salesianos Málaga procesión"},
- {nombre:"Sangre",busqueda:"Cristo de la Sangre Málaga Semana Santa"},
- {nombre:"El Rico",busqueda:"Nuestro Padre Jesús El Rico Málaga procesión"},
- {nombre:"Paloma",busqueda:"Virgen de la Paloma Málaga Semana Santa"},
- {nombre:"Expiración",busqueda:"Cristo de la Expiración Málaga Semana Santa"}
+/* Fotografías concretas de Wikimedia Commons */
+const hermandades = [
+ {
+  nombre:"Mediadora",
+  url:"https://commons.wikimedia.org/wiki/Special:FilePath/Mediadora_-_Trono.jpg?width=1400"
+ },
+ {
+  nombre:"Fusionadas",
+  url:"https://commons.wikimedia.org/wiki/Special:FilePath/Fusionadas_Trono_4.jpg?width=1400"
+ },
+ {
+  nombre:"Salesianos",
+  url:"https://commons.wikimedia.org/wiki/Special:FilePath/Salesianos_-_Trono.jpg?width=1400"
+ },
+ {
+  nombre:"Sangre",
+  url:"https://commons.wikimedia.org/wiki/Special:FilePath/Sangre_Trono.jpg?width=1400"
+ },
+ {
+  nombre:"El Rico",
+  url:"https://commons.wikimedia.org/wiki/Special:FilePath/El_rico_malaga.jpg?width=1400"
+ },
+ {
+  nombre:"Paloma",
+  url:"https://commons.wikimedia.org/wiki/Special:FilePath/Paloma_Trono_de_la_Paloma.jpg?width=1400"
+ },
+ {
+  nombre:"Expiración",
+  url:"https://commons.wikimedia.org/wiki/Special:FilePath/Expiraci%C3%B3n_Trono.jpg?width=1400"
+ }
 ];
 
-const foto1=document.getElementById("foto1");
-const foto2=document.getElementById("foto2");
-const nombre=document.getElementById("nombre");
-const zonaPuntos=document.getElementById("puntos");
-const imagenes=[];
-let actual=0,capa=0,temporizador=null;
+const foto1 = document.getElementById("foto1");
+const foto2 = document.getElementById("foto2");
+const nombre = document.getElementById("nombre");
+const zonaPuntos = document.getElementById("puntos");
+
+let actual = 0;
+let capa = 0;
+let temporizador = null;
+let cambiando = false;
 
 hermandades.forEach((h,i)=>{
- const b=document.createElement("button");
- b.type="button";
- b.className="punto";
- b.title=h.nombre;
- b.setAttribute("aria-label","Ver "+h.nombre);
- b.addEventListener("click",()=>mostrar(i));
- zonaPuntos.appendChild(b);
+ const boton = document.createElement("button");
+ boton.type = "button";
+ boton.className = "punto";
+ boton.title = h.nombre;
+ boton.setAttribute("aria-label","Ver "+h.nombre);
+ boton.addEventListener("click",()=>mostrar(i,true));
+ zonaPuntos.appendChild(boton);
 });
 
 function actualizarPuntos(){
@@ -100,93 +185,66 @@ function actualizarPuntos(){
  });
 }
 
-function buscarFoto(termino){
- const url="https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch="+encodeURIComponent(termino+" filetype:bitmap")+"&gsrnamespace=6&gsrlimit=8&prop=imageinfo&iiprop=url&iiurlwidth=1400&format=json&origin=*";
- return fetch(url).then(r=>{
-  if(!r.ok)throw Error("No se pudo consultar Wikimedia");
-  return r.json();
- }).then(data=>{
-  const paginas=Object.values(data.query?.pages||{});
-  const candidatas=paginas.filter(p=>p.imageinfo&&p.imageinfo[0]&&(p.imageinfo[0].thumburl||p.imageinfo[0].url));
-  if(!candidatas.length)throw Error("No hay foto");
-  const elegida=candidatas.find(p=>!/coat of arms|escudo|logo|poster/i.test(p.title))||candidatas[0];
-  return {
-   url:elegida.imageinfo[0].thumburl||elegida.imageinfo[0].url,
-   titulo:elegida.title,
-   pagina:"https://commons.wikimedia.org/wiki/"+encodeURIComponent(elegida.title.replace(/ /g,"_"))
-  };
- });
-}
+function mostrar(i,manual=false){
+ if(cambiando)return;
+ cambiando=true;
 
-async function prepararImagenes(){
- for(let i=0;i<hermandades.length;i++){
-  try{
-   const foto=await buscarFoto(hermandades[i].busqueda);
-   const prueba=new Image();
-   prueba.src=foto.url;
-   await new Promise((resolve,reject)=>{
-    prueba.onload=resolve;
-    prueba.onerror=reject;
-   });
-   imagenes[i]=foto;
-  }catch(e){
-   imagenes[i]=null;
-  }
- }
- if(imagenes.some(Boolean)){
-  mostrar(0);
-  temporizador=setInterval(()=>mostrar((actual+1)%hermandades.length),10000);
- }else{
-  nombre.textContent="No se han podido cargar las fotografías";
- }
-}
-
-function mostrar(i){
- if(!imagenes[i]){
-  let siguiente=-1;
-  for(let paso=1;paso<=hermandades.length;paso++){
-   const candidato=(i+paso)%hermandades.length;
-   if(imagenes[candidato]){siguiente=candidato;break;}
-  }
-  actual=i;
-  actualizarPuntos();
-  nombre.textContent=hermandades[i].nombre+" · fotografía no disponible";
-  if(siguiente>=0)setTimeout(()=>mostrar(siguiente),1800);
-  return;
- }
- const datos=imagenes[i];
+ const datos=hermandades[i];
  const entrante=capa===0?foto2:foto1;
  const saliente=capa===0?foto1:foto2;
- entrante.src=datos.url;
+
+ nombre.textContent=datos.nombre+"…";
+
  entrante.onload=()=>{
   entrante.classList.add("visible");
   saliente.classList.remove("visible");
+  actual=i;
+  capa=capa===0?1:0;
+  nombre.textContent=datos.nombre;
+  actualizarPuntos();
+  cambiando=false;
+  entrante.onload=null;
+  entrante.onerror=null;
  };
- if(entrante.complete&&entrante.naturalWidth>0){
-  entrante.classList.add("visible");
-  saliente.classList.remove("visible");
- }
- capa=capa===0?1:0;
- actual=i;
- nombre.textContent=hermandades[i].nombre;
- actualizarPuntos();
-}
-prepararImagenes();
 
-/* Oración original, con pausas largas */
+ entrante.onerror=()=>{
+  entrante.onload=null;
+  entrante.onerror=null;
+  nombre.textContent="No se ha podido cargar: "+datos.nombre;
+  cambiando=false;
+ };
+
+ entrante.classList.remove("visible");
+ entrante.src=datos.url;
+
+ if(manual && temporizador){
+  clearInterval(temporizador);
+  temporizador=setInterval(()=>siguiente(),10000);
+ }
+}
+
+function siguiente(){
+ if(cambiando)return;
+ mostrar((actual+1)%hermandades.length);
+}
+
+mostrar(0);
+temporizador=setInterval(siguiente,10000);
+
+/* Oración con pausas */
 const oracion=[
-"Señor de Málaga…",
-"hoy es Miércoles Santo…",
-"la tarde avanza despacio… y las calles se llenan de esperanza.",
-"Mediadora… Fusionadas… Salesianos… Sangre… El Rico… Paloma… y Expiración.",
-"Siete nombres… siete caminos… y una misma fe que une a todo un pueblo.",
-"Mira, Señor, a quienes sufren en silencio…",
-"consuela a las familias que atraviesan momentos difíciles…",
-"devuelve la esperanza a quien la ha perdido… y acompaña a quien se siente solo.",
-"Que tu mirada nos enseñe a perdonar…",
-"que tu presencia nos dé fuerzas para seguir…",
-"y que nunca falten en nuestros corazones la fe… la humildad… y el amor al prójimo.",
-"Amén."
+ "Señor de Málaga…",
+ "hoy es Miércoles Santo…",
+ "la tarde avanza despacio… y las calles se llenan de esperanza.",
+ "Mediadora… Fusionadas… Salesianos… Sangre… El Rico… Paloma… y Expiración.",
+ "Siete nombres… siete caminos… y una misma fe que une a todo un pueblo.",
+ "Mira, Señor, a quienes sufren en silencio…",
+ "consuela a las familias que atraviesan momentos difíciles…",
+ "devuelve la esperanza a quien la ha perdido… y acompaña a quien se siente solo.",
+ "Que tu mirada nos enseñe a perdonar…",
+ "que tu presencia nos dé fuerzas para seguir…",
+ "y que nunca falten en nuestros corazones la fe… la humildad… y el amor al prójimo.",
+ "Amén."
 ].join(" … ");
 
 const botonVoz=document.getElementById("voz");
@@ -198,6 +256,7 @@ botonVoz.addEventListener("click",()=>{
   estado.textContent="Este navegador no dispone de voz recitada.";
   return;
  }
+
  if(hablando){
   speechSynthesis.cancel();
   hablando=false;
@@ -205,12 +264,14 @@ botonVoz.addEventListener("click",()=>{
   estado.textContent="Oración detenida";
   return;
  }
+
  speechSynthesis.cancel();
  const u=new SpeechSynthesisUtterance(oracion);
  u.lang="es-ES";
  u.rate=.68;
  u.pitch=.80;
  u.volume=1;
+
  u.onstart=()=>{
   hablando=true;
   botonVoz.textContent="■";
@@ -226,6 +287,7 @@ botonVoz.addEventListener("click",()=>{
   botonVoz.textContent="♪";
   estado.textContent="No se ha podido iniciar la voz.";
  };
+
  speechSynthesis.speak(u);
 });
 
@@ -251,3 +313,5 @@ botonMusica.addEventListener("click",()=>{
 </script>
 </body>
 </html>
+
+
