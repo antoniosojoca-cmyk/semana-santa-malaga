@@ -1,0 +1,374 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sábado Santo | Semana Santa de Málaga</title>
+
+<style>
+*{box-sizing:border-box}
+html{background:#050505}
+body{
+  margin:0;
+  color:#e7d4a0;
+  background:#050505;
+  font-family:Georgia,"Times New Roman",serif;
+  text-align:center;
+  min-height:100vh;
+}
+header{padding:28px 16px 8px}
+h1{
+  font-size:clamp(30px,5vw,48px);
+  font-weight:normal;
+  letter-spacing:3px;
+  margin:8px 0 12px;
+  color:#d8bd7b;
+}
+.subtitulo{
+  font-size:15px;
+  color:#c3b38c;
+  letter-spacing:2px;
+  line-height:1.8;
+}
+nav{margin:12px 0 8px}
+nav a{
+  color:#d8bd7b;
+  text-decoration:none;
+  font-size:13px;
+  letter-spacing:2px;
+}
+nav a:hover{color:#fff0c2}
+.intro{
+  max-width:760px;
+  margin:18px auto 12px;
+  padding:0 22px;
+  color:#d0c6b0;
+  font-size:17px;
+  line-height:1.9;
+}
+.galeria{
+  width:100%;
+  max-width:1100px;
+  margin:8px auto 0;
+  padding:0 12px;
+}
+.foto{
+  display:none;
+  width:100%;
+  height:min(68vh,700px);
+  object-fit:contain;
+  object-position:center;
+  margin:auto;
+  opacity:0;
+  transition:opacity .8s ease;
+  -webkit-mask-image:radial-gradient(ellipse 72% 76% at center,black 55%,transparent 100%);
+  mask-image:radial-gradient(ellipse 72% 76% at center,black 55%,transparent 100%);
+}
+.foto.activa{
+  display:block;
+  opacity:1;
+}
+.pie{
+  color:#d8bd7b;
+  font-size:17px;
+  letter-spacing:1px;
+  margin:0 auto 14px;
+  padding:0 12px;
+}
+.controles{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:13px;
+  margin:12px 0 18px;
+}
+.flecha{
+  background:transparent;
+  color:#d8bd7b;
+  border:0;
+  font-size:25px;
+  cursor:pointer;
+  padding:5px 12px;
+}
+.puntos{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+}
+.punto{
+  width:8px;
+  height:8px;
+  border:1px solid #c9ad6d;
+  border-radius:50%;
+  background:transparent;
+  padding:0;
+  cursor:pointer;
+}
+.punto.activo{background:#d8bd7b}
+.botones{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:12px;
+  padding:0 12px;
+  margin:12px 0 18px;
+}
+.boton{
+  color:#d8bd7b;
+  background:#090909;
+  border:1px solid #806b3e;
+  padding:11px 18px;
+  font-family:Georgia,serif;
+  font-size:14px;
+  letter-spacing:1px;
+  cursor:pointer;
+}
+.boton:hover{background:#19150d}
+#estado{
+  min-height:24px;
+  padding:0 16px;
+  color:#b7a780;
+  font-size:13px;
+}
+.oracion{
+  max-width:780px;
+  margin:22px auto 35px;
+  padding:0 24px;
+  color:#d8d0bf;
+  font-size:18px;
+  line-height:2;
+  font-style:italic;
+}
+.oracion h2{
+  font-size:23px;
+  font-weight:normal;
+  color:#d8bd7b;
+  font-style:normal;
+  letter-spacing:2px;
+}
+.creditos{
+  max-width:800px;
+  margin:30px auto;
+  padding:0 18px;
+  color:#817967;
+  font:11px/1.8 Arial,sans-serif;
+}
+.creditos a{color:#bba36b}
+footer{
+  padding:20px 10px 30px;
+  color:#82765c;
+  font-size:12px;
+  letter-spacing:1px;
+}
+@media(max-width:600px){
+  header{padding-top:22px}
+  .foto{height:55vh}
+  .intro{font-size:15px}
+  .oracion{font-size:16px}
+}
+</style>
+</head>
+
+<body>
+<header>
+  <h1>SÁBADO SANTO</h1>
+  <div class="subtitulo">SEMANA SANTA DE MÁLAGA</div>
+  <nav><a href="index.html">← PORTADA</a></nav>
+</header>
+
+<p class="intro">
+  Málaga guarda silencio. Tras el dolor del Viernes Santo,
+  la ciudad contempla el misterio de Cristo y espera, en oración,
+  la luz de la Resurrección.
+</p>
+
+<main>
+  <section class="galeria" aria-label="Galería de imágenes devocionales">
+    <img class="foto activa"
+      src="https://commons.wikimedia.org/wiki/Special:FilePath/Monte_Calvario_Yacente.jpg?width=1600"
+      alt="Santísimo Cristo Yacente de la Paz y la Unidad, Monte Calvario"
+      data-pie="Cristo Yacente de la Paz y la Unidad">
+
+    <img class="foto"
+      src="https://commons.wikimedia.org/wiki/Special:FilePath/Cristo_del_Amor_y_Nuestra_Se%C3%B1ora_de_la_Caridad.jpg?width=1600"
+      alt="Cristo del Amor y Nuestra Señora de la Caridad"
+      data-pie="Cristo del Amor y Nuestra Señora de la Caridad">
+
+    <img class="foto"
+      src="https://commons.wikimedia.org/wiki/Special:FilePath/Piedad_Trono.jpg?width=1600"
+      alt="Nuestra Señora de la Piedad de Málaga"
+      data-pie="Nuestra Señora de la Piedad">
+
+    <img class="foto"
+      src="https://commons.wikimedia.org/wiki/Special:FilePath/Santo_Traslado_Trono.jpg?width=1600"
+      alt="Hermandad del Santo Traslado de Málaga"
+      data-pie="El Santo Traslado y la Soledad">
+
+    <img class="foto"
+      src="https://commons.wikimedia.org/wiki/Special:FilePath/Resucitado.jpg?width=1600"
+      alt="Santísimo Cristo Resucitado de Málaga"
+      data-pie="La esperanza de la Resurrección">
+  </section>
+
+  <div class="pie" id="pieFoto">Cristo Yacente de la Paz y la Unidad</div>
+
+  <div class="controles">
+    <button class="flecha" id="anterior" aria-label="Fotografía anterior">‹</button>
+    <div class="puntos" id="puntos" aria-label="Elegir fotografía"></div>
+    <button class="flecha" id="siguiente" aria-label="Fotografía siguiente">›</button>
+  </div>
+
+  <div class="botones">
+    <button class="boton" id="botonOracion">✧ Escuchar oración</button>
+    <button class="boton" id="botonMusica">♫ Escuchar marcha</button>
+  </div>
+
+  <div id="estado" aria-live="polite"></div>
+
+  <section class="oracion">
+    <h2>En el silencio de tu ausencia</h2>
+    Señor, cuando todo parece terminar,
+    enséñanos a esperar.
+
+    Cuando el mundo queda en silencio,
+    danos fe para seguir creyendo.
+
+    Que el dolor no apague la esperanza,
+    que la oscuridad no venza a la luz,
+    y que nuestros corazones permanezcan
+    junto a Ti, aguardando la mañana nueva.
+
+    Porque incluso en la noche más profunda,
+    el amor sigue esperando.
+    <br><br>
+    Amén.
+  </section>
+</main>
+
+<div class="creditos">
+  Fotografías alojadas en Wikimedia Commons. Consulta las fichas originales y
+  sus licencias:
+  <a href="https://commons.wikimedia.org/wiki/File:Monte_Calvario_Yacente.jpg" target="_blank" rel="noopener">Cristo Yacente</a> ·
+  <a href="https://commons.wikimedia.org/wiki/File:Cristo_del_Amor_y_Nuestra_Se%C3%B1ora_de_la_Caridad.jpg" target="_blank" rel="noopener">Cristo del Amor y Caridad</a> ·
+  <a href="https://commons.wikimedia.org/wiki/File:Piedad_Trono.jpg" target="_blank" rel="noopener">La Piedad</a> ·
+  <a href="https://commons.wikimedia.org/wiki/File:Santo_Traslado_Trono.jpg" target="_blank" rel="noopener">Santo Traslado</a> ·
+  <a href="https://commons.wikimedia.org/wiki/File:Resucitado.jpg" target="_blank" rel="noopener">Resucitado</a>.
+</div>
+
+<footer>
+  SÁBADO SANTO · SILENCIO, FE Y ESPERANZA
+</footer>
+
+<script>
+const fotos = Array.from(document.querySelectorAll(".foto"));
+const puntosCont = document.getElementById("puntos");
+const pieFoto = document.getElementById("pieFoto");
+const estado = document.getElementById("estado");
+let actual = 0;
+let temporizador;
+
+fotos.forEach((foto, i) => {
+  const punto = document.createElement("button");
+  punto.className = "punto" + (i === 0 ? " activo" : "");
+  punto.setAttribute("aria-label", "Mostrar fotografía " + (i + 1));
+  punto.addEventListener("click", () => mostrar(i));
+  puntosCont.appendChild(punto);
+});
+
+const puntos = Array.from(document.querySelectorAll(".punto"));
+
+function mostrar(indice) {
+  actual = (indice + fotos.length) % fotos.length;
+  fotos.forEach((foto, i) => {
+    foto.classList.toggle("activa", i === actual);
+  });
+  puntos.forEach((punto, i) => {
+    punto.classList.toggle("activo", i === actual);
+  });
+  pieFoto.textContent = fotos[actual].dataset.pie;
+}
+
+document.getElementById("anterior").addEventListener("click", () => mostrar(actual - 1));
+document.getElementById("siguiente").addEventListener("click", () => mostrar(actual + 1));
+
+temporizador = setInterval(() => mostrar(actual + 1), 9000);
+
+/* Marcha: se carga al pulsar, para no iniciar sonido inesperadamente. */
+const marchaUrl = "https://www.youtube-nocookie.com/embed/abWkOzLLSGY?autoplay=1&controls=0&playsinline=1&rel=0&enablejsapi=1";
+let marcoMusica = null;
+let musicaActiva = false;
+
+function pararMusica() {
+  if (marcoMusica) {
+    marcoMusica.remove();
+    marcoMusica = null;
+  }
+  musicaActiva = false;
+  document.getElementById("botonMusica").textContent = "♫ Escuchar marcha";
+}
+
+document.getElementById("botonMusica").addEventListener("click", () => {
+  if (musicaActiva) {
+    pararMusica();
+    estado.textContent = "Marcha detenida.";
+    return;
+  }
+  if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+  document.getElementById("botonOracion").textContent = "✧ Escuchar oración";
+  pararMusica();
+
+  marcoMusica = document.createElement("iframe");
+  marcoMusica.src = marchaUrl;
+  marcoMusica.title = "Marcha procesional del Sábado Santo";
+  marcoMusica.allow = "autoplay; encrypted-media; picture-in-picture";
+  marcoMusica.style.cssText = "position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;";
+  marcoMusica.setAttribute("aria-hidden", "true");
+  document.body.appendChild(marcoMusica);
+
+  musicaActiva = true;
+  document.getElementById("botonMusica").textContent = "♫ Detener marcha";
+  estado.textContent = "Intentando reproducir la marcha. Si no suena, pulsa de nuevo o revisa el vídeo.";
+});
+
+/* La oración se lee con la voz española disponible en el navegador. */
+const botonOracion = document.getElementById("botonOracion");
+const textoOracion = document.querySelector(".oracion").innerText;
+
+botonOracion.addEventListener("click", () => {
+  if (!("speechSynthesis" in window)) {
+    estado.textContent = "Este navegador no dispone de lectura de voz.";
+    return;
+  }
+
+  if (window.speechSynthesis.speaking) {
+    window.speechSynthesis.cancel();
+    botonOracion.textContent = "✧ Escuchar oración";
+    estado.textContent = "Oración detenida.";
+    return;
+  }
+
+  pararMusica();
+  window.speechSynthesis.cancel();
+
+  const voz = new SpeechSynthesisUtterance(textoOracion);
+  voz.lang = "es-ES";
+  voz.rate = 0.78;
+  voz.pitch = 0.82;
+  voz.onend = () => {
+    botonOracion.textContent = "✧ Escuchar oración";
+    estado.textContent = "";
+  };
+  voz.onerror = () => {
+    botonOracion.textContent = "✧ Escuchar oración";
+    estado.textContent = "No se pudo iniciar la voz en este navegador.";
+  };
+
+  botonOracion.textContent = "✧ Detener oración";
+  estado.textContent = "La oración se reproduce con la voz disponible en tu navegador.";
+  window.speechSynthesis.speak(voz);
+});
+</script>
+</body>
+</html>
